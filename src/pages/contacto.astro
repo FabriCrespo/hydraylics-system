@@ -1,0 +1,977 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <!-- Hero Section -->
+  <section class="hero-contacto">
+    <div class="hero-overlay-contacto"></div>
+    <div class="hero-content-contacto">
+      <div class="hero-badge-contacto">Contáctanos</div>
+      <h1 class="hero-title-contacto">
+        Estamos Aquí para <span class="highlight-contacto">Ayudarte</span>
+      </h1>
+      <p class="hero-subtitle-contacto">
+        ¿Tu maquinaria necesita atención? Contáctanos ahora y recibe asesoría profesional
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item-hero">
+          <span class="stat-icon-hero">⚡</span>
+          <span class="stat-text-hero">Respuesta en minutos</span>
+        </div>
+        <div class="stat-item-hero">
+          <span class="stat-icon-hero">24/7</span>
+          <span class="stat-text-hero">Servicio de emergencia</span>
+        </div>
+        <div class="stat-item-hero">
+          <span class="stat-icon-hero">📍</span>
+          <span class="stat-text-hero">Santa Cruz, Bolivia</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Métodos de Contacto Rápido -->
+  <section class="contacto-rapido">
+    <div class="container-contacto">
+      <div class="contacto-rapido-grid">
+        <a href="https://api.whatsapp.com/send?phone=59169200281&text=Hola,%20necesito%20información" target="_blank" class="contacto-card whatsapp-card">
+          <div class="contacto-icon-wrapper">
+            <svg class="contacto-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+          </div>
+          <h3>WhatsApp</h3>
+          <p>Chatea con nosotros</p>
+          <span class="contacto-value">+591 69200281</span>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="tel:+59169200281" class="contacto-card telefono-card">
+          <div class="contacto-icon-wrapper">
+            <svg class="contacto-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+            </svg>
+          </div>
+          <h3>Teléfono</h3>
+          <p>Llámanos directamente</p>
+          <span class="contacto-value">+591 69200281</span>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="mailto:hydraulicssistem@gmail.com" class="contacto-card email-card">
+          <div class="contacto-icon-wrapper">
+            <svg class="contacto-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </div>
+          <h3>Email</h3>
+          <p>Escríbenos un correo</p>
+          <span class="contacto-value">hydraulicssistem@gmail.com</span>
+          <div class="card-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulario de Contacto -->
+  <section class="formulario-section">
+    <div class="container-contacto">
+      <div class="formulario-wrapper">
+        <div class="formulario-header">
+          <span class="section-badge-contacto">Envíanos un Mensaje</span>
+          <h2 class="section-title-contacto">¿Tienes una Consulta?</h2>
+          <p class="section-description-contacto">
+            Completa el formulario y te responderemos a la brevedad posible
+          </p>
+        </div>
+
+        <form class="contacto-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Nombre Completo *</label>
+              <input type="text" id="nombre" name="nombre" required placeholder="Juan Pérez">
+            </div>
+
+            <div class="form-group">
+              <label for="empresa">Empresa</label>
+              <input type="text" id="empresa" name="empresa" placeholder="Tu empresa (opcional)">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="telefono">Teléfono *</label>
+              <input type="tel" id="telefono" name="telefono" required placeholder="+591 00000000">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required placeholder="tu@email.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="asunto">Asunto *</label>
+            <select id="asunto" name="asunto" required>
+              <option value="">Selecciona un asunto</option>
+              <option value="reparacion">Reparación de Equipo</option>
+              <option value="repuestos">Consulta de Repuestos</option>
+              <option value="emergencia">Servicio de Emergencia</option>
+              <option value="cotizacion">Solicitar Cotización</option>
+              <option value="mantenimiento">Mantenimiento Preventivo</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="mensaje">Mensaje *</label>
+            <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Describe tu consulta o necesidad..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+            Enviar Mensaje
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Información de Contacto -->
+  <section class="info-section">
+    <div class="container-contacto">
+      <div class="info-grid">
+        <!-- Información de Contacto -->
+        <div class="info-card">
+          <h3>Información de Contacto</h3>
+          <div class="info-items">
+            <div class="info-item">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+              </div>
+              <div class="info-text">
+                <h4>Ubicación</h4>
+                <p>Santa Cruz, Bolivia</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+                </svg>
+              </div>
+              <div class="info-text">
+                <h4>Teléfono</h4>
+                <p>+591 69200281</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+              </div>
+              <div class="info-text">
+                <h4>Email</h4>
+                <p>hydraulicssistem@gmail.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horarios -->
+        <div class="horarios-card">
+          <h3>Horarios de Atención</h3>
+          <div class="horarios-list">
+            <div class="horario-item">
+              <span class="dia">Lunes - Viernes</span>
+              <span class="hora">8:00 - 18:00</span>
+            </div>
+            <div class="horario-item">
+              <span class="dia">Sábado</span>
+              <span class="hora">8:00 - 13:00</span>
+            </div>
+            <div class="horario-item emergencia-item">
+              <span class="dia">🚨 Emergencias</span>
+              <span class="hora">24/7</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mapa Grande -->
+  <section class="mapa-section">
+    <div class="mapa-container">
+      <div class="mapa-header">
+        <h2>Encuéntranos</h2>
+        <p>Visítanos en nuestra ubicación en Santa Cruz, Bolivia</p>
+      </div>
+      <div class="mapa-wrapper-grande">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1165.0934804011072!2d-63.213058726666084!3d-17.396015390313593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93ee3dd05358df59%3A0xf97c0eaed94ba305!2sHYDRAULICS%20SISTEM!5e0!3m2!1ses-419!2sbo!4v1760461550163!5m2!1ses-419!2sbo" 
+          width="100%" 
+          height="500" 
+          style="border:0; border-radius: 20px;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="cta-contacto">
+    <div class="container-contacto">
+      <div class="cta-contacto-content">
+        <h2>¿Necesitas Atención Inmediata?</h2>
+        <p>Nuestro equipo está disponible 24/7 para emergencias</p>
+        <a href="https://api.whatsapp.com/send?phone=59169200281&text=Hola,%20tengo%20una%20emergencia" target="_blank" class="btn-emergencia">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+          Contactar Servicio de Emergencia
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Hero Contacto */
+  .hero-contacto {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-tertiary) 0%, var(--color-tertiary-light) 100%);
+    overflow: hidden;
+  }
+
+  .hero-contacto::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 30% 40%, rgba(225, 51, 44, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 70% 60%, rgba(225, 51, 44, 0.1) 0%, transparent 50%);
+    animation: pulse-bg-contacto 6s ease-in-out infinite;
+  }
+
+  @keyframes pulse-bg-contacto {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  .hero-overlay-contacto {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(241, 236, 232, 0.02) 20px, rgba(241, 236, 232, 0.02) 40px);
+  }
+
+  .hero-content-contacto {
+    position: relative;
+    text-align: center;
+    z-index: 10;
+    max-width: 900px;
+    padding: 2rem;
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .hero-badge-contacto {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: rgba(225, 51, 44, 0.2);
+    border: 1px solid var(--color-secondary);
+    color: var(--color-secondary);
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .hero-title-contacto {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    color: var(--color-primary);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .highlight-contacto {
+    color: var(--color-secondary);
+    position: relative;
+  }
+
+  .hero-subtitle-contacto {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: rgba(241, 236, 232, 0.85);
+    margin-bottom: 3rem;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .stat-item-hero {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: rgba(241, 236, 232, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(241, 236, 232, 0.2);
+    border-radius: 50px;
+    color: var(--color-primary);
+  }
+
+  .stat-icon-hero {
+    font-size: 1.5rem;
+  }
+
+  .stat-text-hero {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  /* Container */
+  .container-contacto {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Contacto Rápido */
+  .contacto-rapido {
+    padding: 4rem 0;
+    background: linear-gradient(to bottom, var(--color-primary) 0%, var(--color-white) 100%);
+    margin-top: -3rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .contacto-rapido-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .contacto-card {
+    background: var(--color-white);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px var(--color-overlay-light);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .contacto-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    transition: height 0.4s ease;
+  }
+
+  .whatsapp-card::before {
+    background: linear-gradient(90deg, #25D366, #128C7E);
+  }
+
+  .telefono-card::before {
+    background: linear-gradient(90deg, var(--color-secondary), var(--color-secondary-light));
+  }
+
+  .email-card::before {
+    background: linear-gradient(90deg, #EA4335, #FBBC04);
+  }
+
+  .contacto-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px var(--color-overlay);
+  }
+
+  .contacto-card:hover::before {
+    height: 100%;
+  }
+
+  .contacto-card:hover .contacto-icon-wrapper,
+  .contacto-card:hover h3,
+  .contacto-card:hover p,
+  .contacto-card:hover .contacto-value {
+    position: relative;
+    z-index: 1;
+    color: var(--color-white);
+  }
+
+  .contacto-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: rgba(225, 51, 44, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: all 0.4s ease;
+  }
+
+  .contacto-card:hover .contacto-icon-wrapper {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .contacto-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--color-secondary);
+    transition: color 0.4s ease;
+  }
+
+  .contacto-card:hover .contacto-icon {
+    color: var(--color-white);
+  }
+
+  .contacto-card h3 {
+    font-size: 1.5rem;
+    color: var(--color-tertiary);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    transition: color 0.4s ease;
+  }
+
+  .contacto-card p {
+    color: var(--color-gray-500);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    transition: color 0.4s ease;
+  }
+
+  .contacto-value {
+    font-size: 1.1rem;
+    color: var(--color-tertiary);
+    font-weight: 600;
+    transition: color 0.4s ease;
+  }
+
+  .card-arrow {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    color: var(--color-secondary);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s ease;
+  }
+
+  .contacto-card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--color-white);
+  }
+
+  /* Formulario */
+  .formulario-section {
+    padding: 6rem 0;
+    background: var(--color-white);
+  }
+
+  .formulario-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .section-badge-contacto {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background-color: rgba(225, 51, 44, 0.1);
+    color: var(--color-secondary);
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .section-title-contacto {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: var(--color-tertiary);
+    margin-bottom: 1rem;
+  }
+
+  .section-description-contacto {
+    color: var(--color-gray-600);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Formulario */
+  .contacto-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    font-weight: 600;
+    color: var(--color-tertiary);
+    font-size: 0.95rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 1rem;
+    border: 2px solid var(--color-gray-200);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 4px rgba(225, 51, 44, 0.1);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .btn-submit {
+    padding: 1.2rem 2.5rem;
+    background: var(--color-secondary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    box-shadow: 0 10px 30px rgba(225, 51, 44, 0.3);
+  }
+
+  .btn-submit:hover {
+    background: var(--color-secondary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(225, 51, 44, 0.4);
+  }
+
+  /* Información de Contacto */
+  .info-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-tertiary-light) 100%);
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+  }
+
+  .info-card,
+  .horarios-card {
+    background: var(--color-white);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px var(--color-overlay);
+    transition: transform 0.3s ease;
+  }
+
+  .info-card:hover,
+  .horarios-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .info-card h3,
+  .horarios-card h3 {
+    font-size: 1.5rem;
+    color: var(--color-tertiary);
+    margin-bottom: 2rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .info-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .info-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .info-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-light));
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 5px 15px rgba(225, 51, 44, 0.3);
+  }
+
+  .info-icon svg {
+    width: 26px;
+    height: 26px;
+    color: var(--color-white);
+  }
+
+  .info-text h4 {
+    font-size: 1rem;
+    color: var(--color-tertiary);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+
+  .info-text p {
+    color: var(--color-gray-600);
+    font-size: 0.95rem;
+  }
+
+  /* Horarios */
+  .horarios-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .horario-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem;
+    background: var(--color-primary);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+  }
+
+  .horario-item:hover {
+    transform: translateX(5px);
+  }
+
+  .horario-item .dia {
+    font-weight: 600;
+    color: var(--color-tertiary);
+    font-size: 1rem;
+  }
+
+  .horario-item .hora {
+    color: var(--color-gray-600);
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  .emergencia-item {
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-light));
+    box-shadow: 0 5px 20px rgba(225, 51, 44, 0.3);
+  }
+
+  .emergencia-item .dia,
+  .emergencia-item .hora {
+    color: var(--color-white);
+  }
+
+  /* Mapa Grande */
+  .mapa-section {
+    padding: 6rem 0;
+    background: var(--color-white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mapa-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
+  }
+
+  .mapa-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .mapa-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .mapa-header h2 {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 800;
+    color: var(--color-tertiary);
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .mapa-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-secondary), var(--color-secondary-light));
+    border-radius: 2px;
+  }
+
+  .mapa-header p {
+    font-size: 1.2rem;
+    color: var(--color-gray-600);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .mapa-wrapper-grande {
+    position: relative;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px var(--color-overlay);
+    transition: transform 0.3s ease;
+  }
+
+  .mapa-wrapper-grande:hover {
+    transform: scale(1.02);
+  }
+
+  .mapa-wrapper-grande::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(225, 51, 44, 0.05), transparent, rgba(225, 51, 44, 0.05));
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* CTA Contacto */
+  .cta-contacto {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--color-tertiary) 0%, var(--color-tertiary-light) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-contacto::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(225, 51, 44, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: movePattern 20s linear infinite;
+  }
+
+  @keyframes movePattern {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+  }
+
+  .cta-contacto-content {
+    position: relative;
+    text-align: center;
+    z-index: 10;
+  }
+
+  .cta-contacto-content h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .cta-contacto-content p {
+    font-size: 1.1rem;
+    color: rgba(241, 236, 232, 0.9);
+    margin-bottom: 2.5rem;
+  }
+
+  .btn-emergencia {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.2rem 2.5rem;
+    background: var(--color-secondary);
+    color: var(--color-white);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(225, 51, 44, 0.3);
+    animation: pulse-button 2s infinite;
+  }
+
+  @keyframes pulse-button {
+    0%, 100% {
+      box-shadow: 0 10px 30px rgba(225, 51, 44, 0.3);
+    }
+    50% {
+      box-shadow: 0 10px 50px rgba(225, 51, 44, 0.6);
+    }
+  }
+
+  .btn-emergencia:hover {
+    background: var(--color-secondary-dark);
+    transform: translateY(-3px);
+  }
+
+  /* Responsive */
+  @media (max-width: 968px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .contacto-rapido-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .mapa-container {
+      padding: 0 1rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-stats {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .stat-item-hero {
+      justify-content: center;
+    }
+
+    .formulario-section,
+    .info-section,
+    .mapa-section,
+    .contacto-rapido,
+    .cta-contacto {
+      padding: 3rem 0;
+    }
+
+    .info-card,
+    .horarios-card {
+      padding: 2rem;
+    }
+
+    .mapa-wrapper-grande {
+      border-radius: 15px;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  // Manejo del formulario
+  const form = document.getElementById('contactForm') as HTMLFormElement;
+  
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      const data = {
+        nombre: formData.get('nombre'),
+        empresa: formData.get('empresa'),
+        telefono: formData.get('telefono'),
+        email: formData.get('email'),
+        asunto: formData.get('asunto'),
+        mensaje: formData.get('mensaje')
+      };
+      
+      // Crear mensaje para WhatsApp
+      const mensaje = `*Nuevo mensaje desde el sitio web*\n\n` +
+        `*Nombre:* ${data.nombre}\n` +
+        `*Empresa:* ${data.empresa || 'No especificada'}\n` +
+        `*Teléfono:* ${data.telefono}\n` +
+        `*Email:* ${data.email}\n` +
+        `*Asunto:* ${data.asunto}\n\n` +
+        `*Mensaje:*\n${data.mensaje}`;
+      
+      const mensajeCodificado = encodeURIComponent(mensaje);
+      const whatsappURL = `https://api.whatsapp.com/send?phone=59169200281&text=${mensajeCodificado}`;
+      
+      // Abrir WhatsApp
+      window.open(whatsappURL, '_blank');
+      
+      // Limpiar formulario
+      form.reset();
+      
+      // Mostrar mensaje de éxito
+      alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
+    });
+  }
+</script>

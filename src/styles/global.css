@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* Variables de colores de la empresa */
+:root {
+  --color-primary: #f1ece8;      /* Beige/Crema claro */
+  --color-secondary: #e1332c;    /* Rojo corporativo */
+  --color-tertiary: #3d3532;     /* Gris oscuro/Marrón */
+  
+  /* Variaciones para diferentes usos */
+  --color-primary-dark: #e0d5cf;
+  --color-secondary-dark: #c12e27;
+  --color-secondary-light: #f04840;
+  --color-tertiary-light: #5a4f4b;
+  
+  /* Colores adicionales para funcionalidad */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  
+  /* Colores de estado */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+  
+  /* Colores de transparencia */
+  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-overlay-light: rgba(0, 0, 0, 0.1);
+  --color-overlay-dark: rgba(0, 0, 0, 0.8);
+}
+
+/* Estilos base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--color-primary);
+  color: var(--color-tertiary);
+}

@@ -1,0 +1,1023 @@
+---
+import Layout from '../layouts/Layout.astro';   
+---
+
+<Layout>
+  <!-- Hero Section -->
+  <section class="hero-productos">
+    <div class="hero-overlay-productos"></div>
+    <div class="hero-content-productos">
+      <div class="hero-badge-productos">Nuestros Productos</div>
+      <h1 class="hero-title-productos">
+        Componentes <span class="highlight-productos">Hidráulicos</span> de Calidad
+      </h1>
+      <p class="hero-subtitle-productos">
+        Encuentra la pieza perfecta para tu maquinaria. Repuestos originales y compatibles para todas las marcas
+      </p>
+    </div>
+  </section>
+
+  <!-- Filtros y Búsqueda -->
+  <section class="filtros-section">
+    <div class="container-productos">
+      <div class="filtros-header">
+        <h2>Buscar Productos</h2>
+        <p>Filtra por categoría, marca o tipo de máquina</p>
+      </div>
+      
+      <div class="filtros-grid">
+        <!-- Búsqueda -->
+        <div class="filtro-group">
+          <label for="busqueda">Buscar</label>
+          <div class="search-input">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input type="text" id="busqueda" placeholder="Buscar por código o descripción...">
+          </div>
+        </div>
+
+        <!-- Categoría -->
+        <div class="filtro-group">
+          <label for="categoria">Categoría</label>
+          <select id="categoria">
+            <option value="">Todas las categorías</option>
+            <option value="bombas">Bombas Hidráulicas</option>
+            <option value="motores">Motores Hidráulicos</option>
+            <option value="valvulas">Válvulas Hidráulicas</option>
+            <option value="cilindros">Cilindros Hidráulicos</option>
+            <option value="filtros">Filtros y Accesorios</option>
+            <option value="mangueras">Mangueras y Conexiones</option>
+          </select>
+        </div>
+
+        <!-- Marca -->
+        <div class="filtro-group">
+          <label for="marca">Marca</label>
+          <select id="marca">
+            <option value="">Todas las marcas</option>
+            <option value="case">Case</option>
+            <option value="caterpillar">Caterpillar</option>
+            <option value="john-deere">John Deere</option>
+            <option value="komatsu">Komatsu</option>
+            <option value="volvo">Volvo</option>
+            <option value="new-holland">New Holland</option>
+            <option value="bobcat">Bobcat</option>
+            <option value="jcb">JCB</option>
+          </select>
+        </div>
+
+        <!-- Máquina -->
+        <div class="filtro-group">
+          <label for="maquina">Tipo de Máquina</label>
+          <select id="maquina">
+            <option value="">Todas las máquinas</option>
+            <option value="retroexcavadora">Retroexcavadora</option>
+            <option value="cargadora">Cargadora</option>
+            <option value="excavadora">Excavadora</option>
+            <option value="bulldozer">Bulldozer</option>
+            <option value="tractor">Tractor</option>
+            <option value="montacargas">Montacargas</option>
+            <option value="compactadora">Compactadora</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filtros-actions">
+        <button class="btn-filtrar" id="btnFiltrar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46 22,3"/>
+          </svg>
+          Filtrar Productos
+        </button>
+        <button class="btn-limpiar" id="btnLimpiar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+          </svg>
+          Limpiar Filtros
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resultados -->
+  <section class="resultados-section">
+    <div class="container-productos">
+      <div class="resultados-header">
+        <div class="resultados-info">
+          <h3>Productos Encontrados</h3>
+          <span class="productos-count" id="productosCount">12 productos</span>
+        </div>
+        <div class="ordenar">
+          <label for="ordenar">Ordenar por:</label>
+          <select id="ordenar">
+            <option value="nombre">Nombre</option>
+            <option value="codigo">Código</option>
+            <option value="marca">Marca</option>
+            <option value="precio">Precio</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Grid de Productos -->
+      <div class="productos-grid" id="productosGrid">
+        <!-- Producto 1 -->
+        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="retroexcavadora">
+          <div class="producto-imagen">
+            <div class="producto-badge">Nuevo</div>
+            <img src="/placeholder-producto.jpg" alt="Bomba Hidráulica Case" loading="lazy">
+          </div>
+          <div class="producto-info">
+            <div class="producto-codigo">Código: 6885175</div>
+            <h4 class="producto-nombre">Bomba Hidráulica de Transmisión</h4>
+            <div class="producto-details">
+              <span class="producto-funcion">Transmisión</span>
+              <span class="producto-maquina">Retroexcavadora</span>
+            </div>
+            <div class="producto-marca">Case</div>
+            <div class="producto-actions">
+              <button class="btn-cotizar">Solicitar Cotización</button>
+              <button class="btn-detalles">Ver Detalles</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="retroexcavadora">
+          <div class="producto-imagen">
+            <img src="/placeholder-producto.jpg" alt="Bomba Principal Case" loading="lazy">
+          </div>
+          <div class="producto-info">
+            <div class="producto-codigo">Código: 130258A2</div>
+            <h4 class="producto-nombre">Bomba Hidráulica Principal</h4>
+            <div class="producto-details">
+              <span class="producto-funcion">Principal</span>
+              <span class="producto-maquina">Retroexcavadora</span>
+            </div>
+            <div class="producto-marca">Case 580L/580M</div>
+            <div class="producto-actions">
+              <button class="btn-cotizar">Solicitar Cotización</button>
+              <button class="btn-detalles">Ver Detalles</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="retroexcavadora">
+          <div class="producto-imagen">
+            <img src="/placeholder-producto.jpg" alt="Bomba Doble Case" loading="lazy">
+          </div>
+          <div class="producto-info">
+            <div class="producto-codigo">Código: 145292A1</div>
+            <h4 class="producto-nombre">Bomba Hidráulica Doble</h4>
+            <div class="producto-details">
+              <span class="producto-funcion">Principal y Dirección</span>
+              <span class="producto-maquina">Retroexcavadora</span>
+            </div>
+            <div class="producto-marca">Case 580H</div>
+            <div class="producto-actions">
+              <button class="btn-cotizar">Solicitar Cotización</button>
+              <button class="btn-detalles">Ver Detalles</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 4 -->
+        <div class="producto-card" data-categoria="motores" data-marca="case" data-maquina="cosechadora">
+          <div class="producto-imagen">
+            <img src="/placeholder-producto.jpg" alt="Motor Hidráulico Case" loading="lazy">
+          </div>
+          <div class="producto-info">
+            <div class="producto-codigo">Código: M00408383</div>
+            <h4 class="producto-nombre">Motor Hidráulico de Engranajes</h4>
+            <div class="producto-details">
+              <span class="producto-funcion">Extractor</span>
+              <span class="producto-maquina">Cosechadora</span>
+            </div>
+            <div class="producto-marca">Case</div>
+            <div class="producto-actions">
+              <button class="btn-cotizar">Solicitar Cotización</button>
+              <button class="btn-detalles">Ver Detalles</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 5 -->
+        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="cargadora">
+          <div class="producto-imagen">
+            <img src="/placeholder-producto.jpg" alt="Bomba Transmisión Loader" loading="lazy">
+          </div>
+          <div class="producto-info">
+            <div class="producto-codigo">Código: L32414</div>
+            <h4 class="producto-nombre">Bomba de Transmisión</h4>
+            <div class="producto-details">
+              <span class="producto-funcion">Transmisión</span>
+              <span class="producto-maquina">Cargadora</span>
+            </div>
+            <div class="producto-marca">Case W20A</div>
+            <div class="producto-actions">
+              <button class="btn-cotizar">Solicitar Cotización</button>
+              <button class="btn-detalles">Ver Detalles</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 6 -->
+        <div class="producto-card" data-categoria="valvulas" data-marca="case" data-maquina="cargadora">
+          <div class="producto-imagen">
+            <img src="/placeholder-producto.jpg" alt="Válvula Hidráulica" loading="lazy">
+          </div>
+          <div class="producto-info">
+            <div class="producto-codigo">Código: L33537</div>
+            <h4 class="producto-nombre">Válvula Hidráulica 28000</h4>
+            <div class="producto-details">
+              <span class="producto-funcion">Válvula 28000</span>
+              <span class="producto-maquina">Cargadora</span>
+            </div>
+            <div class="producto-marca">Clark 28000</div>
+            <div class="producto-actions">
+              <button class="btn-cotizar">Solicitar Cotización</button>
+              <button class="btn-detalles">Ver Detalles</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 7 -->
+        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="cargadora">
+          <div class="producto-imagen">
+            <img src="/placeholder-producto.jpg" alt="Bomba Dirección" loading="lazy">
+          </div>
+          <div class="producto-info">
+            <div class="producto-codigo">Código: L52381</div>
+            <h4 class="producto-nombre">Bomba de Dirección Hidráulica</h4>
+            <div class="producto-details">
+              <span class="producto-funcion">Dirección</span>
+              <span class="producto-maquina">Cargadora</span>
+            </div>
+            <div class="producto-marca">Case W7</div>
+            <div class="producto-actions">
+              <button class="btn-cotizar">Solicitar Cotización</button>
+              <button class="btn-detalles">Ver Detalles</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 8 -->
+        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="retroexcavadora">
+          <div class="producto-imagen">
+            <img src="/placeholder-producto.jpg" alt="Bomba Principal 580L" loading="lazy">
+          </div>
+          <div class="producto-info">
+            <div class="producto-codigo">Código: 257953A1</div>
+            <h4 class="producto-nombre">Bomba Principal 580L/580M</h4>
+            <div class="producto-details">
+              <span class="producto-funcion">Principal</span>
+              <span class="producto-maquina">Retroexcavadora</span>
+            </div>
+            <div class="producto-marca">Case</div>
+            <div class="producto-actions">
+              <button class="btn-cotizar">Solicitar Cotización</button>
+              <button class="btn-detalles">Ver Detalles</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 9 -->
+        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="cargadora">
+          <div class="producto-imagen">
+            <img src="/placeholder-producto.jpg" alt="Bomba Frenos" loading="lazy">
+          </div>
+          <div class="producto-info">
+            <div class="producto-codigo">Código: 385483A1</div>
+            <h4 class="producto-nombre">Bomba de Frenos Hidráulica</h4>
+            <div class="producto-details">
+              <span class="producto-funcion">Frenos</span>
+              <span class="producto-maquina">Cargadora</span>
+            </div>
+            <div class="producto-marca">Case 521D/621D</div>
+            <div class="producto-actions">
+              <button class="btn-cotizar">Solicitar Cotización</button>
+              <button class="btn-detalles">Ver Detalles</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 10 -->
+        <div class="producto-card" data-categoria="motores" data-marca="case" data-maquina="cosechadora">
+          <div class="producto-imagen">
+            <img src="/placeholder-producto.jpg" alt="Motor Primario" loading="lazy">
+          </div>
+          <div class="producto-info">
+            <div class="producto-codigo">Código: 410027</div>
+            <h4 class="producto-nombre">Motor Hidráulico Primario</h4>
+            <div class="producto-details">
+              <span class="producto-funcion">Motor Primario</span>
+              <span class="producto-maquina">Cosechadora</span>
+            </div>
+            <div class="producto-marca">Case A7000/7700</div>
+            <div class="producto-actions">
+              <button class="btn-cotizar">Solicitar Cotización</button>
+              <button class="btn-detalles">Ver Detalles</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 11 -->
+        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="retroexcavadora">
+          <div class="producto-imagen">
+            <img src="/placeholder-producto.jpg" alt="Bomba Torque" loading="lazy">
+          </div>
+          <div class="producto-info">
+            <div class="producto-codigo">Código: A37570</div>
+            <h4 class="producto-nombre">Bomba de Torque</h4>
+            <div class="producto-details">
+              <span class="producto-funcion">Torque</span>
+              <span class="producto-maquina">Retroexcavadora</span>
+            </div>
+            <div class="producto-marca">Case 580E</div>
+            <div class="producto-actions">
+              <button class="btn-cotizar">Solicitar Cotización</button>
+              <button class="btn-detalles">Ver Detalles</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 12 -->
+        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="retroexcavadora">
+          <div class="producto-imagen">
+            <img src="/placeholder-producto.jpg" alt="Bomba Principal 580E" loading="lazy">
+          </div>
+          <div class="producto-info">
+            <div class="producto-codigo">Código: D49241</div>
+            <h4 class="producto-nombre">Bomba Principal 580E</h4>
+            <div class="producto-details">
+              <span class="producto-funcion">Principal</span>
+              <span class="producto-maquina">Retroexcavadora</span>
+            </div>
+            <div class="producto-marca">Case</div>
+            <div class="producto-actions">
+              <button class="btn-cotizar">Solicitar Cotización</button>
+              <button class="btn-detalles">Ver Detalles</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paginación -->
+      <div class="paginacion">
+        <button class="btn-pagina" disabled>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15,18 9,12 15,6"/>
+          </svg>
+          Anterior
+        </button>
+        <div class="paginas">
+          <button class="btn-pagina active">1</button>
+          <button class="btn-pagina">2</button>
+          <button class="btn-pagina">3</button>
+          <span class="puntos">...</span>
+          <button class="btn-pagina">10</button>
+        </div>
+        <button class="btn-pagina">
+          Siguiente
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Hero Productos */
+  .hero-productos {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-tertiary) 0%, var(--color-tertiary-light) 100%);
+    overflow: hidden;
+  }
+
+  .hero-productos::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(225, 51, 44, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(225, 51, 44, 0.1) 0%, transparent 50%);
+    animation: pulse-bg-productos 8s ease-in-out infinite;
+  }
+
+  @keyframes pulse-bg-productos {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .hero-overlay-productos {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(241, 236, 232, 0.02) 30px, rgba(241, 236, 232, 0.02) 60px);
+  }
+
+  .hero-content-productos {
+    position: relative;
+    text-align: center;
+    z-index: 10;
+    max-width: 900px;
+    padding: 2rem;
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .hero-badge-productos {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: rgba(225, 51, 44, 0.2);
+    border: 1px solid var(--color-secondary);
+    color: var(--color-secondary);
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .hero-title-productos {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    color: var(--color-primary);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .highlight-productos {
+    color: var(--color-secondary);
+    position: relative;
+  }
+
+  .hero-subtitle-productos {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: rgba(241, 236, 232, 0.85);
+    margin-bottom: 0;
+  }
+
+  /* Container */
+  .container-productos {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Filtros */
+  .filtros-section {
+    padding: 4rem 0;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-gray-200);
+  }
+
+  .filtros-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .filtros-header h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-tertiary);
+    margin-bottom: 1rem;
+  }
+
+  .filtros-header p {
+    font-size: 1.1rem;
+    color: var(--color-gray-600);
+  }
+
+  .filtros-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .filtro-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .filtro-group label {
+    font-weight: 600;
+    color: var(--color-tertiary);
+    font-size: 0.95rem;
+  }
+
+  .filtro-group select {
+    padding: 1rem;
+    border: 2px solid var(--color-gray-200);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    background: var(--color-white);
+  }
+
+  .filtro-group select:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 4px rgba(225, 51, 44, 0.1);
+  }
+
+  .search-input {
+    position: relative;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: var(--color-gray-400);
+  }
+
+  .search-input input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    border: 2px solid var(--color-gray-200);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+  }
+
+  .search-input input:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 4px rgba(225, 51, 44, 0.1);
+  }
+
+  .filtros-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .btn-filtrar,
+  .btn-limpiar {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-filtrar {
+    background: var(--color-secondary);
+    color: var(--color-white);
+    box-shadow: 0 5px 15px rgba(225, 51, 44, 0.3);
+  }
+
+  .btn-filtrar:hover {
+    background: var(--color-secondary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(225, 51, 44, 0.4);
+  }
+
+  .btn-limpiar {
+    background: var(--color-gray-100);
+    color: var(--color-gray-700);
+    border: 2px solid var(--color-gray-300);
+  }
+
+  .btn-limpiar:hover {
+    background: var(--color-gray-200);
+    transform: translateY(-2px);
+  }
+
+  /* Resultados */
+  .resultados-section {
+    padding: 4rem 0;
+    background: var(--color-gray-50);
+  }
+
+  .resultados-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .resultados-info h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-tertiary);
+    margin-bottom: 0.5rem;
+  }
+
+  .productos-count {
+    color: var(--color-gray-600);
+    font-size: 1rem;
+  }
+
+  .ordenar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .ordenar label {
+    font-weight: 600;
+    color: var(--color-tertiary);
+  }
+
+  .ordenar select {
+    padding: 0.8rem 1rem;
+    border: 2px solid var(--color-gray-200);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background: var(--color-white);
+  }
+
+  /* Grid de Productos */
+  .productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .producto-card {
+    background: var(--color-white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px var(--color-overlay-light);
+    transition: all 0.3s ease;
+    border: 1px solid var(--color-gray-100);
+  }
+
+  .producto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px var(--color-overlay);
+  }
+
+  .producto-imagen {
+    position: relative;
+    height: 200px;
+    background: linear-gradient(135deg, var(--color-gray-100), var(--color-gray-200));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .producto-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .producto-card:hover .producto-imagen img {
+    transform: scale(1.05);
+  }
+
+  .producto-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--color-secondary);
+    color: var(--color-white);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .producto-info {
+    padding: 1.5rem;
+  }
+
+  .producto-codigo {
+    font-size: 0.85rem;
+    color: var(--color-gray-500);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .producto-nombre {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-tertiary);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .producto-details {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .producto-funcion,
+  .producto-maquina {
+    background: var(--color-primary);
+    color: var(--color-tertiary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .producto-marca {
+    color: var(--color-gray-600);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+
+  .producto-actions {
+    display: flex;
+    gap: 0.8rem;
+  }
+
+  .btn-cotizar,
+  .btn-detalles {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-cotizar {
+    background: var(--color-secondary);
+    color: var(--color-white);
+  }
+
+  .btn-cotizar:hover {
+    background: var(--color-secondary-dark);
+    transform: translateY(-1px);
+  }
+
+  .btn-detalles {
+    background: var(--color-gray-100);
+    color: var(--color-gray-700);
+    border: 1px solid var(--color-gray-300);
+  }
+
+  .btn-detalles:hover {
+    background: var(--color-gray-200);
+    transform: translateY(-1px);
+  }
+
+  /* Paginación */
+  .paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .btn-pagina {
+    padding: 0.8rem 1.2rem;
+    border: 2px solid var(--color-gray-300);
+    background: var(--color-white);
+    color: var(--color-gray-700);
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-pagina:hover:not(:disabled) {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+    transform: translateY(-1px);
+  }
+
+  .btn-pagina.active {
+    background: var(--color-secondary);
+    border-color: var(--color-secondary);
+    color: var(--color-white);
+  }
+
+  .btn-pagina:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .paginas {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .puntos {
+    padding: 0.8rem 0.5rem;
+    color: var(--color-gray-500);
+  }
+
+  /* Responsive */
+  @media (max-width: 968px) {
+    .filtros-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .resultados-header {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+    }
+
+    .productos-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-productos {
+      min-height: 50vh;
+    }
+
+    .filtros-section,
+    .resultados-section {
+      padding: 3rem 0;
+    }
+
+    .productos-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .producto-actions {
+      flex-direction: column;
+    }
+
+    .paginacion {
+      flex-wrap: wrap;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  // Funcionalidad de filtros
+  document.addEventListener('DOMContentLoaded', function() {
+    const filtros = {
+      busqueda: document.getElementById('busqueda') as HTMLInputElement | null,
+      categoria: document.getElementById('categoria') as HTMLSelectElement | null,
+      marca: document.getElementById('marca') as HTMLSelectElement | null,
+      maquina: document.getElementById('maquina') as HTMLSelectElement | null
+    };
+
+    const productosGrid = document.getElementById('productosGrid');
+    const productosCount = document.getElementById('productosCount');
+    const btnFiltrar = document.getElementById('btnFiltrar');
+    const btnLimpiar = document.getElementById('btnLimpiar');
+
+    function filtrarProductos() {
+      if (!filtros.busqueda || !filtros.categoria || !filtros.marca || !filtros.maquina || !productosGrid || !productosCount) {
+        return;
+      }
+
+      const terminoBusqueda = filtros.busqueda.value.toLowerCase();
+      const categoriaSeleccionada = filtros.categoria.value;
+      const marcaSeleccionada = filtros.marca.value;
+      const maquinaSeleccionada = filtros.maquina.value;
+
+      const productos = productosGrid.querySelectorAll('.producto-card');
+      let productosVisibles = 0;
+
+      productos.forEach(producto => {
+        const productoElement = producto as HTMLElement;
+        const nombreElement = producto.querySelector('.producto-nombre');
+        const codigoElement = producto.querySelector('.producto-codigo');
+
+        if (!nombreElement || !codigoElement) return;
+
+        const nombre = nombreElement.textContent?.toLowerCase() || '';
+        const codigo = codigoElement.textContent?.toLowerCase() || '';
+        const categoria = productoElement.dataset.categoria;
+        const marca = productoElement.dataset.marca;
+        const maquina = productoElement.dataset.maquina;
+
+        const coincideBusqueda = !terminoBusqueda || 
+          nombre.includes(terminoBusqueda) || 
+          codigo.includes(terminoBusqueda);
+
+        const coincideCategoria = !categoriaSeleccionada || categoria === categoriaSeleccionada;
+        const coincideMarca = !marcaSeleccionada || marca === marcaSeleccionada;
+        const coincideMaquina = !maquinaSeleccionada || maquina === maquinaSeleccionada;
+
+        if (coincideBusqueda && coincideCategoria && coincideMarca && coincideMaquina) {
+          productoElement.style.display = 'block';
+          productosVisibles++;
+        } else {
+          productoElement.style.display = 'none';
+        }
+      });
+
+      productosCount.textContent = `${productosVisibles} productos`;
+    }
+
+    function limpiarFiltros() {
+      Object.values(filtros).forEach(filtro => {
+        if (!filtro) return;
+        if (filtro instanceof HTMLInputElement) {
+          filtro.value = '';
+        } else if (filtro instanceof HTMLSelectElement) {
+          filtro.selectedIndex = 0;
+        }
+      });
+      filtrarProductos();
+    }
+
+    // Event listeners
+    btnFiltrar?.addEventListener('click', filtrarProductos);
+    btnLimpiar?.addEventListener('click', limpiarFiltros);
+
+    // Filtro en tiempo real para búsqueda
+    filtros.busqueda?.addEventListener('input', filtrarProductos);
+
+    // Filtro automático para selects
+    [filtros.categoria, filtros.marca, filtros.maquina].forEach(select => {
+      select?.addEventListener('change', filtrarProductos);
+    });
+
+    // Funcionalidad de cotización
+    document.querySelectorAll('.btn-cotizar').forEach(btn => {
+      btn.addEventListener('click', function(this: HTMLElement) {
+        const productoCard = (this as HTMLElement).closest('.producto-card') as HTMLElement;
+        if (!productoCard) return;
+
+        const codigoElement = productoCard.querySelector('.producto-codigo');
+        const nombreElement = productoCard.querySelector('.producto-nombre');
+
+        if (!codigoElement || !nombreElement) return;
+
+        const codigo = codigoElement.textContent || '';
+        const nombre = nombreElement.textContent || '';
+        
+        const mensaje = `*Solicitud de Cotización*\n\n` +
+          `*Producto:* ${nombre}\n` +
+          `*Código:* ${codigo}\n\n` +
+          `Hola, me interesa este producto. ¿Podrían enviarme información de precios y disponibilidad?`;
+        
+        const mensajeCodificado = encodeURIComponent(mensaje);
+        const whatsappURL = `https://api.whatsapp.com/send?phone=59169200281&text=${mensajeCodificado}`;
+        
+        window.open(whatsappURL, '_blank');
+      });
+    });
+
+    // Funcionalidad de detalles
+    document.querySelectorAll('.btn-detalles').forEach(btn => {
+      btn.addEventListener('click', function(this: HTMLElement) {
+        const productoCard = (this as HTMLElement).closest('.producto-card') as HTMLElement;
+        if (!productoCard) return;
+
+        const codigoElement = productoCard.querySelector('.producto-codigo');
+        const nombreElement = productoCard.querySelector('.producto-nombre');
+
+        if (!codigoElement || !nombreElement) return;
+
+        const codigo = codigoElement.textContent || '';
+        const nombre = nombreElement.textContent || '';
+        
+        alert(`Detalles del producto:\n\n${nombre}\n${codigo}\n\nPróximamente disponible información detallada.`);
+      });
+    });
+  });
+</script>
