@@ -5,7 +5,6 @@ import Layout from '../layouts/Layout.astro';
 <Layout>
   <!-- Hero Section -->
   <section class="hero-contacto">
-    <div class="hero-overlay-contacto"></div>
     <div class="hero-content-contacto">
       <div class="hero-badge-contacto">Contáctanos</div>
       <h1 class="hero-title-contacto">
@@ -14,20 +13,7 @@ import Layout from '../layouts/Layout.astro';
       <p class="hero-subtitle-contacto">
         ¿Tu maquinaria necesita atención? Contáctanos ahora y recibe asesoría profesional
       </p>
-      <div class="hero-stats">
-        <div class="stat-item-hero">
-          <span class="stat-icon-hero">⚡</span>
-          <span class="stat-text-hero">Respuesta en minutos</span>
-        </div>
-        <div class="stat-item-hero">
-          <span class="stat-icon-hero">24/7</span>
-          <span class="stat-text-hero">Servicio de emergencia</span>
-        </div>
-        <div class="stat-item-hero">
-          <span class="stat-icon-hero">📍</span>
-          <span class="stat-text-hero">Santa Cruz, Bolivia</span>
-        </div>
-      </div>
+    
     </div>
   </section>
 
@@ -74,136 +60,115 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Formulario de Contacto -->
-  <section class="formulario-section">
+  <!-- Información y Formulario -->
+  <section class="contacto-main">
     <div class="container-contacto">
-      <div class="formulario-wrapper">
-        <div class="formulario-header">
-          <span class="section-badge-contacto">Envíanos un Mensaje</span>
-          <h2 class="section-title-contacto">¿Tienes una Consulta?</h2>
-          <p class="section-description-contacto">
-            Completa el formulario y te responderemos a la brevedad posible
-          </p>
-        </div>
+      <div class="contact-layout">
+        <aside class="contact-info-panel">
+          <div class="info-header">
+            <h2>Información de Contacto</h2>
+            <p>Estamos listos para ayudarte. Contáctanos por cualquiera de los siguientes medios o visítanos en Santa Cruz.</p>
+          </div>
 
-        <form class="contacto-form" id="contactForm">
-          <div class="form-row">
+          <div class="info-grid">
+            <div class="info-card">
+              <h3>Datos de contacto</h3>
+              <ul class="info-list">
+                <li>
+                  <span class="info-label">Ubicación</span>
+                  <span class="info-value">Santa Cruz, Bolivia</span>
+                </li>
+                <li>
+                  <span class="info-label">Teléfono</span>
+                  <a class="info-link" href="tel:+59169200281">+591 69200281</a>
+                </li>
+                <li>
+                  <span class="info-label">Email</span>
+                  <a class="info-link" href="mailto:hydraulicssistem@gmail.com">hydraulicssistem@gmail.com</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="info-card">
+              <h3>Horarios de atención</h3>
+              <ul class="info-list">
+                <li>
+                  <span class="info-label">Lunes - Viernes</span>
+                  <span class="info-value">8:00 - 18:00</span>
+                </li>
+                <li>
+                  <span class="info-label">Sábado</span>
+                  <span class="info-value">8:00 - 13:00</span>
+                </li>
+                <li>
+                  <span class="info-label">Emergencias</span>
+                  <span class="info-value">Disponibles 24/7</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+
+        <div class="contact-form-panel">
+          <div class="formulario-header">
+            <span class="section-badge-contacto">Envíanos un Mensaje</span>
+            <h2 class="section-title-contacto">¿Tienes una Consulta?</h2>
+            <p class="section-description-contacto">
+              Completa el formulario y te responderemos a la brevedad posible
+            </p>
+          </div>
+
+          <form class="contacto-form" id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nombre">Nombre Completo *</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Juan Pérez">
+              </div>
+
+              <div class="form-group">
+                <label for="empresa">Empresa</label>
+                <input type="text" id="empresa" name="empresa" placeholder="Tu empresa (opcional)">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="telefono">Teléfono *</label>
+                <input type="tel" id="telefono" name="telefono" required placeholder="+591 00000000">
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required placeholder="tu@email.com">
+              </div>
+            </div>
+
             <div class="form-group">
-              <label for="nombre">Nombre Completo *</label>
-              <input type="text" id="nombre" name="nombre" required placeholder="Juan Pérez">
+              <label for="asunto">Asunto *</label>
+              <select id="asunto" name="asunto" required>
+                <option value="">Selecciona un asunto</option>
+                <option value="reparacion">Reparación de Equipo</option>
+                <option value="repuestos">Consulta de Repuestos</option>
+                <option value="emergencia">Servicio de Emergencia</option>
+                <option value="cotizacion">Solicitar Cotización</option>
+                <option value="mantenimiento">Mantenimiento Preventivo</option>
+                <option value="otro">Otro</option>
+              </select>
             </div>
 
             <div class="form-group">
-              <label for="empresa">Empresa</label>
-              <input type="text" id="empresa" name="empresa" placeholder="Tu empresa (opcional)">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="telefono">Teléfono *</label>
-              <input type="tel" id="telefono" name="telefono" required placeholder="+591 00000000">
+              <label for="mensaje">Mensaje *</label>
+              <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Describe tu consulta o necesidad..."></textarea>
             </div>
 
-            <div class="form-group">
-              <label for="email">Email *</label>
-              <input type="email" id="email" name="email" required placeholder="tu@email.com">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="asunto">Asunto *</label>
-            <select id="asunto" name="asunto" required>
-              <option value="">Selecciona un asunto</option>
-              <option value="reparacion">Reparación de Equipo</option>
-              <option value="repuestos">Consulta de Repuestos</option>
-              <option value="emergencia">Servicio de Emergencia</option>
-              <option value="cotizacion">Solicitar Cotización</option>
-              <option value="mantenimiento">Mantenimiento Preventivo</option>
-              <option value="otro">Otro</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="mensaje">Mensaje *</label>
-            <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Describe tu consulta o necesidad..."></textarea>
-          </div>
-
-          <button type="submit" class="btn-submit">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="22" y1="2" x2="11" y2="13"/>
-              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-            </svg>
-            Enviar Mensaje
-          </button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- Información de Contacto -->
-  <section class="info-section">
-    <div class="container-contacto">
-      <div class="info-grid">
-        <!-- Información de Contacto -->
-        <div class="info-card">
-          <h3>Información de Contacto</h3>
-          <div class="info-items">
-            <div class="info-item">
-              <div class="info-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                </svg>
-              </div>
-              <div class="info-text">
-                <h4>Ubicación</h4>
-                <p>Santa Cruz, Bolivia</p>
-              </div>
-            </div>
-
-            <div class="info-item">
-              <div class="info-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
-                </svg>
-              </div>
-              <div class="info-text">
-                <h4>Teléfono</h4>
-                <p>+591 69200281</p>
-              </div>
-            </div>
-
-            <div class="info-item">
-              <div class="info-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                </svg>
-              </div>
-              <div class="info-text">
-                <h4>Email</h4>
-                <p>hydraulicssistem@gmail.com</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Horarios -->
-        <div class="horarios-card">
-          <h3>Horarios de Atención</h3>
-          <div class="horarios-list">
-            <div class="horario-item">
-              <span class="dia">Lunes - Viernes</span>
-              <span class="hora">8:00 - 18:00</span>
-            </div>
-            <div class="horario-item">
-              <span class="dia">Sábado</span>
-              <span class="hora">8:00 - 13:00</span>
-            </div>
-            <div class="horario-item emergencia-item">
-              <span class="dia">🚨 Emergencias</span>
-              <span class="hora">24/7</span>
-            </div>
-          </div>
+            <button type="submit" class="btn-submit">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+              Enviar Mensaje
+            </button>
+          </form>
         </div>
       </div>
     </div>
@@ -255,7 +220,9 @@ import Layout from '../layouts/Layout.astro';
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--color-tertiary) 0%, var(--color-tertiary-light) 100%);
+    background:
+      linear-gradient(135deg, rgba(34, 30, 28, 0.65) 0%, rgba(34, 30, 28, 0.45) 100%),
+      url('/hero-hydraulic.png') center/cover no-repeat;
     overflow: hidden;
   }
 
@@ -274,13 +241,6 @@ import Layout from '../layouts/Layout.astro';
     50% { opacity: 0.6; }
   }
 
-  .hero-overlay-contacto {
-    position: absolute;
-    inset: 0;
-    background-image: 
-      repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(241, 236, 232, 0.02) 20px, rgba(241, 236, 232, 0.02) 40px);
-  }
-
   .hero-content-contacto {
     position: relative;
     text-align: center;
@@ -293,9 +253,9 @@ import Layout from '../layouts/Layout.astro';
   .hero-badge-contacto {
     display: inline-block;
     padding: 0.5rem 1.5rem;
-    background: rgba(225, 51, 44, 0.2);
-    border: 1px solid var(--color-secondary);
-    color: var(--color-secondary);
+    background: rgba(233, 232, 232, 0.2);
+    border: 1px solid rgba(233, 232, 232, 0.2);
+    color: white;
     border-radius: 50px;
     font-weight: 600;
     font-size: 0.85rem;
@@ -323,33 +283,6 @@ import Layout from '../layouts/Layout.astro';
     margin-bottom: 3rem;
   }
 
-  .hero-stats {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .stat-item-hero {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.8rem 1.5rem;
-    background: rgba(241, 236, 232, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(241, 236, 232, 0.2);
-    border-radius: 50px;
-    color: var(--color-primary);
-  }
-
-  .stat-icon-hero {
-    font-size: 1.5rem;
-  }
-
-  .stat-text-hero {
-    font-size: 0.9rem;
-    font-weight: 500;
-  }
 
   /* Container */
   .container-contacto {
@@ -494,15 +427,36 @@ import Layout from '../layouts/Layout.astro';
     color: var(--color-white);
   }
 
-  /* Formulario */
-  .formulario-section {
+  /* Bloque principal de contacto */
+  .contacto-main {
     padding: 6rem 0;
     background: var(--color-white);
   }
 
-  .formulario-wrapper {
-    max-width: 800px;
-    margin: 0 auto;
+  .contact-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 3rem;
+    align-items: flex-start;
+  }
+
+  .contact-info-panel {
+    background: var(--color-primary);
+    border-radius: 20px;
+    border: 1px solid rgba(61, 53, 50, 0.08);
+    padding: 2.5rem;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .contact-form-panel {
+    background: var(--color-primary);
+    border-radius: 20px;
+    border: 1px solid rgba(61, 53, 50, 0.08);
+    padding: 2.5rem;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
   }
 
   .section-badge-contacto {
@@ -603,124 +557,84 @@ import Layout from '../layouts/Layout.astro';
     box-shadow: 0 15px 40px rgba(225, 51, 44, 0.4);
   }
 
-  /* Información de Contacto */
-  .info-section {
-    padding: 4rem 0;
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-tertiary-light) 100%);
+  .info-header {
+    text-align: left;
+  }
+
+  .info-header h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: var(--color-tertiary);
+    margin-bottom: 0.75rem;
+  }
+
+  .info-header p {
+    color: rgba(61, 53, 50, 0.7);
+    font-size: 1.05rem;
+    line-height: 1.6;
   }
 
   .info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
-  }
-
-  .info-card,
-  .horarios-card {
-    background: var(--color-white);
-    padding: 2.5rem;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px var(--color-overlay);
-    transition: transform 0.3s ease;
-  }
-
-  .info-card:hover,
-  .horarios-card:hover {
-    transform: translateY(-5px);
-  }
-
-  .info-card h3,
-  .horarios-card h3 {
-    font-size: 1.5rem;
-    color: var(--color-tertiary);
-    margin-bottom: 2rem;
-    font-weight: 700;
-    text-align: center;
-  }
-
-  .info-items {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
 
-  .info-item {
+  .info-card {
+    background: var(--color-white);
+    border-radius: 16px;
+    border: 1px solid rgba(61, 53, 50, 0.08);
+    padding: 1.75rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
     display: flex;
-    gap: 1rem;
-    align-items: flex-start;
+    flex-direction: column;
+    gap: 1.25rem;
   }
 
-  .info-icon {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-light));
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    box-shadow: 0 5px 15px rgba(225, 51, 44, 0.3);
-  }
-
-  .info-icon svg {
-    width: 26px;
-    height: 26px;
-    color: var(--color-white);
-  }
-
-  .info-text h4 {
-    font-size: 1rem;
+  .info-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
     color: var(--color-tertiary);
-    margin-bottom: 0.3rem;
-    font-weight: 600;
+    margin: 0;
   }
 
-  .info-text p {
-    color: var(--color-gray-600);
-    font-size: 0.95rem;
-  }
-
-  /* Horarios */
-  .horarios-list {
+  .info-list {
+    list-style: none;
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
 
-  .horario-item {
+  .info-list li {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem;
-    background: var(--color-primary);
-    border-radius: 15px;
-    transition: all 0.3s ease;
+    flex-direction: column;
+    gap: 0.4rem;
   }
 
-  .horario-item:hover {
-    transform: translateX(5px);
-  }
-
-  .horario-item .dia {
+  .info-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(61, 53, 50, 0.55);
     font-weight: 600;
+  }
+
+  .info-value {
+    font-size: 1.1rem;
     color: var(--color-tertiary);
-    font-size: 1rem;
+    font-weight: 600;
   }
 
-  .horario-item .hora {
-    color: var(--color-gray-600);
-    font-weight: 500;
-    font-size: 0.95rem;
+  .info-link {
+    font-size: 1.1rem;
+    color: var(--color-secondary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
   }
 
-  .emergencia-item {
-    background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-light));
-    box-shadow: 0 5px 20px rgba(225, 51, 44, 0.3);
-  }
-
-  .emergencia-item .dia,
-  .emergencia-item .hora {
-    color: var(--color-white);
+  .info-link:hover {
+    color: var(--color-secondary-dark);
   }
 
   /* Mapa Grande */
@@ -884,9 +798,17 @@ import Layout from '../layouts/Layout.astro';
       grid-template-columns: 1fr;
     }
 
-    .info-grid {
+    .contact-layout {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 2.5rem;
+    }
+
+    .contact-info-panel {
+      order: 2;
+    }
+
+    .contact-form-panel {
+      order: 1;
     }
 
     .mapa-container {
@@ -895,25 +817,15 @@ import Layout from '../layouts/Layout.astro';
   }
 
   @media (max-width: 640px) {
-    .hero-stats {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .stat-item-hero {
-      justify-content: center;
-    }
-
-    .formulario-section,
-    .info-section,
+    .contacto-main,
     .mapa-section,
     .contacto-rapido,
     .cta-contacto {
       padding: 3rem 0;
     }
 
-    .info-card,
-    .horarios-card {
+    .contact-info-panel,
+    .contact-form-panel {
       padding: 2rem;
     }
 
@@ -953,13 +865,13 @@ import Layout from '../layouts/Layout.astro';
       };
       
       // Crear mensaje para WhatsApp
-      const mensaje = `*Nuevo mensaje desde el sitio web*\n\n` +
-        `*Nombre:* ${data.nombre}\n` +
-        `*Empresa:* ${data.empresa || 'No especificada'}\n` +
-        `*Teléfono:* ${data.telefono}\n` +
-        `*Email:* ${data.email}\n` +
-        `*Asunto:* ${data.asunto}\n\n` +
-        `*Mensaje:*\n${data.mensaje}`;
+      const mensaje = `Nuevo contacto desde la web:\n\n` +
+        `Nombre: ${data.nombre}\n` +
+        `Empresa: ${data.empresa || 'No especificada'}\n` +
+        `Teléfono: ${data.telefono}\n` +
+        `Email: ${data.email}\n` +
+        `Asunto: ${data.asunto}\n\n` +
+        `Mensaje:\n${data.mensaje}`;
       
       const mensajeCodificado = encodeURIComponent(mensaje);
       const whatsappURL = `https://api.whatsapp.com/send?phone=59169200281&text=${mensajeCodificado}`;

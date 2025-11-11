@@ -21,8 +21,7 @@ const contactInfo = {
   <div class="footer-content">
     <div class="footer-section about">
       <h3 class="footer-logo">
-        <span class="logo-text">Hydraulic</span>
-        <span class="logo-accent">Sistem</span>
+        <img src="/Logo.png" alt="Hydraulic Sistem" class="footer-logo-img">
       </h3>
       <p class="footer-description">
         Soluciones hidráulicas de alta calidad para la industria. 
@@ -172,17 +171,20 @@ const contactInfo = {
   }
 
   .footer-logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
   }
 
-  .logo-text {
-    color: var(--color-primary);
+  .footer-logo-img {
+    height: 140px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
   }
 
-  .logo-accent {
-    color: var(--color-secondary);
+  .footer-logo-img:hover {
+    transform: scale(1.03);
   }
 
   .footer-description {

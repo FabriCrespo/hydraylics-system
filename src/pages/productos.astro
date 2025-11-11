@@ -1,11 +1,19 @@
 ---
-import Layout from '../layouts/Layout.astro';   
+import Layout from '../layouts/Layout.astro';
+import productsData from '../data/products.json';
+
+const products = productsData;
+const modelOptions = Array.from(
+  new Set(products.flatMap((product) => product.modelos_compatibles ?? []))
+).sort((a, b) => a.localeCompare(b));
 ---
 
 <Layout>
   <!-- Hero Section -->
   <section class="hero-productos">
-    <div class="hero-overlay-productos"></div>
+    <div class="hero-background">
+      <img src="/her-products.png" alt="Componentes hidráulicos" />
+    </div>
     <div class="hero-content-productos">
       <div class="hero-badge-productos">Nuestros Productos</div>
       <h1 class="hero-title-productos">
@@ -26,7 +34,6 @@ import Layout from '../layouts/Layout.astro';
       </div>
       
       <div class="filtros-grid">
-        <!-- Búsqueda -->
         <div class="filtro-group">
           <label for="busqueda">Buscar</label>
           <div class="search-input">
@@ -34,52 +41,39 @@ import Layout from '../layouts/Layout.astro';
               <circle cx="11" cy="11" r="8"/>
               <path d="m21 21-4.35-4.35"/>
             </svg>
-            <input type="text" id="busqueda" placeholder="Buscar por código o descripción...">
+            <input type="text" id="busqueda" placeholder="Buscar por nombre o ID...">
           </div>
         </div>
 
-        <!-- Categoría -->
         <div class="filtro-group">
-          <label for="categoria">Categoría</label>
-          <select id="categoria">
-            <option value="">Todas las categorías</option>
-            <option value="bombas">Bombas Hidráulicas</option>
-            <option value="motores">Motores Hidráulicos</option>
-            <option value="valvulas">Válvulas Hidráulicas</option>
-            <option value="cilindros">Cilindros Hidráulicos</option>
-            <option value="filtros">Filtros y Accesorios</option>
-            <option value="mangueras">Mangueras y Conexiones</option>
+          <label for="modelo">Modelo compatible</label>
+          <select id="modelo">
+            <option value="">Todos los modelos</option>
+            {
+              modelOptions.map((modelo) => (
+                <option value={modelo}>{modelo}</option>
+              ))
+            }
           </select>
         </div>
 
-        <!-- Marca -->
         <div class="filtro-group">
-          <label for="marca">Marca</label>
-          <select id="marca">
-            <option value="">Todas las marcas</option>
-            <option value="case">Case</option>
-            <option value="caterpillar">Caterpillar</option>
-            <option value="john-deere">John Deere</option>
-            <option value="komatsu">Komatsu</option>
-            <option value="volvo">Volvo</option>
-            <option value="new-holland">New Holland</option>
-            <option value="bobcat">Bobcat</option>
-            <option value="jcb">JCB</option>
+          <label for="stock">Disponibilidad</label>
+          <select id="stock">
+            <option value="">Todos</option>
+            <option value="alto">Stock alto (&gt; 100)</option>
+            <option value="medio">Stock medio (50 - 100)</option>
+            <option value="bajo">Stock bajo (&lt; 50)</option>
+            <option value="sin">Sin stock</option>
           </select>
         </div>
 
-        <!-- Máquina -->
         <div class="filtro-group">
-          <label for="maquina">Tipo de Máquina</label>
-          <select id="maquina">
-            <option value="">Todas las máquinas</option>
-            <option value="retroexcavadora">Retroexcavadora</option>
-            <option value="cargadora">Cargadora</option>
-            <option value="excavadora">Excavadora</option>
-            <option value="bulldozer">Bulldozer</option>
-            <option value="tractor">Tractor</option>
-            <option value="montacargas">Montacargas</option>
-            <option value="compactadora">Compactadora</option>
+          <label for="imagen">Imagen disponible</label>
+          <select id="imagen">
+            <option value="">Todos</option>
+            <option value="true">Solo con imagen</option>
+            <option value="false">Solo sin imagen</option>
           </select>
         </div>
       </div>
@@ -107,7 +101,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="resultados-header">
         <div class="resultados-info">
           <h3>Productos Encontrados</h3>
-          <span class="productos-count" id="productosCount">12 productos</span>
+          <span class="productos-count" id="productosCount">{products.length} productos</span>
         </div>
         <div class="ordenar">
           <label for="ordenar">Ordenar por:</label>
@@ -122,272 +116,145 @@ import Layout from '../layouts/Layout.astro';
 
       <!-- Grid de Productos -->
       <div class="productos-grid" id="productosGrid">
-        <!-- Producto 1 -->
-        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="retroexcavadora">
-          <div class="producto-imagen">
-            <div class="producto-badge">Nuevo</div>
-            <img src="/placeholder-producto.jpg" alt="Bomba Hidráulica Case" loading="lazy">
-          </div>
-          <div class="producto-info">
-            <div class="producto-codigo">Código: 6885175</div>
-            <h4 class="producto-nombre">Bomba Hidráulica de Transmisión</h4>
-            <div class="producto-details">
-              <span class="producto-funcion">Transmisión</span>
-              <span class="producto-maquina">Retroexcavadora</span>
-            </div>
-            <div class="producto-marca">Case</div>
-            <div class="producto-actions">
-              <button class="btn-cotizar">Solicitar Cotización</button>
-              <button class="btn-detalles">Ver Detalles</button>
-            </div>
-          </div>
-        </div>
+        {
+          products.map((producto) => {
+            const modelos = producto.modelos_compatibles ?? [];
+            const stock = producto.stock ?? 0;
+            const tieneImagen = Boolean(producto.imagen);
 
-        <!-- Producto 2 -->
-        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="retroexcavadora">
-          <div class="producto-imagen">
-            <img src="/placeholder-producto.jpg" alt="Bomba Principal Case" loading="lazy">
-          </div>
-          <div class="producto-info">
-            <div class="producto-codigo">Código: 130258A2</div>
-            <h4 class="producto-nombre">Bomba Hidráulica Principal</h4>
-            <div class="producto-details">
-              <span class="producto-funcion">Principal</span>
-              <span class="producto-maquina">Retroexcavadora</span>
-            </div>
-            <div class="producto-marca">Case 580L/580M</div>
-            <div class="producto-actions">
-              <button class="btn-cotizar">Solicitar Cotización</button>
-              <button class="btn-detalles">Ver Detalles</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Producto 3 -->
-        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="retroexcavadora">
-          <div class="producto-imagen">
-            <img src="/placeholder-producto.jpg" alt="Bomba Doble Case" loading="lazy">
-          </div>
-          <div class="producto-info">
-            <div class="producto-codigo">Código: 145292A1</div>
-            <h4 class="producto-nombre">Bomba Hidráulica Doble</h4>
-            <div class="producto-details">
-              <span class="producto-funcion">Principal y Dirección</span>
-              <span class="producto-maquina">Retroexcavadora</span>
-            </div>
-            <div class="producto-marca">Case 580H</div>
-            <div class="producto-actions">
-              <button class="btn-cotizar">Solicitar Cotización</button>
-              <button class="btn-detalles">Ver Detalles</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Producto 4 -->
-        <div class="producto-card" data-categoria="motores" data-marca="case" data-maquina="cosechadora">
-          <div class="producto-imagen">
-            <img src="/placeholder-producto.jpg" alt="Motor Hidráulico Case" loading="lazy">
-          </div>
-          <div class="producto-info">
-            <div class="producto-codigo">Código: M00408383</div>
-            <h4 class="producto-nombre">Motor Hidráulico de Engranajes</h4>
-            <div class="producto-details">
-              <span class="producto-funcion">Extractor</span>
-              <span class="producto-maquina">Cosechadora</span>
-            </div>
-            <div class="producto-marca">Case</div>
-            <div class="producto-actions">
-              <button class="btn-cotizar">Solicitar Cotización</button>
-              <button class="btn-detalles">Ver Detalles</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Producto 5 -->
-        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="cargadora">
-          <div class="producto-imagen">
-            <img src="/placeholder-producto.jpg" alt="Bomba Transmisión Loader" loading="lazy">
-          </div>
-          <div class="producto-info">
-            <div class="producto-codigo">Código: L32414</div>
-            <h4 class="producto-nombre">Bomba de Transmisión</h4>
-            <div class="producto-details">
-              <span class="producto-funcion">Transmisión</span>
-              <span class="producto-maquina">Cargadora</span>
-            </div>
-            <div class="producto-marca">Case W20A</div>
-            <div class="producto-actions">
-              <button class="btn-cotizar">Solicitar Cotización</button>
-              <button class="btn-detalles">Ver Detalles</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Producto 6 -->
-        <div class="producto-card" data-categoria="valvulas" data-marca="case" data-maquina="cargadora">
-          <div class="producto-imagen">
-            <img src="/placeholder-producto.jpg" alt="Válvula Hidráulica" loading="lazy">
-          </div>
-          <div class="producto-info">
-            <div class="producto-codigo">Código: L33537</div>
-            <h4 class="producto-nombre">Válvula Hidráulica 28000</h4>
-            <div class="producto-details">
-              <span class="producto-funcion">Válvula 28000</span>
-              <span class="producto-maquina">Cargadora</span>
-            </div>
-            <div class="producto-marca">Clark 28000</div>
-            <div class="producto-actions">
-              <button class="btn-cotizar">Solicitar Cotización</button>
-              <button class="btn-detalles">Ver Detalles</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Producto 7 -->
-        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="cargadora">
-          <div class="producto-imagen">
-            <img src="/placeholder-producto.jpg" alt="Bomba Dirección" loading="lazy">
-          </div>
-          <div class="producto-info">
-            <div class="producto-codigo">Código: L52381</div>
-            <h4 class="producto-nombre">Bomba de Dirección Hidráulica</h4>
-            <div class="producto-details">
-              <span class="producto-funcion">Dirección</span>
-              <span class="producto-maquina">Cargadora</span>
-            </div>
-            <div class="producto-marca">Case W7</div>
-            <div class="producto-actions">
-              <button class="btn-cotizar">Solicitar Cotización</button>
-              <button class="btn-detalles">Ver Detalles</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Producto 8 -->
-        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="retroexcavadora">
-          <div class="producto-imagen">
-            <img src="/placeholder-producto.jpg" alt="Bomba Principal 580L" loading="lazy">
-          </div>
-          <div class="producto-info">
-            <div class="producto-codigo">Código: 257953A1</div>
-            <h4 class="producto-nombre">Bomba Principal 580L/580M</h4>
-            <div class="producto-details">
-              <span class="producto-funcion">Principal</span>
-              <span class="producto-maquina">Retroexcavadora</span>
-            </div>
-            <div class="producto-marca">Case</div>
-            <div class="producto-actions">
-              <button class="btn-cotizar">Solicitar Cotización</button>
-              <button class="btn-detalles">Ver Detalles</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Producto 9 -->
-        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="cargadora">
-          <div class="producto-imagen">
-            <img src="/placeholder-producto.jpg" alt="Bomba Frenos" loading="lazy">
-          </div>
-          <div class="producto-info">
-            <div class="producto-codigo">Código: 385483A1</div>
-            <h4 class="producto-nombre">Bomba de Frenos Hidráulica</h4>
-            <div class="producto-details">
-              <span class="producto-funcion">Frenos</span>
-              <span class="producto-maquina">Cargadora</span>
-            </div>
-            <div class="producto-marca">Case 521D/621D</div>
-            <div class="producto-actions">
-              <button class="btn-cotizar">Solicitar Cotización</button>
-              <button class="btn-detalles">Ver Detalles</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Producto 10 -->
-        <div class="producto-card" data-categoria="motores" data-marca="case" data-maquina="cosechadora">
-          <div class="producto-imagen">
-            <img src="/placeholder-producto.jpg" alt="Motor Primario" loading="lazy">
-          </div>
-          <div class="producto-info">
-            <div class="producto-codigo">Código: 410027</div>
-            <h4 class="producto-nombre">Motor Hidráulico Primario</h4>
-            <div class="producto-details">
-              <span class="producto-funcion">Motor Primario</span>
-              <span class="producto-maquina">Cosechadora</span>
-            </div>
-            <div class="producto-marca">Case A7000/7700</div>
-            <div class="producto-actions">
-              <button class="btn-cotizar">Solicitar Cotización</button>
-              <button class="btn-detalles">Ver Detalles</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Producto 11 -->
-        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="retroexcavadora">
-          <div class="producto-imagen">
-            <img src="/placeholder-producto.jpg" alt="Bomba Torque" loading="lazy">
-          </div>
-          <div class="producto-info">
-            <div class="producto-codigo">Código: A37570</div>
-            <h4 class="producto-nombre">Bomba de Torque</h4>
-            <div class="producto-details">
-              <span class="producto-funcion">Torque</span>
-              <span class="producto-maquina">Retroexcavadora</span>
-            </div>
-            <div class="producto-marca">Case 580E</div>
-            <div class="producto-actions">
-              <button class="btn-cotizar">Solicitar Cotización</button>
-              <button class="btn-detalles">Ver Detalles</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Producto 12 -->
-        <div class="producto-card" data-categoria="bombas" data-marca="case" data-maquina="retroexcavadora">
-          <div class="producto-imagen">
-            <img src="/placeholder-producto.jpg" alt="Bomba Principal 580E" loading="lazy">
-          </div>
-          <div class="producto-info">
-            <div class="producto-codigo">Código: D49241</div>
-            <h4 class="producto-nombre">Bomba Principal 580E</h4>
-            <div class="producto-details">
-              <span class="producto-funcion">Principal</span>
-              <span class="producto-maquina">Retroexcavadora</span>
-            </div>
-            <div class="producto-marca">Case</div>
-            <div class="producto-actions">
-              <button class="btn-cotizar">Solicitar Cotización</button>
-              <button class="btn-detalles">Ver Detalles</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Paginación -->
-      <div class="paginacion">
-        <button class="btn-pagina" disabled>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="15,18 9,12 15,6"/>
-          </svg>
-          Anterior
-        </button>
-        <div class="paginas">
-          <button class="btn-pagina active">1</button>
-          <button class="btn-pagina">2</button>
-          <button class="btn-pagina">3</button>
-          <span class="puntos">...</span>
-          <button class="btn-pagina">10</button>
-        </div>
-        <button class="btn-pagina">
-          Siguiente
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="9,18 15,12 9,6"/>
-          </svg>
-        </button>
+            return (
+              <div
+                class="producto-card"
+                data-modelos={modelos.join(',')}
+                data-stock={stock}
+                data-imagen={tieneImagen ? 'true' : 'false'}
+              >
+                <div class="producto-imagen">
+                  {stock > 100 && <div class="producto-badge">Stock alto</div>}
+                  <button
+                    class="producto-info-button"
+                    type="button"
+                    aria-label={`Más información de ${producto.nombre}`}
+                    data-producto-id={producto.id}
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="12" y1="16" x2="12" y2="12" />
+                      <line x1="12" y1="8" x2="12.01" y2="8" />
+                    </svg>
+                  </button>
+                  <img
+                    src={producto.imagen ?? '/placeholder-producto.jpg'}
+                    alt={producto.nombre}
+                    loading="lazy"
+                  />
+                </div>
+                <div class="producto-info">
+                  <div class="producto-codigo">ID: {producto.id}</div>
+                  <h4 class="producto-nombre">{producto.nombre}</h4>
+                  <p class="producto-descripcion">{producto.descripcion}</p>
+                  <div class="producto-details">
+                    <span class="producto-funcion">Stock: {stock} unidades</span>
+                    {modelos.length > 0 && (
+                      <span class="producto-maquina">
+                        Compatible: {modelos.slice(0, 3).join(', ')}
+                        {modelos.length > 3 ? '…' : ''}
+                      </span>
+                    )}
+                  </div>
+                  <div class="producto-actions">
+                    <div class="cantidad-control" data-producto-id={producto.id}>
+                      <button
+                        class="cantidad-btn"
+                        type="button"
+                        data-action="decremento"
+                        aria-label="Disminuir cantidad"
+                      >
+                        &minus;
+                      </button>
+                      <input
+                        class="cantidad-input"
+                        type="number"
+                        min="1"
+                        step="1"
+                        value="1"
+                        inputmode="numeric"
+                        aria-label="Cantidad"
+                      />
+                      <button
+                        class="cantidad-btn"
+                        type="button"
+                        data-action="incremento"
+                        aria-label="Aumentar cantidad"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <button class="btn-agregar-carrito" type="button" data-producto-id={producto.id}>
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <circle cx="9" cy="21" r="1" />
+                        <circle cx="20" cy="21" r="1" />
+                        <path d="M1 1h4l2.68 13.39a2 2 0 001.95 1.61h9.72a2 2 0 001.95-1.61l1.75-9.78H6.5" />
+                      </svg>
+                      Agregar al carrito
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        }
       </div>
     </div>
   </section>
+
+  <div class="modal-detalle" id="detalleModal" aria-hidden="true">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+      <button class="modal-close" id="modalCerrar" aria-label="Cerrar detalla de producto">
+        <span>&times;</span>
+      </button>
+      <div class="modal-content">
+        <div class="modal-image" id="modalImagenWrapper">
+          <img id="modalImagen" src="" alt="" />
+        </div>
+        <div class="modal-info">
+          <span class="modal-badge">Detalle de producto</span>
+          <h3 id="modalTitulo"></h3>
+          <p class="modal-codigo" id="modalCodigo"></p>
+          <p class="modal-descripcion" id="modalDescripcion"></p>
+          <div class="modal-section">
+            <h4>Compatibilidad</h4>
+            <div class="modal-tags" id="modalCompatibilidad"></div>
+          </div>
+          <div class="modal-section" id="modalStock"></div>
+          <div class="modal-actions">
+            <button class="btn-cotizar" id="modalCotizar">Solicitar cotización</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </Layout>
 
 <style>
@@ -398,7 +265,6 @@ import Layout from '../layouts/Layout.astro';
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--color-tertiary) 0%, var(--color-tertiary-light) 100%);
     overflow: hidden;
   }
 
@@ -406,28 +272,30 @@ import Layout from '../layouts/Layout.astro';
     content: '';
     position: absolute;
     inset: 0;
-    background-image: 
-      radial-gradient(circle at 20% 30%, rgba(225, 51, 44, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(225, 51, 44, 0.1) 0%, transparent 50%);
-    animation: pulse-bg-productos 8s ease-in-out infinite;
+    background: linear-gradient(135deg, rgba(34, 30, 28, 0.6) 0%, rgba(34, 30, 28, 0.35) 100%);
+    z-index: 0;
   }
 
-  @keyframes pulse-bg-productos {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-  }
-
-  .hero-overlay-productos {
+  .hero-background {
     position: absolute;
     inset: 0;
-    background-image: 
-      repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(241, 236, 232, 0.02) 30px, rgba(241, 236, 232, 0.02) 60px);
+    z-index: -1;
+  }
+
+  .hero-background img {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    min-width: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
   }
 
   .hero-content-productos {
     position: relative;
     text-align: center;
-    z-index: 10;
+    z-index: 1;
     max-width: 900px;
     padding: 2rem;
     animation: fadeInUp 1s ease-out;
@@ -666,6 +534,8 @@ import Layout from '../layouts/Layout.astro';
     box-shadow: 0 5px 20px var(--color-overlay-light);
     transition: all 0.3s ease;
     border: 1px solid var(--color-gray-100);
+    display: flex;
+    flex-direction: column;
   }
 
   .producto-card:hover {
@@ -675,23 +545,27 @@ import Layout from '../layouts/Layout.astro';
 
   .producto-imagen {
     position: relative;
-    height: 200px;
-    background: linear-gradient(135deg, var(--color-gray-100), var(--color-gray-200));
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: var(--color-white);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    padding: 1.2rem;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 12px;
   }
 
   .producto-imagen img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.3s ease;
   }
 
-  .producto-card:hover .producto-imagen img {
-    transform: scale(1.05);
+  .producto-imagen img.is-wide {
+    transform: scale(0.9);
   }
 
   .producto-badge {
@@ -707,8 +581,36 @@ import Layout from '../layouts/Layout.astro';
     text-transform: uppercase;
   }
 
+  .producto-info-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(24, 20, 18, 0.12);
+    color: var(--color-tertiary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(24, 20, 18, 0.08);
+  }
+
+  .producto-info-button:hover {
+    background: rgba(225, 51, 44, 0.18);
+    color: var(--color-secondary);
+    transform: translateY(-1px);
+  }
+
   .producto-info {
-    padding: 1.5rem;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    flex: 1;
   }
 
   .producto-codigo {
@@ -724,6 +626,17 @@ import Layout from '../layouts/Layout.astro';
     color: var(--color-tertiary);
     margin-bottom: 1rem;
     line-height: 1.3;
+  }
+
+  .producto-descripcion {
+    font-size: 0.9rem;
+    color: var(--color-gray-600);
+    line-height: 1.4;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .producto-details {
@@ -752,90 +665,257 @@ import Layout from '../layouts/Layout.astro';
 
   .producto-actions {
     display: flex;
-    gap: 0.8rem;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: auto;
   }
 
-  .btn-cotizar,
-  .btn-detalles {
-    flex: 1;
-    padding: 0.8rem 1rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .btn-cotizar {
-    background: var(--color-secondary);
-    color: var(--color-white);
-  }
-
-  .btn-cotizar:hover {
-    background: var(--color-secondary-dark);
-    transform: translateY(-1px);
-  }
-
-  .btn-detalles {
-    background: var(--color-gray-100);
-    color: var(--color-gray-700);
-    border: 1px solid var(--color-gray-300);
-  }
-
-  .btn-detalles:hover {
-    background: var(--color-gray-200);
-    transform: translateY(-1px);
-  }
-
-  /* Paginación */
-  .paginacion {
-    display: flex;
+  .cantidad-control {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 3rem;
-  }
-
-  .btn-pagina {
-    padding: 0.8rem 1.2rem;
-    border: 2px solid var(--color-gray-300);
-    background: var(--color-white);
-    color: var(--color-gray-700);
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
     gap: 0.5rem;
+    background: var(--color-primary);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    width: fit-content;
   }
 
-  .btn-pagina:hover:not(:disabled) {
-    border-color: var(--color-secondary);
-    color: var(--color-secondary);
+  .cantidad-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color-white);
+    color: var(--color-tertiary);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .cantidad-btn:hover {
+    background: var(--color-secondary);
+    color: var(--color-white);
     transform: translateY(-1px);
   }
 
-  .btn-pagina.active {
+  .cantidad-input {
+    width: 48px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-tertiary);
+    appearance: textfield;
+  }
+
+  .cantidad-input::-webkit-outer-spin-button,
+  .cantidad-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .btn-agregar-carrito {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.25rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
     background: var(--color-secondary);
-    border-color: var(--color-secondary);
     color: var(--color-white);
+    box-shadow: 0 6px 20px rgba(225, 51, 44, 0.28);
   }
 
-  .btn-pagina:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  .btn-agregar-carrito:hover {
+    background: var(--color-secondary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(225, 51, 44, 0.35);
   }
 
-  .paginas {
+
+  /* Modal Detalle */
+  .modal-detalle {
+    position: fixed;
+    inset: 0;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+  }
+
+  .modal-detalle.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(24, 20, 18, 0.65);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-container {
+    position: relative;
+    background: var(--color-white);
+    border-radius: 20px;
+    box-shadow: 0 25px 80px rgba(34, 30, 28, 0.25);
+    max-width: 960px;
+    width: min(960px, 95vw);
+    overflow: hidden;
+    z-index: 1;
+    transform: translateY(20px);
+    transition: transform 0.35s ease;
+  }
+
+  .modal-detalle.is-active .modal-container {
+    transform: translateY(0);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: none;
+    background: rgba(24, 20, 18, 0.08);
+    color: var(--color-tertiary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .modal-close:hover {
+    background: rgba(225, 51, 44, 0.12);
+    transform: rotate(90deg);
+  }
+
+  .modal-content {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2rem;
+    padding: 3rem;
+  }
+
+  .modal-image {
+    background: var(--color-gray-100);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-image img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    border-radius: 12px;
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+  }
+
+  .modal-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: var(--color-tertiary);
+  }
+
+  .modal-badge {
+    align-self: flex-start;
+    padding: 0.35rem 1rem;
+    border-radius: 999px;
+    background: rgba(225, 51, 44, 0.12);
+    color: var(--color-secondary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .modal-info h3 {
+    font-size: clamp(1.75rem, 3vw, 2.2rem);
+    margin: 0;
+    font-weight: 800;
+  }
+
+  .modal-codigo {
+    font-weight: 600;
+    color: var(--color-gray-600);
+  }
+
+  .modal-descripcion {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-gray-700);
+  }
+
+  .modal-section h4 {
+    margin: 0 0 0.5rem;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-gray-500);
+  }
+
+  .modal-tags {
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
   }
 
-  .puntos {
-    padding: 0.8rem 0.5rem;
-    color: var(--color-gray-500);
+  .modal-tag {
+    padding: 0.4rem 0.8rem;
+    background: var(--color-primary);
+    color: var(--color-tertiary);
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .modal-stock {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    background: rgba(34, 30, 28, 0.06);
+    color: var(--color-tertiary);
+    font-weight: 600;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+  }
+
+  .modal-actions .btn-cotizar {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    font-size: 1rem;
   }
 
   /* Responsive */
@@ -854,6 +934,15 @@ import Layout from '../layouts/Layout.astro';
     .productos-grid {
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 1.5rem;
+    }
+
+    .modal-content {
+      grid-template-columns: 1fr;
+      padding: 2.5rem;
+    }
+
+    .modal-image {
+      padding: 1rem;
     }
   }
 
@@ -875,9 +964,31 @@ import Layout from '../layouts/Layout.astro';
       flex-direction: column;
     }
 
-    .paginacion {
-      flex-wrap: wrap;
+    .cantidad-control {
+      width: 100%;
+      justify-content: center;
+      gap: 0.75rem;
     }
+
+    .btn-agregar-carrito {
+      width: 100%;
+    }
+
+    .modal-container {
+      width: 95vw;
+      border-radius: 16px;
+    }
+
+    .modal-content {
+      padding: 2rem 1.5rem;
+      gap: 1.5rem;
+    }
+
+    .modal-close {
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+
   }
 
   @keyframes fadeInUp {
@@ -892,132 +1003,281 @@ import Layout from '../layouts/Layout.astro';
   }
 </style>
 
+<script
+  id="productosData"
+  type="application/json"
+  set:html={JSON.stringify(products)}
+></script>
 <script>
-  // Funcionalidad de filtros
-  document.addEventListener('DOMContentLoaded', function() {
+  // @ts-nocheck
+  document.addEventListener('DOMContentLoaded', () => {
+    /** @type {Array<any>} */
+    const productos = JSON.parse(
+      document.getElementById('productosData')?.textContent || '[]'
+    );
+
+    /** @type {{ busqueda: HTMLInputElement | null; modelo: HTMLSelectElement | null; stock: HTMLSelectElement | null; imagen: HTMLSelectElement | null; }} */
     const filtros = {
-      busqueda: document.getElementById('busqueda') as HTMLInputElement | null,
-      categoria: document.getElementById('categoria') as HTMLSelectElement | null,
-      marca: document.getElementById('marca') as HTMLSelectElement | null,
-      maquina: document.getElementById('maquina') as HTMLSelectElement | null
+      busqueda: document.getElementById('busqueda'),
+      modelo: document.getElementById('modelo'),
+      stock: document.getElementById('stock'),
+      imagen: document.getElementById('imagen')
     };
 
+    /** @type {HTMLElement | null} */
     const productosGrid = document.getElementById('productosGrid');
+    /** @type {HTMLElement | null} */
     const productosCount = document.getElementById('productosCount');
     const btnFiltrar = document.getElementById('btnFiltrar');
     const btnLimpiar = document.getElementById('btnLimpiar');
+    const imagenesProductos = Array.from(document.querySelectorAll('.producto-imagen img'));
+    const modal = document.getElementById('detalleModal');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalCerrar = document.getElementById('modalCerrar');
+    const modalTitulo = document.getElementById('modalTitulo');
+    const modalCodigo = document.getElementById('modalCodigo');
+    const modalDescripcion = document.getElementById('modalDescripcion');
+    const modalCompatibilidad = document.getElementById('modalCompatibilidad');
+    const modalStock = document.getElementById('modalStock');
+    const modalImagen = document.getElementById('modalImagen');
+    const modalCotizar = document.getElementById('modalCotizar');
 
-    function filtrarProductos() {
-      if (!filtros.busqueda || !filtros.categoria || !filtros.marca || !filtros.maquina || !productosGrid || !productosCount) {
-        return;
+    let productoActual = null;
+    let cartManager = window.cartManager ?? null;
+
+    if (!cartManager) {
+      document.addEventListener(
+        'cart-ready',
+        () => {
+          cartManager = window.cartManager ?? null;
+        },
+        { once: true }
+      );
+    }
+
+    const ajustarImagen = (img) => {
+      if (!img || !img.complete || !img.naturalWidth || !img.naturalHeight) return;
+      if (img.naturalWidth > img.naturalHeight) {
+        img.classList.add('is-wide');
+      }
+    };
+
+    imagenesProductos.forEach((img) => {
+      if (img.complete) {
+        ajustarImagen(img);
+      } else {
+        img.addEventListener('load', () => ajustarImagen(img));
+      }
+    });
+
+    const abrirModal = (producto) => {
+      if (!modal) return;
+      productoActual = producto;
+
+      if (modalTitulo) modalTitulo.textContent = producto.nombre ?? 'Producto sin nombre';
+      if (modalCodigo) modalCodigo.textContent = `ID: ${producto.id}`;
+      if (modalDescripcion) modalDescripcion.textContent = producto.descripcion ?? 'Sin descripción disponible.';
+
+      if (modalImagen) {
+        modalImagen.src = producto.imagen ?? '/placeholder-producto.jpg';
+        modalImagen.alt = producto.nombre ?? 'Producto hidráulico';
       }
 
-      const terminoBusqueda = filtros.busqueda.value.toLowerCase();
-      const categoriaSeleccionada = filtros.categoria.value;
-      const marcaSeleccionada = filtros.marca.value;
-      const maquinaSeleccionada = filtros.maquina.value;
-
-      const productos = productosGrid.querySelectorAll('.producto-card');
-      let productosVisibles = 0;
-
-      productos.forEach(producto => {
-        const productoElement = producto as HTMLElement;
-        const nombreElement = producto.querySelector('.producto-nombre');
-        const codigoElement = producto.querySelector('.producto-codigo');
-
-        if (!nombreElement || !codigoElement) return;
-
-        const nombre = nombreElement.textContent?.toLowerCase() || '';
-        const codigo = codigoElement.textContent?.toLowerCase() || '';
-        const categoria = productoElement.dataset.categoria;
-        const marca = productoElement.dataset.marca;
-        const maquina = productoElement.dataset.maquina;
-
-        const coincideBusqueda = !terminoBusqueda || 
-          nombre.includes(terminoBusqueda) || 
-          codigo.includes(terminoBusqueda);
-
-        const coincideCategoria = !categoriaSeleccionada || categoria === categoriaSeleccionada;
-        const coincideMarca = !marcaSeleccionada || marca === marcaSeleccionada;
-        const coincideMaquina = !maquinaSeleccionada || maquina === maquinaSeleccionada;
-
-        if (coincideBusqueda && coincideCategoria && coincideMarca && coincideMaquina) {
-          productoElement.style.display = 'block';
-          productosVisibles++;
+      if (modalCompatibilidad) {
+        modalCompatibilidad.innerHTML = '';
+        const modelos = producto.modelos_compatibles ?? [];
+        if (modelos.length === 0) {
+          const span = document.createElement('span');
+          span.className = 'modal-tag';
+          span.textContent = 'Sin referencias registradas';
+          modalCompatibilidad.appendChild(span);
         } else {
-          productoElement.style.display = 'none';
+          modelos.slice(0, 12).forEach((modelo) => {
+            const span = document.createElement('span');
+            span.className = 'modal-tag';
+            span.textContent = modelo;
+            modalCompatibilidad.appendChild(span);
+          });
+        }
+      }
+
+      if (modalStock) {
+        const stock = producto.stock ?? 0;
+        const estado = stock > 0 ? 'disponible' : 'sin stock';
+        modalStock.innerHTML = `<div class="modal-stock">Stock ${estado}: <strong>${stock}</strong> unidades</div>`;
+      }
+
+      modal.setAttribute('aria-hidden', 'false');
+      modal.classList.add('is-active');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const cerrarModal = () => {
+      if (!modal) return;
+      modal.classList.remove('is-active');
+      modal.setAttribute('aria-hidden', 'true');
+      const carritoAbierto = cartManager?.isOpen?.() ?? false;
+      document.body.style.overflow = carritoAbierto ? 'hidden' : '';
+      productoActual = null;
+    };
+
+    const stockMatchers = {
+      alto: (stock) => stock > 100,
+      medio: (stock) => stock >= 50 && stock <= 100,
+      bajo: (stock) => stock > 0 && stock < 50,
+      sin: (stock) => stock === 0
+    };
+
+    const filtrar = () => {
+      if (!productosGrid || !productosCount) return;
+
+      const termino = (filtros.busqueda?.value || '').trim().toLowerCase();
+      const modelo = (filtros.modelo?.value || '').trim().toLowerCase();
+      const stockFiltro = filtros.stock?.value || '';
+      const imagenFiltro = filtros.imagen?.value || '';
+      const coincideStock = stockMatchers[stockFiltro] || (() => true);
+
+      const cards = /** @type {HTMLElement[]} */ (Array.from(productosGrid.children));
+      let visibles = 0;
+
+      cards.forEach((card) => {
+        const nombre = card.querySelector('.producto-nombre')?.textContent?.toLowerCase() || '';
+        const codigo = card.querySelector('.producto-codigo')?.textContent?.toLowerCase() || '';
+        const descripcion = card.querySelector('.producto-descripcion')?.textContent?.toLowerCase() || '';
+        const modelos = (card.dataset.modelos || '')
+          .split(',')
+          .map((m) => m.trim().toLowerCase())
+          .filter(Boolean);
+        const stock = Number(card.dataset.stock || '0');
+        const tieneImagen = card.dataset.imagen === 'true';
+
+        const coincideBusqueda =
+          !termino || nombre.includes(termino) || codigo.includes(termino) || descripcion.includes(termino);
+        const coincideModelo = !modelo || modelos.includes(modelo);
+        const coincideImagen =
+          !imagenFiltro ||
+          (imagenFiltro === 'true' && tieneImagen) ||
+          (imagenFiltro === 'false' && !tieneImagen);
+
+        if (coincideBusqueda && coincideModelo && coincideStock(stock) && coincideImagen) {
+          card.style.display = 'block';
+          visibles += 1;
+        } else {
+          card.style.display = 'none';
         }
       });
 
-      productosCount.textContent = `${productosVisibles} productos`;
-    }
+      productosCount.textContent = `${visibles} productos`;
+    };
 
-    function limpiarFiltros() {
-      Object.values(filtros).forEach(filtro => {
+    const limpiar = () => {
+      Object.values(filtros).forEach((filtro) => {
         if (!filtro) return;
-        if (filtro instanceof HTMLInputElement) {
-          filtro.value = '';
-        } else if (filtro instanceof HTMLSelectElement) {
-          filtro.selectedIndex = 0;
+        if ('value' in filtro) filtro.value = '';
+        if ('selectedIndex' in filtro) filtro.selectedIndex = 0;
+      });
+      filtrar();
+    };
+
+    btnFiltrar?.addEventListener('click', filtrar);
+    btnLimpiar?.addEventListener('click', limpiar);
+    filtros.busqueda?.addEventListener('input', filtrar);
+    filtros.modelo?.addEventListener('change', filtrar);
+    filtros.stock?.addEventListener('change', filtrar);
+    filtros.imagen?.addEventListener('change', filtrar);
+
+    const obtenerCantidadDesdeCard = (card) => {
+      if (!card) return 1;
+      const input = card.querySelector('.cantidad-input');
+      const valor = Number(input?.value) || 1;
+      const cantidadNormalizada = Math.max(1, Math.floor(valor));
+      if (input) {
+        input.value = String(cantidadNormalizada);
+      }
+      return cantidadNormalizada;
+    };
+
+    productosGrid?.querySelectorAll('.cantidad-control').forEach((control) => {
+      const input = control.querySelector('.cantidad-input');
+      const decrementar = control.querySelector('[data-action="decremento"]');
+      const incrementar = control.querySelector('[data-action="incremento"]');
+
+      const actualizarCantidad = (delta) => {
+        if (!input) return;
+        const actual = Number(input.value) || 1;
+        const nuevo = Math.max(1, actual + delta);
+        input.value = String(nuevo);
+      };
+
+      decrementar?.addEventListener('click', () => actualizarCantidad(-1));
+      incrementar?.addEventListener('click', () => actualizarCantidad(1));
+
+      input?.addEventListener('input', () => {
+        obtenerCantidadDesdeCard(control.closest('.producto-card'));
+      });
+    });
+
+    productosGrid?.querySelectorAll('.producto-info-button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-producto-id');
+        const producto = productos.find((item) => item.id === id);
+        if (!producto) return;
+        abrirModal(producto);
+      });
+    });
+
+    productosGrid?.querySelectorAll('.btn-agregar-carrito').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-producto-id');
+        const producto = productos.find((item) => item.id === id);
+        if (!producto) return;
+
+        const card = btn.closest('.producto-card');
+        const cantidad = obtenerCantidadDesdeCard(card);
+
+        const ejecutarAgregado = (manager) => {
+          manager?.addItem(
+            {
+              id: producto.id,
+              nombre: producto.nombre ?? 'Producto sin nombre',
+              imagen: producto.imagen ?? null,
+              stock: Number(producto.stock ?? 0)
+            },
+            cantidad
+          );
+        };
+
+        if (cartManager) {
+          ejecutarAgregado(cartManager);
+        } else {
+          document.addEventListener(
+            'cart-ready',
+            () => {
+              ejecutarAgregado(window.cartManager ?? null);
+            },
+            { once: true }
+          );
         }
       });
-      filtrarProductos();
-    }
-
-    // Event listeners
-    btnFiltrar?.addEventListener('click', filtrarProductos);
-    btnLimpiar?.addEventListener('click', limpiarFiltros);
-
-    // Filtro en tiempo real para búsqueda
-    filtros.busqueda?.addEventListener('input', filtrarProductos);
-
-    // Filtro automático para selects
-    [filtros.categoria, filtros.marca, filtros.maquina].forEach(select => {
-      select?.addEventListener('change', filtrarProductos);
     });
 
-    // Funcionalidad de cotización
-    document.querySelectorAll('.btn-cotizar').forEach(btn => {
-      btn.addEventListener('click', function(this: HTMLElement) {
-        const productoCard = (this as HTMLElement).closest('.producto-card') as HTMLElement;
-        if (!productoCard) return;
+    modalCerrar?.addEventListener('click', cerrarModal);
+    modalOverlay?.addEventListener('click', cerrarModal);
 
-        const codigoElement = productoCard.querySelector('.producto-codigo');
-        const nombreElement = productoCard.querySelector('.producto-nombre');
+    modalCotizar?.addEventListener('click', () => {
+      if (!productoActual) return;
 
-        if (!codigoElement || !nombreElement) return;
-
-        const codigo = codigoElement.textContent || '';
-        const nombre = nombreElement.textContent || '';
-        
-        const mensaje = `*Solicitud de Cotización*\n\n` +
-          `*Producto:* ${nombre}\n` +
-          `*Código:* ${codigo}\n\n` +
-          `Hola, me interesa este producto. ¿Podrían enviarme información de precios y disponibilidad?`;
-        
-        const mensajeCodificado = encodeURIComponent(mensaje);
-        const whatsappURL = `https://api.whatsapp.com/send?phone=59169200281&text=${mensajeCodificado}`;
-        
-        window.open(whatsappURL, '_blank');
-      });
+      const mensaje = `Solicitud de cotización\n\nProducto: ${productoActual.nombre}\nID: ${productoActual.id}\nStock: ${productoActual.stock ?? 0}`;
+      const url = `https://api.whatsapp.com/send?phone=59169200281&text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank');
     });
 
-    // Funcionalidad de detalles
-    document.querySelectorAll('.btn-detalles').forEach(btn => {
-      btn.addEventListener('click', function(this: HTMLElement) {
-        const productoCard = (this as HTMLElement).closest('.producto-card') as HTMLElement;
-        if (!productoCard) return;
-
-        const codigoElement = productoCard.querySelector('.producto-codigo');
-        const nombreElement = productoCard.querySelector('.producto-nombre');
-
-        if (!codigoElement || !nombreElement) return;
-
-        const codigo = codigoElement.textContent || '';
-        const nombre = nombreElement.textContent || '';
-        
-        alert(`Detalles del producto:\n\n${nombre}\n${codigo}\n\nPróximamente disponible información detallada.`);
-      });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal?.classList.contains('is-active')) {
+        cerrarModal();
+      }
     });
+
+    filtrar();
   });
 </script>

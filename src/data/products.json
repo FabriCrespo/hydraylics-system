@@ -1,0 +1,164 @@
+[
+  {
+    "id": "piston-shoe",
+    "nombre": "Piston Shoe",
+    "descripcion": "Zapatas de pistón para bombas Sauer Sundstrand y Eaton/Parker.",
+    "modelos_compatibles": [
+      "PV90R42",
+      "PV90R55",
+      "PV90R75",
+      "PV90R100",
+      "PV90R130",
+      "PV90R180",
+      "PV90R250",
+      "Eaton 3321",
+      "Eaton 3331",
+      "Eaton 3322",
+      "Eaton 4621",
+      "Eaton 4631",
+      "Eaton 5421",
+      "Eaton 5431",
+      "Eaton 3932",
+      "Eaton 6423",
+      "Eaton 7620",
+      "Eaton 7621",
+      "Eaton 78462",
+      "PVXS130",
+      "PVXS180"
+    ],
+    "stock": 180,
+    "imagen": "/productos/piston-shoe.jpg"
+  },
+  {
+    "id": "cylinder-block",
+    "nombre": "Cylinder Block",
+    "descripcion": "Bloques de cilindros mecanizados para bombas PV90 y series Eaton.",
+    "modelos_compatibles": [
+      "PV90R42",
+      "PV90R55",
+      "PV90R75",
+      "PV90R100",
+      "PV90R130",
+      "PV90R180",
+      "PV90R250",
+      "Eaton 3321",
+      "Eaton 3331",
+      "Eaton 3322",
+      "Eaton 4631",
+      "Eaton 5421",
+      "Eaton 5431"
+    ],
+    "stock": 45,
+    "imagen": "/productos/cylander-block.jpeg"
+  },
+  {
+    "id": "valve-plate-lrm",
+    "nombre": "Valve Plate L/R/M",
+    "descripcion": "Platos de válvula izquierda/derecha/medio según configuración de bomba.",
+    "modelos_compatibles": [
+      "PV90R42",
+      "PV90R55",
+      "PV90R75",
+      "PV90R100",
+      "PV90R130",
+      "PV90R180",
+      "PV90R250",
+      "Eaton 3321",
+      "Eaton 3331",
+      "PVXS130",
+      "PVXS180"
+    ],
+    "stock": 30,
+    "imagen": "/productos/velve-plate.jpeg"
+  },
+  {
+    "id": "retainer-plate",
+    "nombre": "Retainer Plate",
+    "descripcion": "Placas retenedoras para mantener el conjunto de pistones alineado.",
+    "modelos_compatibles": [
+      "PV90R42",
+      "PV90R55",
+      "PV90R75",
+      "PV90R100",
+      "PV90R130",
+      "PV90R180",
+      "PV90R250",
+      "Eaton 3321",
+      "Eaton 3331",
+      "PVXS130",
+      "PVXS180"
+    ],
+    "stock": 60,
+    "imagen": "/productos/retainer-plate.jpeg"
+  },
+  {
+    "id": "drive-shaft",
+    "nombre": "Drive Shaft",
+    "descripcion": "Ejes principales endurecidos para bombas Sauer Sundstrand y Eaton.",
+    "modelos_compatibles": [
+      "PV90R42",
+      "PV90R55",
+      "PV90R75",
+      "PV90R100",
+      "PV90R130",
+      "PV90R180",
+      "PV90R250",
+      "Eaton 3321",
+      "Eaton 3331",
+      "Eaton 4621",
+      "Eaton 7630"
+    ],
+    "stock": 35,
+    "imagen": "/productos/drive.jpeg"
+  },
+  {
+    "id": "retainer-ring",
+    "nombre": "Retainer",
+    "descripcion": "Retenedores circulares para el conjunto de pistones.",
+    "modelos_compatibles": [
+      "PV90R42",
+      "PV90R55",
+      "PV90R75",
+      "PV90R100",
+      "PV90R130",
+      "PV90R180",
+      "PV90R250",
+      "Eaton 3321",
+      "PVXS130"
+    ],
+    "stock": 80,
+    "imagen": "/productos/retainer.jpeg"
+  },
+  {
+    "id": "thrust-plate",
+    "nombre": "Thrust Plate",
+    "descripcion": "Platos de empuje para bombas Eaton/Parker.",
+    "modelos_compatibles": [
+      "Eaton 3321",
+      "Eaton 3331",
+      "Eaton 3322",
+      "Eaton 4621",
+      "Eaton 4631",
+      "PVXS130",
+      "PVXS180"
+    ],
+    "stock": 55,
+    "imagen": "/productos/thrust.jpeg"
+  },
+  {
+    "id": "bearing-plate",
+    "nombre": "Bearing Plate",
+    "descripcion": "Platos de soporte para eje motriz en series Eaton.",
+    "modelos_compatibles": [
+      "Eaton 3321",
+      "Eaton 3331",
+      "Eaton 7620",
+      "Eaton 7621",
+      "PVXS130",
+      "PVXS180"
+    ],
+    "stock": 50,
+    "imagen": "/productos/bearing-plate.jpeg"
+  }
+]
+
