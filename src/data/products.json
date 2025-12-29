@@ -1,164 +1,97 @@
 [
   {
-    "id": "piston-shoe",
-    "nombre": "Piston Shoe",
-    "descripcion": "Zapatas de pistón para bombas Sauer Sundstrand y Eaton/Parker.",
+    "id": "bomba-engrenagem-4280520001",
+    "nombre": "Bomba de Engrenagem 4280520001 (Subst. B3509915043)",
+    "descripcion": "Bomba hidráulica de engranajes principal de alta presión para cargadores de caña Motocana. Compatible con números de parte 3239915004 y 27500191.",
     "modelos_compatibles": [
-      "PV90R42",
-      "PV90R55",
-      "PV90R75",
-      "PV90R100",
-      "PV90R130",
-      "PV90R180",
-      "PV90R250",
-      "Eaton 3321",
-      "Eaton 3331",
-      "Eaton 3322",
-      "Eaton 4621",
-      "Eaton 4631",
-      "Eaton 5421",
-      "Eaton 5431",
-      "Eaton 3932",
-      "Eaton 6423",
-      "Eaton 7620",
-      "Eaton 7621",
-      "Eaton 78462",
-      "PVXS130",
-      "PVXS180"
+      "4280520001",
+      "3239915004",
+      "27500191",
+      "B3509915043"
     ],
-    "stock": 180,
-    "imagen": "/productos/piston-shoe.jpg"
+    "imagen": "/productos/1.jpeg"
   },
   {
-    "id": "cylinder-block",
-    "nombre": "Cylinder Block",
-    "descripcion": "Bloques de cilindros mecanizados para bombas PV90 y series Eaton.",
+    "id": "bomba-engrenagem-4280520002",
+    "nombre": "Bomba de Engrenagem 4280520002 (Subst. B3509915006)",
+    "descripcion": "Bomba hidráulica de engranajes para grúas, cargadores forestales, polipastos, cargadores y cortadores forestales. Fabricada por Medal.",
     "modelos_compatibles": [
-      "PV90R42",
-      "PV90R55",
-      "PV90R75",
-      "PV90R100",
-      "PV90R130",
-      "PV90R180",
-      "PV90R250",
-      "Eaton 3321",
-      "Eaton 3331",
-      "Eaton 3322",
-      "Eaton 4631",
-      "Eaton 5421",
-      "Eaton 5431"
+      "B4280520002",
+      "4280520002",
+      "B3509915006"
     ],
-    "stock": 45,
-    "imagen": "/productos/cylander-block.jpeg"
+    "imagen": "/productos/2.jpeg"
   },
   {
-    "id": "valve-plate-lrm",
-    "nombre": "Valve Plate L/R/M",
-    "descripcion": "Platos de válvula izquierda/derecha/medio según configuración de bomba.",
+    "id": "bomba-engrenagem-4280520003",
+    "nombre": "Bombas de engranajes hidráulicos Motores de engranajes hidráulicos Linha MD350",
+    "descripcion": "La línea de Bombas de Engranajes y Motores Hidráulicos MEDAL MD350 alinea la calidad constructiva, la durabilidad y el desempeño, brindándole un producto de alto desempeño, porque para nosotros ¡Su Máquina No Puede Pararse! Las piezas de la gama MD350 son intercambiables con la gama comercial Parker Hannifin P350. ¡Elige bien, elige MEDAL!",
     "modelos_compatibles": [
-      "PV90R42",
-      "PV90R55",
-      "PV90R75",
-      "PV90R100",
-      "PV90R130",
-      "PV90R180",
-      "PV90R250",
-      "Eaton 3321",
-      "Eaton 3331",
-      "PVXS130",
-      "PVXS180"
+      "MD350"
     ],
-    "stock": 30,
-    "imagen": "/productos/velve-plate.jpeg"
+    "imagen": "/productos/3.jpg"
   },
   {
-    "id": "retainer-plate",
-    "nombre": "Retainer Plate",
-    "descripcion": "Placas retenedoras para mantener el conjunto de pistones alineado.",
+    "id": "orbitrol-de-direccion-101s-100",
+    "nombre": "Orbitrol de dirección 101S-100",
+    "descripcion": "Orbitrol de dirección 101S-100 para máquinas de construcción y agrícolas. Fabricada por Parker Hannifin.",
     "modelos_compatibles": [
-      "PV90R42",
-      "PV90R55",
-      "PV90R75",
-      "PV90R100",
-      "PV90R130",
-      "PV90R180",
-      "PV90R250",
-      "Eaton 3321",
-      "Eaton 3331",
-      "PVXS130",
-      "PVXS180"
+      "101S-100"
     ],
-    "stock": 60,
-    "imagen": "/productos/retainer-plate.jpeg"
+    "imagen": ["/productos/bomb (1).jpeg", "/productos/bomb (2).jpeg", "/productos/bomb (3).jpeg", "/productos/bomb (4).jpeg"]
   },
   {
-    "id": "drive-shaft",
-    "nombre": "Drive Shaft",
-    "descripcion": "Ejes principales endurecidos para bombas Sauer Sundstrand y Eaton.",
+    "id":"unidades-de-direccion-hidraulica-de-cosechadora-combinada-101s-1",
+    "nombre": "Unidades de dirección hidráulica de cosechadora combinada 101s-1 transmisión de dirección",
+    "descripcion": "Unidades de dirección hidráulica de cosechadora combinada 101s-1 transmisión de dirección para máquinas de construcción y agrícolas. Fabricada por Parker Hannifin.",
     "modelos_compatibles": [
-      "PV90R42",
-      "PV90R55",
-      "PV90R75",
-      "PV90R100",
-      "PV90R130",
-      "PV90R180",
-      "PV90R250",
-      "Eaton 3321",
-      "Eaton 3331",
-      "Eaton 4621",
-      "Eaton 7630"
+      "101S-1"
     ],
-    "stock": 35,
-    "imagen": "/productos/drive.jpeg"
+    "imagen": ["/productos/bomb2 (1).jpeg", "/productos/bomb2 (2).jpeg", "/productos/bomb2 (3).jpeg"]
   },
   {
-    "id": "retainer-ring",
-    "nombre": "Retainer",
-    "descripcion": "Retenedores circulares para el conjunto de pistones.",
+    "id":"valvula-de-direccion-orbital-hidraulica-101s",
+    "nombre": "Válvula de dirección orbital hidráulica 101s",
+    "descripcion": "Unidades de dirección hidráulica de cosechadora combinada 101s-1 transmisión de dirección para máquinas de construcción y agrícolas. Fabricada por Parker Hannifin.",
     "modelos_compatibles": [
-      "PV90R42",
-      "PV90R55",
-      "PV90R75",
-      "PV90R100",
-      "PV90R130",
-      "PV90R180",
-      "PV90R250",
-      "Eaton 3321",
-      "PVXS130"
+      "101S-1"
     ],
-    "stock": 80,
-    "imagen": "/productos/retainer.jpeg"
+    "imagen": ["/productos/valv (1).jpeg", "/productos/valv (2).jpeg", "/productos/valv (3).jpeg"]
   },
   {
-    "id": "thrust-plate",
-    "nombre": "Thrust Plate",
-    "descripcion": "Platos de empuje para bombas Eaton/Parker.",
+    "id":"comandos-hidraulicos-de-2-palancas-o-de-dos-cuerpos-de-80-ltrs-de-160-ltrs-y-200-ltrs",
+    "nombre": "Comandos hidráulicos de 2 palancas o de dos cuerpos de 80 ltrs  de 160 ltrs  y 200 ltrs",
+    "descripcion": "Comandos hidráulicos de 2 palancas o de dos cuerpos de 80 ltrs  de 160 ltrs  y 200 ltrs para máquinas de construcción y agrícolas. Fabricada por Parker Hannifin.",
     "modelos_compatibles": [
-      "Eaton 3321",
-      "Eaton 3331",
-      "Eaton 3322",
-      "Eaton 4621",
-      "Eaton 4631",
-      "PVXS130",
-      "PVXS180"
+      "101S-1"
     ],
-    "stock": 55,
-    "imagen": "/productos/thrust.jpeg"
+    "imagen": "/productos/2p.jpg"
   },
   {
-    "id": "bearing-plate",
-    "nombre": "Bearing Plate",
-    "descripcion": "Platos de soporte para eje motriz en series Eaton.",
+    "id":"comandos-hidraulicos-de-3-palancas-o-de-dos-cuerpos-de-80-ltrs-de-160-ltrs-y-200-ltrs",
+    "nombre": "Comandos hidráulicos de 3 palancas o de dos cuerpos de 80 ltrs  de 160 ltrs  y 200 ltrs",
+    "descripcion": "Comandos hidráulicos de 3 palancas o de dos cuerpos de 80 ltrs  de 160 ltrs  y 200 ltrs para máquinas de construcción y agrícolas. Fabricada por Parker Hannifin.",
     "modelos_compatibles": [
-      "Eaton 3321",
-      "Eaton 3331",
-      "Eaton 7620",
-      "Eaton 7621",
-      "PVXS130",
-      "PVXS180"
+      "101S-1"
     ],
-    "stock": 50,
-    "imagen": "/productos/bearing-plate.jpeg"
+    "imagen": "/productos/39.jpg"
+  },
+  {
+    "id":"comandos-hidraulicos-de-5-palancas-o-de-dos-cuerpos-de-80-ltrs-de-160-ltrs-y-200-ltrs",
+    "nombre": "Comandos hidráulicos de  5 palancas o de dos cuerpos de 80 ltrs  de 160 ltrs  y 200 ltrs",
+    "descripcion": "Comandos hidráulicos de 5 palancas o de dos cuerpos de 80 ltrs  de 160 ltrs  y 200 ltrs para máquinas de construcción y agrícolas. Fabricada por Parker Hannifin.",
+    "modelos_compatibles": [
+      "101S-1"
+    ],
+    "imagen": "/productos/5p.webp"
+  },
+  {
+    "id":"comandos-hidraulicos-de-6-palancas-o-de-dos-cuerpos-de-80-ltrs-de-160-ltrs-y-200-ltrs",
+    "nombre": "Comandos hidráulicos de  6 palancas o de dos cuerpos de 80 ltrs  de 160 ltrs  y 200 ltrs",
+    "descripcion": "Comandos hidráulicos de 6 palancas o de dos cuerpos de 80 ltrs  de 160 ltrs  y 200 ltrs para máquinas de construcción y agrícolas. Fabricada por Parker Hannifin.",
+    "modelos_compatibles": [
+      "101S-1"
+    ],
+    "imagen": ["/productos/6pp (1).jpeg", "/productos/6pp (2).jpeg", "/productos/6pp (3).jpeg"]
   }
 ]
-

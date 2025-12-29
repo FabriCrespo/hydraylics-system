@@ -1,0 +1,411 @@
+---
+interface Props {
+  products: Array<{
+    id: string;
+    nombre: string;
+    descripcion?: string;
+    imagen?: string | string[];
+    modelos_compatibles?: string[];
+  }>;
+  phoneNumber?: string;
+}
+
+const { products, phoneNumber = "59170405030" } = Astro.props;
+---
+
+<div class="modal-detalle" id="detalleModal" aria-hidden="true">
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div
+    class="modal-container"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitulo"
+  >
+    <button
+      class="modal-close"
+      id="modalCerrar"
+      aria-label="Cerrar detalle de producto"
+    >
+      <span>&times;</span>
+    </button>
+    <div class="modal-content">
+      <div class="modal-image" id="modalImagenWrapper">
+        <img id="modalImagen" src="" alt="" />
+      </div>
+      <div class="modal-info">
+        <span class="modal-badge">Detalle de producto</span>
+        <h3 id="modalTitulo"></h3>
+        <p class="modal-codigo" id="modalCodigo"></p>
+        <p class="modal-descripcion" id="modalDescripcion"></p>
+        <div class="modal-section">
+          <h4>Compatibilidad</h4>
+          <div class="modal-tags" id="modalCompatibilidad"></div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-cotizar" id="modalCotizar"
+            >Solicitar cotización</button
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Modal Detalle */
+  .modal-detalle {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+  }
+
+  .modal-detalle.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(24, 20, 18, 0.6);
+    backdrop-filter: blur(3px);
+  }
+
+  .modal-container {
+    position: relative;
+    background: var(--color-white);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(34, 30, 28, 0.2);
+    max-width: 700px;
+    width: min(700px, 90vw);
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 1;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+
+  .modal-detalle.is-active .modal-container {
+    transform: translateY(0);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    border: none;
+    background: rgba(24, 20, 18, 0.06);
+    color: var(--color-tertiary);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition:
+      background 0.3s ease,
+      transform 0.3s ease;
+    z-index: 10;
+  }
+
+  .modal-close:hover {
+    background: rgba(225, 51, 44, 0.15);
+    transform: rotate(90deg);
+  }
+
+  .modal-content {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+
+  .modal-image {
+    background: var(--color-gray-50);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-image img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    border-radius: 8px;
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+  }
+
+  .modal-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    color: var(--color-tertiary);
+  }
+
+  .modal-badge {
+    align-self: flex-start;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    background: rgba(225, 51, 44, 0.1);
+    color: var(--color-secondary);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .modal-info h3 {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .modal-codigo {
+    font-weight: 500;
+    color: var(--color-gray-500);
+    font-size: 0.85rem;
+  }
+
+  .modal-descripcion {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-gray-600);
+    margin: 0;
+  }
+
+  .modal-section h4 {
+    margin: 0 0 0.5rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-gray-500);
+    font-weight: 600;
+  }
+
+  .modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .modal-tag {
+    padding: 0.3rem 0.7rem;
+    background: var(--color-gray-100);
+    color: var(--color-tertiary);
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid var(--color-gray-200);
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .modal-actions .btn-cotizar {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    background: var(--color-secondary);
+    color: var(--color-white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .modal-actions .btn-cotizar:hover {
+    background: var(--color-secondary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(225, 51, 44, 0.25);
+  }
+
+  @media (max-width: 768px) {
+    .modal-container {
+      max-width: 95vw;
+      max-height: 95vh;
+      border-radius: 12px;
+    }
+
+    .modal-content {
+      grid-template-columns: 1fr;
+      padding: 1.5rem;
+      gap: 1.25rem;
+    }
+
+    .modal-image {
+      padding: 0.75rem;
+      max-width: 100%;
+    }
+
+    .modal-image img {
+      aspect-ratio: 4 / 3;
+    }
+
+    .modal-info h3 {
+      font-size: 1.2rem;
+    }
+
+    .modal-descripcion {
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .modal-container {
+      width: 95vw;
+      max-height: 90vh;
+      border-radius: 12px;
+    }
+
+    .modal-content {
+      padding: 1.25rem;
+      gap: 1rem;
+    }
+
+    .modal-close {
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 28px;
+      height: 28px;
+      font-size: 1.1rem;
+    }
+
+    .modal-info h3 {
+      font-size: 1.1rem;
+    }
+
+    .modal-codigo {
+      font-size: 0.8rem;
+    }
+
+    .modal-descripcion {
+      font-size: 0.8rem;
+    }
+
+    .modal-tag {
+      padding: 0.25rem 0.6rem;
+      font-size: 0.7rem;
+    }
+
+    .modal-actions .btn-cotizar {
+      padding: 0.65rem 0.9rem;
+      font-size: 0.85rem;
+    }
+  }
+</style>
+
+<script define:vars={{ products, phoneNumber }}>
+  // @ts-nocheck
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("detalleModal");
+    const modalOverlay = document.getElementById("modalOverlay");
+    const modalCerrar = document.getElementById("modalCerrar");
+    const modalTitulo = document.getElementById("modalTitulo");
+    const modalCodigo = document.getElementById("modalCodigo");
+    const modalDescripcion = document.getElementById("modalDescripcion");
+    const modalCompatibilidad = document.getElementById("modalCompatibilidad");
+    const modalImagen = document.getElementById("modalImagen");
+    const modalCotizar = document.getElementById("modalCotizar");
+
+    let productoActual = null;
+    let cartManager = window.cartManager ?? null;
+
+    if (!cartManager) {
+      document.addEventListener(
+        "cart-ready",
+        () => {
+          cartManager = window.cartManager ?? null;
+        },
+        { once: true },
+      );
+    }
+
+    const abrirModal = (producto) => {
+      if (!modal) return;
+      productoActual = producto;
+
+      if (modalTitulo)
+        modalTitulo.textContent = producto.nombre ?? "Producto sin nombre";
+      if (modalCodigo) modalCodigo.textContent = `ID: ${producto.id}`;
+      if (modalDescripcion)
+        modalDescripcion.textContent =
+          producto.descripcion ?? "Sin descripción disponible.";
+
+      if (modalImagen) {
+        const imagenSrc = Array.isArray(producto.imagen)
+          ? producto.imagen[0]
+          : producto.imagen;
+        modalImagen.src = imagenSrc ?? "/placeholder-producto.jpg";
+        modalImagen.alt = producto.nombre ?? "Producto hidráulico";
+      }
+
+      if (modalCompatibilidad) {
+        modalCompatibilidad.innerHTML = "";
+        const modelos = producto.modelos_compatibles ?? [];
+        if (modelos.length === 0) {
+          const span = document.createElement("span");
+          span.className = "modal-tag";
+          span.textContent = "Sin referencias registradas";
+          modalCompatibilidad.appendChild(span);
+        } else {
+          modelos.slice(0, 12).forEach((modelo) => {
+            const span = document.createElement("span");
+            span.className = "modal-tag";
+            span.textContent = modelo;
+            modalCompatibilidad.appendChild(span);
+          });
+        }
+      }
+
+      modal.setAttribute("aria-hidden", "false");
+      modal.classList.add("is-active");
+      document.body.style.overflow = "hidden";
+    };
+
+    const cerrarModal = () => {
+      if (!modal) return;
+      modal.classList.remove("is-active");
+      modal.setAttribute("aria-hidden", "true");
+      const carritoAbierto = cartManager?.isOpen?.() ?? false;
+      document.body.style.overflow = carritoAbierto ? "hidden" : "";
+      productoActual = null;
+    };
+
+    modalCerrar?.addEventListener("click", cerrarModal);
+    modalOverlay?.addEventListener("click", cerrarModal);
+
+    modalCotizar?.addEventListener("click", () => {
+      if (!productoActual) return;
+
+      const mensaje = `Hola, quisiera hacer una cotización del siguiente producto:\n\nProducto: ${productoActual.nombre}\nID: ${productoActual.id}\n\nGracias.`;
+      const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(mensaje)}`;
+      window.open(url, "_blank");
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal?.classList.contains("is-active")) {
+        cerrarModal();
+      }
+    });
+
+    // Exponer función para abrir el modal desde otros componentes
+    window.abrirModalProducto = abrirModal;
+  });
+</script>
