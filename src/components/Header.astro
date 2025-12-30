@@ -22,6 +22,17 @@
     </nav>
 
     <div class="header-actions">
+      <a href="/admin" class="header-admin" aria-label="Panel de Administración" title="Administración">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+        </svg>
+      </a>
       <button class="header-cart" type="button" aria-label="Ver carrito">
         <svg
           width="26"
@@ -105,6 +116,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .header-admin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .header-admin:hover {
+    background: rgba(225, 51, 44, 0.1);
+    color: var(--color-secondary);
+    transform: translateY(-1px);
+  }
+
+  .header-admin svg {
+    width: 20px;
+    height: 20px;
   }
 
   .header-cart {
@@ -320,6 +358,17 @@
 
     .header-actions {
       order: 3;
+      gap: 0.4rem;
+    }
+
+    .header-admin {
+      width: 36px;
+      height: 36px;
+    }
+
+    .header-admin svg {
+      width: 18px;
+      height: 18px;
     }
 
     .header-cart {

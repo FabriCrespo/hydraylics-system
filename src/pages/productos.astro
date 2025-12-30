@@ -2,10 +2,27 @@
 import Layout from "../layouts/Layout.astro";
 import ProductModal from "../components/ProductModal.astro";
 import ProductCard from "../components/ProductCard.astro";
-import productsData from "../data/products.json";
+import { productService } from "../utils/productService";
 
-const products = productsData;
-const modelOptions = Array.from(
+// Intentar cargar productos desde Supabase, si falla usar JSON como fallback
+let products: any[] = [];
+let modelOptions: string[] = [];
+
+try {
+  products = await productService.getAll();
+  if (products.length === 0) {
+    // Si no hay productos en Supabase, cargar del JSON
+    const productsData = await import("../data/products.json");
+    products = productsData.default || [];
+  }
+} catch (error) {
+  console.warn("Error al cargar desde Supabase, usando JSON:", error);
+  // Fallback al JSON si Supabase falla
+  const productsData = await import("../data/products.json");
+  products = productsData.default || [];
+}
+
+modelOptions = Array.from(
   new Set(products.flatMap((product) => product.modelos_compatibles ?? [])),
 ).sort((a, b) => a.localeCompare(b));
 ---
@@ -471,6 +488,7 @@ const modelOptions = Array.from(
       transform: translateY(0);
     }
   }
+
 </style>
 
 <script
@@ -713,8 +731,6 @@ const modelOptions = Array.from(
     filtros.busqueda?.addEventListener("input", filtrar);
     filtros.modelo?.addEventListener("change", filtrar);
     filtros.imagen?.addEventListener("change", filtrar);
-
-
 
     filtrar();
   });

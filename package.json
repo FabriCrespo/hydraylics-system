@@ -6,14 +6,17 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "migrate:products": "node scripts/migrateProductsToSupabase.js"
   },
   "dependencies": {
     "-": "^0.0.1",
+    "@supabase/supabase-js": "^2.89.0",
     "@tailwindcss/vite": "^4.1.17",
     "all": "^0.0.0",
     "animejs": "^4.2.2",
     "astro": "^5.14.5",
+    "dotenv": "^17.2.3",
     "phosphor-astro": "^2.1.0",
     "tailwindcss": "^4.1.17"
   }

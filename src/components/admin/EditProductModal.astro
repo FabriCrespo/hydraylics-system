@@ -1,0 +1,764 @@
+---
+interface Props {
+  productId?: string;
+}
+
+const { productId } = Astro.props;
+---
+
+<div class="modal-overlay" id="editProductModal" style="display: none;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalTitle">Editar Producto</h2>
+      <button class="modal-close" id="modalClose" aria-label="Cerrar modal">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <form id="editProductForm" class="product-form">
+      <input type="hidden" id="editProductId" name="id" />
+      
+      <div class="form-group">
+        <label for="editNombre">Nombre del Producto *</label>
+        <input
+          type="text"
+          id="editNombre"
+          name="nombre"
+          required
+          placeholder="Ej: Bomba de Engrenagem 4280520001"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="editDescripcion">Descripción *</label>
+        <textarea
+          id="editDescripcion"
+          name="descripcion"
+          required
+          rows="4"
+          placeholder="Descripción detallada del producto..."
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="editImagen">Imagen(es) *</label>
+        <div class="upload-section">
+          <input
+            type="file"
+            id="editImagenInput"
+            name="imagen"
+            accept="image/*"
+            multiple
+            class="file-input"
+          />
+          <label for="editImagenInput" class="file-label">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            Seleccionar Imágenes
+          </label>
+          <div class="uploaded-images" id="editUploadedImages"></div>
+          <input
+            type="hidden"
+            id="editImagen"
+            name="imagen"
+            required
+          />
+        </div>
+        <small>Puedes seleccionar una o múltiples imágenes (máx. 5MB cada una)</small>
+      </div>
+
+      <div class="form-group">
+        <label for="editModelos">Modelos Compatibles *</label>
+        <input
+          type="text"
+          id="editModelos"
+          name="modelos"
+          required
+          placeholder="Ej: 4280520001, 3239915004, 27500191"
+        />
+        <small>Separa los modelos con comas</small>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-save">
+          Guardar Cambios
+        </button>
+        <button type="button" class="btn-cancel" id="editModalCancel">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-content {
+    background: var(--color-white);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+  }
+
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 2px solid var(--color-gray-200);
+  }
+
+  .modal-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-tertiary);
+    margin: 0;
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    color: var(--color-gray-600);
+    transition: all 0.2s ease;
+  }
+
+  .modal-close:hover {
+    background: var(--color-gray-100);
+    color: var(--color-tertiary);
+  }
+
+  .product-form {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    font-weight: 600;
+    color: var(--color-tertiary);
+    font-size: 0.95rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.875rem;
+    border: 2px solid var(--color-gray-200);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 4px rgba(225, 51, 44, 0.1);
+  }
+
+  .form-group small {
+    font-size: 0.85rem;
+    color: var(--color-gray-500);
+    margin-top: 0.25rem;
+  }
+
+  .upload-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .file-input {
+    display: none;
+  }
+
+  .file-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border: 2px dashed var(--color-gray-300);
+    border-radius: 8px;
+    background: var(--color-gray-50);
+    color: var(--color-tertiary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .file-label:hover {
+    border-color: var(--color-secondary);
+    background: var(--color-gray-100);
+    color: var(--color-secondary);
+  }
+
+  .file-label svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .uploaded-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .uploaded-image-item {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid var(--color-gray-200);
+  }
+
+  .uploaded-image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .uploaded-image-item .remove-image {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    background: rgba(220, 38, 38, 0.9);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+  }
+
+  .uploaded-image-item .remove-image:hover {
+    background: rgba(185, 28, 28, 1);
+    transform: scale(1.1);
+  }
+
+  .upload-progress {
+    padding: 0.5rem;
+    background: var(--color-gray-100);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: var(--color-gray-600);
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .btn-save,
+  .btn-cancel {
+    padding: 0.875rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+  }
+
+  .btn-save {
+    background: var(--color-secondary);
+    color: var(--color-white);
+  }
+
+  .btn-save:hover {
+    background: var(--color-secondary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(225, 51, 44, 0.3);
+  }
+
+  .btn-cancel {
+    background: var(--color-gray-200);
+    color: var(--color-gray-700);
+  }
+
+  .btn-cancel:hover {
+    background: var(--color-gray-300);
+  }
+
+  .message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 0 2rem 1.5rem 2rem;
+    font-weight: 600;
+  }
+
+  .message.success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 2px solid #10b981;
+  }
+
+  .message.error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 2px solid #ef4444;
+  }
+
+  @media (max-width: 640px) {
+    .modal-content {
+      max-width: 100%;
+      max-height: 100vh;
+      border-radius: 0;
+    }
+
+    .modal-header {
+      padding: 1rem 1.5rem;
+    }
+
+    .modal-header h2 {
+      font-size: 1.5rem;
+    }
+
+    .product-form {
+      padding: 1.5rem;
+    }
+
+    .form-actions {
+      flex-direction: column;
+    }
+
+    .btn-save,
+    .btn-cancel {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // Declarar tipos globales
+  declare global {
+    interface Window {
+      openEditProductModal?: (productId: string) => void;
+      closeEditProductModal?: () => void;
+      productService?: any;
+    }
+  }
+
+  // Cargar el servicio de productos dinámicamente
+  let productService: any = null;
+  
+  async function getProductService() {
+    if (!productService) {
+      const module = await import('../../utils/productService');
+      productService = module.productService;
+    }
+    return productService;
+  }
+
+  let editUploadedImages: string[] = [];
+  let editPendingFiles: { file: File; previewId: string; imageItem: HTMLElement }[] = [];
+
+  // Agregar preview de imagen en el modal
+  const addEditImagePreview = (imagePath: string) => {
+    const editUploadedImagesContainer = document.getElementById("editUploadedImages") as HTMLElement;
+    if (!editUploadedImagesContainer) return;
+
+    const imageItem = document.createElement("div");
+    imageItem.className = "uploaded-image-item";
+    imageItem.dataset.path = imagePath;
+
+    const img = document.createElement("img");
+    // Si es data URL (base64), usarla directamente. Si no, usar la ruta normal
+    let imageUrl = imagePath;
+    if (imagePath.startsWith("data:")) {
+      // Es una data URL (base64) - usar directamente
+      imageUrl = imagePath;
+    } else if (imagePath.startsWith("/productos/")) {
+      // Es una ruta de productos estática
+      imageUrl = imagePath;
+    }
+    img.src = imageUrl;
+    img.alt = "Imagen subida";
+    
+    let retryCount = 0;
+    const maxRetries = 3;
+    
+    // Manejar error de carga con reintentos
+    img.onerror = () => {
+      retryCount++;
+      if (retryCount <= maxRetries) {
+        // Reintentar después de un segundo con nuevo timestamp
+        setTimeout(() => {
+          img.src = `${imagePath}?t=${Date.now()}`;
+        }, 1000 * retryCount);
+      } else {
+        // Si falla después de varios intentos, mostrar mensaje
+        img.alt = "Error al cargar imagen";
+        img.style.border = "2px dashed #ef4444";
+        console.error("No se pudo cargar la imagen:", imagePath);
+      }
+    };
+    
+    // Confirmar que la imagen se cargó correctamente
+    img.onload = () => {
+      retryCount = 0; // Resetear contador si se carga correctamente
+    };
+
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "remove-image";
+    removeBtn.textContent = "×";
+    removeBtn.type = "button";
+    removeBtn.addEventListener("click", () => {
+      editUploadedImages = editUploadedImages.filter((path) => path !== imagePath);
+      const imagenHidden = document.getElementById("editImagen") as HTMLInputElement;
+      if (imagenHidden) {
+        imagenHidden.value = editUploadedImages.join(", ");
+      }
+      imageItem.remove();
+      if (editUploadedImages.length === 0) {
+        imagenHidden?.removeAttribute("required");
+      }
+    });
+
+    imageItem.appendChild(img);
+    imageItem.appendChild(removeBtn);
+    editUploadedImagesContainer.appendChild(imageItem);
+  };
+
+  // Exponer funciones globales para abrir/cerrar el modal
+  window.openEditProductModal = async (productId: string) => {
+    const modal = document.getElementById("editProductModal") as HTMLElement;
+    if (!modal) return;
+
+    // Limpiar imágenes previas y pendientes
+    editUploadedImages = [];
+    editPendingFiles = [];
+    const editUploadedImagesContainer = document.getElementById("editUploadedImages") as HTMLElement;
+    if (editUploadedImagesContainer) {
+      editUploadedImagesContainer.innerHTML = "";
+    }
+
+    // Cargar datos del producto desde Supabase
+    try {
+      const service = await getProductService();
+      const product = await service.getById(productId);
+      
+      if (!product) {
+        showMessage("Producto no encontrado", "error");
+        return;
+      }
+    
+      // Llenar el formulario con los datos del producto
+      (document.getElementById("editNombre") as HTMLInputElement).value = product.nombre || "";
+      (document.getElementById("editDescripcion") as HTMLTextAreaElement).value = product.descripcion || "";
+      (document.getElementById("editModelos") as HTMLInputElement).value = product.modelos_compatibles?.join(", ") || "";
+
+      // Procesar imágenes
+      const imagenes = Array.isArray(product.imagen)
+        ? product.imagen
+        : [product.imagen].filter(Boolean);
+      
+      editUploadedImages = imagenes;
+      const imagenHidden = document.getElementById("editImagen") as HTMLInputElement;
+      if (imagenHidden) {
+        imagenHidden.value = imagenes.join(", ");
+      }
+
+      // Mostrar previews de imágenes existentes
+      imagenes.forEach((imgPath: string) => {
+        addEditImagePreview(imgPath);
+      });
+
+      (document.getElementById("editProductId") as HTMLInputElement).value = product.id || "";
+
+      // Mostrar el modal
+      if (modal) {
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+      }
+    } catch (error: any) {
+      showMessage("Error al cargar el producto: " + error.message, "error");
+    }
+  };
+
+  const showMessage = (message: string, type: "success" | "error") => {
+    const existingMessage = document.querySelector(".message");
+    if (existingMessage) {
+      existingMessage.remove();
+    }
+
+    const messageDiv = document.createElement("div");
+    messageDiv.className = `message ${type}`;
+    messageDiv.textContent = message;
+
+    const modalContent = document.querySelector(".modal-content");
+    if (modalContent) {
+      const form = modalContent.querySelector(".product-form");
+      if (form) {
+        modalContent.insertBefore(messageDiv, form);
+      }
+    }
+
+    setTimeout(() => {
+      messageDiv.remove();
+    }, 5000);
+  };
+
+  window.closeEditProductModal = () => {
+    const modal = document.getElementById("editProductModal") as HTMLElement;
+    if (modal) {
+      modal.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("editProductModal") as HTMLElement;
+    const form = document.getElementById("editProductForm") as HTMLFormElement;
+    const closeBtn = document.getElementById("modalClose") as HTMLButtonElement;
+    const cancelBtn = document.getElementById("editModalCancel") as HTMLButtonElement;
+    const editImagenInput = document.getElementById("editImagenInput") as HTMLInputElement;
+    const editUploadedImagesContainer = document.getElementById("editUploadedImages") as HTMLElement;
+
+    // Función para convertir imágenes a data URLs (TODO EN EL CLIENTE - sin servidor)
+    const uploadEditPendingImages = async (): Promise<string[]> => {
+      const uploadedPaths: string[] = [];
+      
+      for (const { file, previewId, imageItem } of editPendingFiles) {
+        try {
+          // Convertir archivo a base64 data URL (TODO EN EL CLIENTE)
+          const reader = new FileReader();
+          const dataUrl = await new Promise<string>((resolve, reject) => {
+            reader.onload = (e) => resolve(e.target?.result as string);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+          });
+          
+          uploadedPaths.push(dataUrl);
+          
+          // Reemplazar preview temporal con la imagen convertida
+          setTimeout(() => {
+            imageItem.remove();
+            addEditImagePreview(dataUrl);
+          }, 100);
+        } catch (error: any) {
+          throw new Error(`Error al procesar la imagen: ${error.message}`);
+        }
+      }
+
+      return uploadedPaths;
+    };
+
+    // Manejar selección de imágenes en el modal (solo preview, sin subir)
+    editImagenInput?.addEventListener("change", (e) => {
+      const files = (e.target as HTMLInputElement).files;
+      if (!files || files.length === 0) return;
+
+      // Crear previews temporales sin subir
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const previewId = `temp-edit-${Date.now()}-${i}`;
+        
+        // Crear preview temporal con FileReader
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const tempImageItem = document.createElement("div");
+          tempImageItem.className = "uploaded-image-item";
+          tempImageItem.id = previewId;
+          tempImageItem.dataset.temp = "true";
+
+          const img = document.createElement("img");
+          img.src = e.target?.result as string;
+          img.alt = "Pendiente de subir";
+
+          const statusDiv = document.createElement("div");
+          statusDiv.className = "upload-progress";
+          statusDiv.textContent = "Pendiente";
+          statusDiv.style.position = "absolute";
+          statusDiv.style.bottom = "0.25rem";
+          statusDiv.style.left = "0.25rem";
+          statusDiv.style.right = "0.25rem";
+          statusDiv.style.padding = "0.25rem";
+          statusDiv.style.background = "rgba(59, 130, 246, 0.9)";
+          statusDiv.style.color = "white";
+          statusDiv.style.borderRadius = "4px";
+          statusDiv.style.fontSize = "0.75rem";
+
+          const removeBtn = document.createElement("button");
+          removeBtn.className = "remove-image";
+          removeBtn.textContent = "×";
+          removeBtn.type = "button";
+          removeBtn.addEventListener("click", () => {
+            // Eliminar de la lista de archivos pendientes
+            editPendingFiles = editPendingFiles.filter((item) => item.previewId !== previewId);
+            tempImageItem.remove();
+          });
+
+          tempImageItem.appendChild(img);
+          tempImageItem.appendChild(statusDiv);
+          tempImageItem.appendChild(removeBtn);
+          if (editUploadedImagesContainer) {
+            editUploadedImagesContainer.appendChild(tempImageItem);
+          }
+
+          // Guardar referencia para subir después
+          editPendingFiles.push({ file, previewId, imageItem: tempImageItem });
+        };
+        reader.readAsDataURL(file);
+      }
+
+      // Limpiar el input
+      editImagenInput.value = "";
+    });
+
+    // Cerrar al hacer clic en el overlay
+    modal?.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        window.closeEditProductModal?.();
+      }
+    });
+
+    // Cerrar con botones
+    closeBtn?.addEventListener("click", () => {
+      window.closeEditProductModal?.();
+    });
+
+    cancelBtn?.addEventListener("click", () => {
+      window.closeEditProductModal?.();
+    });
+
+    // Cerrar con ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal?.style.display === "flex") {
+        window.closeEditProductModal?.();
+      }
+    });
+
+    // Manejar envío del formulario
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const nombre = formData.get("nombre") as string;
+      const descripcion = formData.get("descripcion") as string;
+      const modelosStr = formData.get("modelos") as string;
+      const imagenStr = formData.get("imagen") as string;
+      const productId = (document.getElementById("editProductId") as HTMLInputElement).value;
+
+      // Procesar modelos
+      const modelos_compatibles = modelosStr
+        .split(",")
+        .map((m) => m.trim())
+        .filter(Boolean);
+
+      try {
+        // Convertir imágenes pendientes a data URLs (TODO EN EL CLIENTE)
+        if (editPendingFiles.length > 0) {
+          showMessage("Procesando imágenes...", "success");
+          const newUploadedPaths = await uploadEditPendingImages();
+          editUploadedImages = [...editUploadedImages, ...newUploadedPaths];
+          editPendingFiles = []; // Limpiar lista de pendientes
+        }
+
+        // Procesar imágenes (combinar existentes con nuevas)
+        let imagen: string | string[] = [];
+        
+        if (editUploadedImages.length > 0) {
+          imagen = editUploadedImages.length === 1
+            ? editUploadedImages[0]
+            : editUploadedImages;
+        } else if (imagenStr) {
+          // Si no hay nuevas imágenes, usar las existentes del input
+          imagen = imagenStr.includes(",")
+            ? imagenStr.split(",").map((img) => img.trim()).filter(Boolean)
+            : imagenStr.trim();
+        }
+
+        const productData: any = {
+          nombre,
+          descripcion,
+          modelos_compatibles,
+          imagen,
+        };
+
+        // Actualizar el producto en Supabase
+        const service = await getProductService();
+        const updated = await service.update(productId, productData);
+        
+        if (updated) {
+          showMessage("Producto actualizado correctamente", "success");
+          
+          // Emitir evento para actualizar la página de admin
+          window.dispatchEvent(new CustomEvent('product-updated'));
+          
+          setTimeout(() => {
+            window.closeEditProductModal?.();
+            // Recargar la página para mostrar los cambios
+            if (window.location.pathname.includes('/admin')) {
+              window.location.reload();
+            } else {
+              window.location.reload();
+            }
+          }, 1500);
+        } else {
+          showMessage("Error al actualizar el producto", "error");
+        }
+      } catch (error: any) {
+        showMessage(error.message || "Error al actualizar el producto", "error");
+      }
+    });
+  });
+</script>
