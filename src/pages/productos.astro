@@ -1,30 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductModal from "../components/ProductModal.astro";
-import ProductCard from "../components/ProductCard.astro";
-import { productService } from "../utils/productService";
-
-// Intentar cargar productos desde Supabase, si falla usar JSON como fallback
-let products: any[] = [];
-let modelOptions: string[] = [];
-
-try {
-  products = await productService.getAll();
-  if (products.length === 0) {
-    // Si no hay productos en Supabase, cargar del JSON
-    const productsData = await import("../data/products.json");
-    products = productsData.default || [];
-  }
-} catch (error) {
-  console.warn("Error al cargar desde Supabase, usando JSON:", error);
-  // Fallback al JSON si Supabase falla
-  const productsData = await import("../data/products.json");
-  products = productsData.default || [];
-}
-
-modelOptions = Array.from(
-  new Set(products.flatMap((product) => product.modelos_compatibles ?? [])),
-).sort((a, b) => a.localeCompare(b));
 ---
 
 <Layout>
@@ -62,11 +38,6 @@ modelOptions = Array.from(
           <label for="modelo">Modelo compatible</label>
           <select id="modelo">
             <option value="">Todos los modelos</option>
-            {
-              modelOptions.map((modelo) => (
-                <option value={modelo}>{modelo}</option>
-              ))
-            }
           </select>
         </div>
 
@@ -120,9 +91,7 @@ modelOptions = Array.from(
       <div class="resultados-header">
         <div class="resultados-info">
           <h3>Productos Encontrados</h3>
-          <span class="productos-count" id="productosCount"
-            >{products.length} productos</span
-          >
+          <span class="productos-count" id="productosCount">Cargando...</span>
         </div>
         <div class="ordenar">
           <label for="ordenar">Ordenar por:</label>
@@ -137,16 +106,18 @@ modelOptions = Array.from(
 
       <!-- Grid de Productos -->
       <div class="productos-grid" id="productosGrid">
-        {
-          products.map((producto) => (
-            <ProductCard producto={producto} />
-          ))
-        }
+        <div class="loading-state" id="loadingState">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
+            <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"/>
+          </svg>
+          <p>Cargando productos...</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <ProductModal products={products} phoneNumber="59170405030" />
+  <ProductModal products={[]} phoneNumber="59170405030" />
 </Layout>
 
 <style>
@@ -489,20 +460,198 @@ modelOptions = Array.from(
     }
   }
 
+  .loading-state {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    color: var(--color-gray-500);
+  }
+
+  .loading-state svg {
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+    color: var(--color-secondary);
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .loading-state p {
+    font-size: 1rem;
+    margin: 0;
+  }
+
 </style>
 
-<script
-  id="productosData"
-  type="application/json"
-  set:html={JSON.stringify(products)}
-/>
 <script>
   // @ts-nocheck
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", async () => {
     /** @type {Array<any>} */
-    const productos = JSON.parse(
-      document.getElementById("productosData")?.textContent || "[]",
-    );
+    let productos = [];
+    
+    // Cargar productos desde Supabase
+    try {
+      const { productService } = await import('../utils/productService');
+      productos = await productService.getAll();
+      
+      if (productos.length === 0) {
+        console.warn('No se encontraron productos en Supabase');
+      }
+    } catch (error) {
+      console.error('Error al cargar productos desde Supabase:', error);
+      // Mostrar mensaje de error al usuario
+      const productosGrid = document.getElementById("productosGrid");
+      if (productosGrid) {
+        productosGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; color: var(--color-gray-500);">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 1rem;">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <p style="margin: 0; font-size: 1rem;">Error al cargar productos. Por favor, recarga la página.</p>
+          </div>
+        `;
+      }
+      return;
+    }
+    
+    // El modal no necesita actualización ya que usa la función abrirModalProducto
+    // que recibe el producto directamente
+
+    // Renderizar productos
+    const productosGrid = document.getElementById("productosGrid");
+    const productosCount = document.getElementById("productosCount");
+    const loadingState = document.getElementById("loadingState");
+    const modeloSelect = document.getElementById("modelo");
+    
+    // Ocultar estado de carga
+    if (loadingState) {
+      loadingState.remove();
+    }
+    
+    // Actualizar contador
+    if (productosCount) {
+      productosCount.textContent = `${productos.length} productos`;
+    }
+    
+    // Generar opciones de modelos
+    const modelOptions = Array.from(
+      new Set(productos.flatMap((p) => p.modelos_compatibles ?? []))
+    ).sort((a, b) => a.localeCompare(b));
+    
+    if (modeloSelect) {
+      modelOptions.forEach((modelo) => {
+        const option = document.createElement("option");
+        option.value = modelo;
+        option.textContent = modelo;
+        modeloSelect.appendChild(option);
+      });
+    }
+    
+    // Función para renderizar una tarjeta de producto
+    function renderProductCard(producto) {
+      const modelos = producto.modelos_compatibles ?? [];
+      const imagenes = producto.imagen
+        ? Array.isArray(producto.imagen)
+          ? producto.imagen
+          : [producto.imagen]
+        : ["/placeholder-producto.jpg"];
+      const tieneImagen = imagenes.length > 0 && imagenes[0] !== "/placeholder-producto.jpg";
+      const tieneMultiplesImagenes = imagenes.length > 1;
+      
+      const card = document.createElement("div");
+      card.className = "producto-card";
+      card.setAttribute("data-modelos", modelos.join(","));
+      card.setAttribute("data-imagen", tieneImagen ? "true" : "false");
+      
+      card.innerHTML = `
+        <div class="producto-imagen">
+          <button
+            class="producto-info-button"
+            type="button"
+            aria-label="Más información de ${producto.nombre}"
+            data-producto-id="${producto.id}"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
+          </button>
+          <div class="producto-imagen-container">
+            ${imagenes.map((img, index) => `
+              <img
+                src="${img}"
+                alt="${producto.nombre} - Imagen ${index + 1}"
+                loading="lazy"
+                class="${index === 0 ? "active" : ""}"
+                data-image-index="${index}"
+              />
+            `).join("")}
+          </div>
+          ${tieneMultiplesImagenes ? `
+            <button class="producto-imagen-nav producto-imagen-prev" type="button" aria-label="Imagen anterior" data-producto-id="${producto.id}">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button class="producto-imagen-nav producto-imagen-next" type="button" aria-label="Imagen siguiente" data-producto-id="${producto.id}">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+            <div class="producto-imagen-indicators">
+              ${imagenes.map((_, index) => `
+                <button class="producto-imagen-indicator ${index === 0 ? "active" : ""}" type="button" aria-label="Ver imagen ${index + 1}" data-image-index="${index}" data-producto-id="${producto.id}"></button>
+              `).join("")}
+            </div>
+          ` : ""}
+        </div>
+        <div class="producto-info">
+          <div class="producto-codigo">ID: ${producto.id}</div>
+          <h4 class="producto-nombre">${producto.nombre}</h4>
+          <p class="producto-descripcion">${producto.descripcion || ""}</p>
+          ${modelos.length > 0 ? `
+            <div class="producto-details">
+              <span class="producto-maquina">
+                Compatible: ${modelos.slice(0, 3).join(", ")}${modelos.length > 3 ? "…" : ""}
+              </span>
+            </div>
+          ` : ""}
+          <div class="producto-actions">
+            <div class="cantidad-control" data-producto-id="${producto.id}">
+              <button class="cantidad-btn" type="button" data-action="decremento" aria-label="Disminuir cantidad">&minus;</button>
+              <input class="cantidad-input" type="number" min="1" step="1" value="1" inputmode="numeric" aria-label="Cantidad" />
+              <button class="cantidad-btn" type="button" data-action="incremento" aria-label="Aumentar cantidad">+</button>
+            </div>
+            <button class="btn-agregar-carrito" type="button" data-producto-id="${producto.id}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 001.95 1.61h9.72a2 2 0 001.95-1.61l1.75-9.78H6.5" />
+              </svg>
+              Agregar al carrito
+            </button>
+          </div>
+        </div>
+      `;
+      
+      return card;
+    }
+    
+    // Renderizar todos los productos
+    if (productosGrid) {
+      productosGrid.innerHTML = "";
+      productos.forEach((producto) => {
+        productosGrid.appendChild(renderProductCard(producto));
+      });
+    }
 
     /** @type {{ busqueda: HTMLInputElement | null; modelo: HTMLSelectElement | null; imagen: HTMLSelectElement | null; }} */
     const filtros = {
@@ -511,10 +660,6 @@ modelOptions = Array.from(
       imagen: document.getElementById("imagen"),
     };
 
-    /** @type {HTMLElement | null} */
-    const productosGrid = document.getElementById("productosGrid");
-    /** @type {HTMLElement | null} */
-    const productosCount = document.getElementById("productosCount");
     const btnFiltrar = document.getElementById("btnFiltrar");
     const btnLimpiar = document.getElementById("btnLimpiar");
     const imagenesProductos = Array.from(

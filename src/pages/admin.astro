@@ -2,20 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import EditProductModal from "../components/admin/EditProductModal.astro";
 import AddProductModal from "../components/admin/AddProductModal.astro";
-import { productService } from "../utils/productService";
-
-// Código de acceso
-const ADMIN_CODE = "7773717JV";
-
-// Cargar productos desde Supabase
-let products: any[] = [];
-
-try {
-  products = await productService.getAll();
-} catch (error) {
-  console.error("Error al cargar productos:", error);
-  products = [];
-}
 ---
 
 <Layout>
@@ -82,13 +68,11 @@ try {
     <!-- Estadísticas -->
     <div class="admin-stats">
       <div class="stat-card">
-        <div class="stat-value" id="totalProducts">{products.length}</div>
+        <div class="stat-value" id="totalProducts">-</div>
         <div class="stat-label">Total Productos</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value" id="productsWithImages">
-          {products.filter(p => p.imagen && (Array.isArray(p.imagen) ? p.imagen.length > 0 : p.imagen)).length}
-        </div>
+        <div class="stat-value" id="productsWithImages">-</div>
         <div class="stat-label">Con Imágenes</div>
       </div>
     </div>
@@ -122,82 +106,30 @@ try {
           </tr>
         </thead>
         <tbody id="productsTableBody">
-          {products.map((product) => {
-            const imagenes = Array.isArray(product.imagen)
-              ? product.imagen
-              : [product.imagen].filter(Boolean);
-            const primeraImagen = imagenes[0] || "/placeholder-producto.jpg";
-            
-            return (
-              <tr data-product-id={product.id}>
-                <td class="product-id">{product.id}</td>
-                <td class="product-image">
-                  <img
-                    src={primeraImagen}
-                    alt={product.nombre}
-                    onerror="this.src='/placeholder-producto.jpg'"
-                  />
-                  {imagenes.length > 1 && (
-                    <span class="image-count">+{imagenes.length - 1}</span>
-                  )}
-                </td>
-                <td class="product-name">{product.nombre}</td>
-                <td class="product-description">
-                  {product.descripcion?.substring(0, 100)}
-                  {product.descripcion?.length > 100 ? "..." : ""}
-                </td>
-                <td class="product-models">
-                  <div class="models-tags">
-                    {product.modelos_compatibles?.slice(0, 3).map((modelo: string) => (
-                      <span class="model-tag">{modelo}</span>
-                    ))}
-                    {product.modelos_compatibles?.length > 3 && (
-                      <span class="model-tag-more">+{product.modelos_compatibles.length - 3}</span>
-                    )}
-                  </div>
-                </td>
-                <td class="product-actions">
-                  <button
-                    class="btn-edit"
-                    data-product-id={product.id}
-                    title="Editar producto"
-                  >
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                    </svg>
-                    Editar
-                  </button>
-                  <button
-                    class="btn-delete"
-                    data-product-id={product.id}
-                    title="Eliminar producto"
-                  >
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="3 6 5 6 21 6"></polyline>
-                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                    </svg>
-                    Eliminar
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+          <tr>
+            <td colspan="6" style="text-align: center; padding: 3rem;">
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; color: var(--color-gray-500);">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;">
+                  <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
+                  <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"/>
+                </svg>
+                <p style="margin: 0;">Cargando productos...</p>
+              </div>
+            </td>
+          </tr>
         </tbody>
       </table>
 
-      {products.length === 0 && (
-        <div class="empty-state">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M20 7h-4M4 7h4m0 0V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m-6 0v10a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V7"></path>
-          </svg>
-          <h3>No hay productos</h3>
-          <p>Comienza agregando tu primer producto</p>
-          <button class="btn-primary" onclick="window.openAddProductModal?.()">
-            Agregar Primer Producto
-          </button>
-        </div>
-      )}
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M20 7h-4M4 7h4m0 0V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m-6 0v10a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V7"></path>
+        </svg>
+        <h3>No hay productos</h3>
+        <p>Comienza agregando tu primer producto</p>
+        <button class="btn-primary" onclick="window.openAddProductModal?.()">
+          Agregar Primer Producto
+        </button>
+      </div>
     </div>
   </div>
 
@@ -344,6 +276,11 @@ try {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-10px); }
     75% { transform: translateX(10px); }
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
 
   .admin-container {
@@ -713,11 +650,92 @@ try {
     return productService;
   }
 
-  // Función para recargar la tabla
-  async function reloadProducts() {
+  // Función para renderizar una fila de producto
+  function renderProductRow(product: any) {
+    const imagenes = Array.isArray(product.imagen)
+      ? product.imagen
+      : [product.imagen].filter(Boolean);
+    const primeraImagen = imagenes[0] || "/placeholder-producto.jpg";
+    
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-product-id', product.id);
+    
+    tr.innerHTML = `
+      <td class="product-id">${product.id}</td>
+      <td class="product-image">
+        <img
+          src="${primeraImagen}"
+          alt="${product.nombre}"
+          onerror="this.src='/placeholder-producto.jpg'"
+        />
+        ${imagenes.length > 1 ? `<span class="image-count">+${imagenes.length - 1}</span>` : ''}
+      </td>
+      <td class="product-name">${product.nombre}</td>
+      <td class="product-description">
+        ${product.descripcion ? (product.descripcion.length > 100 ? product.descripcion.substring(0, 100) + '...' : product.descripcion) : ''}
+      </td>
+      <td class="product-models">
+        <div class="models-tags">
+          ${product.modelos_compatibles?.slice(0, 3).map((modelo: string) => 
+            `<span class="model-tag">${modelo}</span>`
+          ).join('') || ''}
+          ${product.modelos_compatibles?.length > 3 ? `<span class="model-tag-more">+${product.modelos_compatibles.length - 3}</span>` : ''}
+        </div>
+      </td>
+      <td class="product-actions">
+        <button class="btn-edit" data-product-id="${product.id}" title="Editar producto">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+          Editar
+        </button>
+        <button class="btn-delete" data-product-id="${product.id}" title="Eliminar producto">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+          Eliminar
+        </button>
+      </td>
+    `;
+    
+    return tr;
+  }
+
+  // Función para cargar y renderizar productos
+  async function loadAndRenderProducts() {
     try {
       const service = await getProductService();
       const products = await service.getAll();
+      
+      const tableBody = document.getElementById('productsTableBody');
+      const emptyState = document.getElementById('emptyState');
+      
+      if (!tableBody) return;
+      
+      // Limpiar tabla
+      tableBody.innerHTML = '';
+      
+      if (products.length === 0) {
+        // Mostrar estado vacío
+        if (emptyState) {
+          emptyState.style.display = 'block';
+        }
+      } else {
+        // Ocultar estado vacío
+        if (emptyState) {
+          emptyState.style.display = 'none';
+        }
+        
+        // Renderizar productos
+        products.forEach((product: any) => {
+          tableBody.appendChild(renderProductRow(product));
+        });
+        
+        // Re-asignar event listeners a los botones
+        attachProductButtonsListeners();
+      }
       
       // Actualizar estadísticas
       const totalProducts = document.getElementById('totalProducts');
@@ -733,18 +751,70 @@ try {
         ).length;
         productsWithImages.textContent = withImages.toString();
       }
-      
-      // Recargar la página para actualizar la tabla
-      window.location.reload();
     } catch (error) {
-      console.error('Error al recargar productos:', error);
+      console.error('Error al cargar productos:', error);
+      const tableBody = document.getElementById('productsTableBody');
+      if (tableBody) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align: center; padding: 3rem; color: var(--color-gray-500);">
+              Error al cargar productos. Por favor, recarga la página.
+            </td>
+          </tr>
+        `;
+      }
     }
+  }
+
+  // Función para asignar event listeners a los botones de productos
+  function attachProductButtonsListeners() {
+    // Botones de editar
+    document.querySelectorAll('.btn-edit').forEach((btn) => {
+      btn.addEventListener('click', async (e) => {
+        const productId = (e.currentTarget as HTMLElement).getAttribute('data-product-id');
+        if (productId && window.openEditProductModal) {
+          window.openEditProductModal(productId);
+        }
+      });
+    });
+
+    // Botones de eliminar
+    document.querySelectorAll('.btn-delete').forEach((btn) => {
+      btn.addEventListener('click', async (e) => {
+        const productId = (e.currentTarget as HTMLElement).getAttribute('data-product-id');
+        if (!productId) return;
+
+        const productName = (e.currentTarget as HTMLElement)
+          .closest('tr')
+          ?.querySelector('.product-name')
+          ?.textContent || 'este producto';
+
+        if (confirm(`¿Estás seguro de que quieres eliminar "${productName}"?\n\nEsta acción no se puede deshacer.`)) {
+          try {
+            const service = await getProductService();
+            await service.delete(productId);
+            
+            alert('Producto eliminado correctamente');
+            await loadAndRenderProducts();
+          } catch (error: any) {
+            alert('Error al eliminar el producto: ' + error.message);
+          }
+        }
+      });
+    });
+  }
+
+  // Función para recargar la tabla
+  async function reloadProducts() {
+    await loadAndRenderProducts();
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     // Verificar autenticación al cargar
     if (checkAuth()) {
       toggleAdminContent(true);
+      // Cargar productos solo si está autenticado
+      loadAndRenderProducts();
     } else {
       toggleAdminContent(false);
     }
@@ -764,6 +834,8 @@ try {
         loginError.style.display = 'none';
         toggleAdminContent(true);
         accessCodeInput.value = '';
+        // Cargar productos después de autenticarse
+        loadAndRenderProducts();
       } else {
         // Código incorrecto
         loginError.style.display = 'flex';
@@ -812,40 +884,7 @@ try {
       });
     }
 
-    // Botones de editar
-    document.querySelectorAll('.btn-edit').forEach((btn) => {
-      btn.addEventListener('click', async (e) => {
-        const productId = (e.currentTarget as HTMLElement).getAttribute('data-product-id');
-        if (productId && window.openEditProductModal) {
-          window.openEditProductModal(productId);
-        }
-      });
-    });
-
-    // Botones de eliminar
-    document.querySelectorAll('.btn-delete').forEach((btn) => {
-      btn.addEventListener('click', async (e) => {
-        const productId = (e.currentTarget as HTMLElement).getAttribute('data-product-id');
-        if (!productId) return;
-
-        const productName = (e.currentTarget as HTMLElement)
-          .closest('tr')
-          ?.querySelector('.product-name')
-          ?.textContent || 'este producto';
-
-        if (confirm(`¿Estás seguro de que quieres eliminar "${productName}"?\n\nEsta acción no se puede deshacer.`)) {
-          try {
-            const service = await getProductService();
-            await service.delete(productId);
-            
-            alert('Producto eliminado correctamente');
-            await reloadProducts();
-          } catch (error: any) {
-            alert('Error al eliminar el producto: ' + error.message);
-          }
-        }
-      });
-    });
+    // Los event listeners de los botones se asignan en attachProductButtonsListeners()
 
     // Escuchar eventos de actualización desde los modales
     window.addEventListener('product-updated', () => {
