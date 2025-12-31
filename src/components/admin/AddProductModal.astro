@@ -161,7 +161,7 @@
           </svg>
           Cancelar
         </button>
-        <button type="submit" class="btn-save">
+        <button type="submit" class="btn-save" id="addProductSubmitBtn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
             <polyline points="17 21 17 13 7 13 7 21"></polyline>
@@ -209,6 +209,17 @@
     to {
       opacity: 1;
       transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes modalSlideOut {
+    from {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-20px) scale(0.95);
     }
   }
 
@@ -743,8 +754,14 @@
   window.closeAddProductModal = () => {
     const modal = document.getElementById("addProductModal") as HTMLElement;
     if (modal) {
-      modal.style.display = "none";
-      document.body.style.overflow = "";
+      // Agregar clase para animación de salida
+      modal.style.animation = 'modalSlideOut 0.3s ease-out';
+      
+      setTimeout(() => {
+        modal.style.display = "none";
+        modal.style.animation = '';
+        document.body.style.overflow = "";
+      }, 300);
     }
   };
 
@@ -859,9 +876,28 @@
         .filter(Boolean);
 
       try {
+        // Mostrar loader
+        window.dispatchEvent(new CustomEvent('show-loader', { detail: { message: 'Validando producto...' } }));
+        
+        // Esperar un momento para que el loader se muestre suavemente
+        await new Promise(resolve => setTimeout(resolve, 300));
+
+        // Verificar si ya existe un producto con el mismo nombre
+        const service = await getProductService();
+        const exists = await service.existsByName(nombre);
+        
+        if (exists) {
+          window.dispatchEvent(new CustomEvent('hide-loader'));
+          await new Promise(resolve => setTimeout(resolve, 200)); // Esperar a que el loader se oculte
+          showMessage(`Ya existe un producto registrado con el nombre "${nombre}". Por favor, usa un nombre diferente.`, "error");
+          return;
+        }
+
+        // Actualizar mensaje del loader
+        window.dispatchEvent(new CustomEvent('show-loader', { detail: { message: 'Procesando imágenes...' } }));
+
         // Convertir imágenes pendientes
         if (addPendingFiles.length > 0) {
-          showMessage("Procesando imágenes...", "success");
           const newUploadedPaths = await uploadPendingImages();
           addUploadedImages = [...addUploadedImages, ...newUploadedPaths];
           addPendingFiles = [];
@@ -875,9 +911,14 @@
         }
 
         if (!imagen || (Array.isArray(imagen) && imagen.length === 0)) {
+          window.dispatchEvent(new CustomEvent('hide-loader'));
+          await new Promise(resolve => setTimeout(resolve, 200));
           showMessage("Debes agregar al menos una imagen", "error");
           return;
         }
+
+        // Actualizar mensaje del loader
+        window.dispatchEvent(new CustomEvent('show-loader', { detail: { message: 'Guardando producto...' } }));
 
         const productData = {
           nombre,
@@ -886,29 +927,41 @@
           imagen,
         };
 
-        const service = await getProductService();
         const created = await service.create(productData);
 
         if (created) {
-          showMessage("Producto creado correctamente", "success");
+          // Ocultar loader con animación suave
+          window.dispatchEvent(new CustomEvent('hide-loader'));
           
-          // Emitir evento para actualizar la página de admin
+          // Esperar a que el loader se oculte completamente
+          await new Promise(resolve => setTimeout(resolve, 400));
+          
+          // Cerrar modal con animación
+          window.closeAddProductModal?.();
+          
+          // Esperar a que el modal se cierre
+          await new Promise(resolve => setTimeout(resolve, 300));
+          
+          // Emitir evento para actualizar la página de admin (esto mostrará la notificación)
           window.dispatchEvent(new CustomEvent('product-created'));
           
-          setTimeout(() => {
-            window.closeAddProductModal?.();
-            // Recargar la página para mostrar los cambios
-            if (window.location.pathname.includes('/admin')) {
-              window.location.reload();
-            } else {
-              window.location.reload();
-            }
-          }, 1500);
+          // No recargar la página, solo actualizar la lista
+          // La notificación se mostrará automáticamente desde admin.astro
         } else {
+          window.dispatchEvent(new CustomEvent('hide-loader'));
+          await new Promise(resolve => setTimeout(resolve, 200));
           showMessage("Error al crear el producto", "error");
         }
       } catch (error: any) {
-        showMessage(error.message || "Error al crear el producto", "error");
+        window.dispatchEvent(new CustomEvent('hide-loader'));
+        await new Promise(resolve => setTimeout(resolve, 200));
+        
+        // Verificar si el error es por duplicado
+        if (error.message && error.message.includes('duplicate') || error.message.includes('unique')) {
+          showMessage(`Ya existe un producto registrado con el nombre "${nombre}". Por favor, usa un nombre diferente.`, "error");
+        } else {
+          showMessage(error.message || "Error al crear el producto", "error");
+        }
       }
     });
   });

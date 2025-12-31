@@ -1,0 +1,331 @@
+---
+---
+
+<div class="modal-overlay" id="deleteConfirmModal" style="display: none;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-icon-wrapper">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <h2>Confirmar Eliminación</h2>
+      <button class="modal-close" id="deleteModalClose" aria-label="Cerrar modal">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <p class="warning-message">
+        ¿Estás seguro de que quieres eliminar el producto <strong id="deleteProductName"></strong>?
+      </p>
+      <p class="warning-subtitle">
+        Esta acción no se puede deshacer. El producto será eliminado permanentemente de tu catálogo.
+      </p>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn-cancel" id="deleteModalCancel">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+        Cancelar
+      </button>
+      <button type="button" class="btn-delete-confirm" id="deleteModalConfirm">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+        Eliminar Producto
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 1rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-content {
+    background: var(--color-white);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+    overflow: hidden;
+  }
+
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem 2rem 1.5rem 2rem;
+    border-bottom: 2px solid var(--color-gray-200);
+    position: relative;
+  }
+
+  .modal-icon-wrapper {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .modal-icon-wrapper svg {
+    color: #dc2626;
+  }
+
+  .modal-header h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-tertiary);
+    margin: 0;
+    flex: 1;
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    color: var(--color-gray-600);
+    transition: all 0.2s ease;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .modal-close:hover {
+    background: var(--color-gray-100);
+    color: var(--color-tertiary);
+  }
+
+  .modal-body {
+    padding: 2rem;
+  }
+
+  .warning-message {
+    font-size: 1.1rem;
+    color: var(--color-tertiary);
+    margin: 0 0 1rem 0;
+    line-height: 1.6;
+  }
+
+  .warning-message strong {
+    color: var(--color-secondary, #e1332c);
+    font-weight: 700;
+  }
+
+  .warning-subtitle {
+    font-size: 0.95rem;
+    color: var(--color-gray-600);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem 2rem 2rem 2rem;
+    border-top: 2px solid var(--color-gray-200);
+  }
+
+  .btn-cancel,
+  .btn-delete-confirm {
+    padding: 0.875rem 1.75rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex: 1;
+  }
+
+  .btn-cancel {
+    background: white;
+    color: #6b7280;
+    border: 2px solid #d1d5db;
+  }
+
+  .btn-cancel:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+    color: #374151;
+  }
+
+  .btn-delete-confirm {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+  }
+
+  .btn-delete-confirm:hover {
+    background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+  }
+
+  .btn-delete-confirm:active {
+    transform: translateY(0);
+  }
+
+  .btn-cancel svg,
+  .btn-delete-confirm svg {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 640px) {
+    .modal-content {
+      max-width: 100%;
+      border-radius: 0;
+    }
+
+    .modal-header {
+      padding: 1.5rem 1.5rem 1rem 1.5rem;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .modal-icon-wrapper {
+      width: 56px;
+      height: 56px;
+    }
+
+    .modal-header h2 {
+      font-size: 1.5rem;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .modal-actions {
+      flex-direction: column;
+      padding: 1.5rem;
+    }
+
+    .btn-cancel,
+    .btn-delete-confirm {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  declare global {
+    interface Window {
+      openDeleteConfirmModal?: (productId: string, productName: string) => void;
+      closeDeleteConfirmModal?: () => void;
+      onDeleteConfirm?: (productId: string) => void;
+    }
+  }
+
+  let currentProductId: string | null = null;
+
+  window.openDeleteConfirmModal = (productId: string, productName: string) => {
+    const modal = document.getElementById('deleteConfirmModal') as HTMLElement;
+    const productNameEl = document.getElementById('deleteProductName') as HTMLElement;
+    
+    if (!modal || !productNameEl) return;
+
+    currentProductId = productId;
+    productNameEl.textContent = productName;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeDeleteConfirmModal = () => {
+    const modal = document.getElementById('deleteConfirmModal') as HTMLElement;
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+      currentProductId = null;
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('deleteConfirmModal') as HTMLElement;
+    const closeBtn = document.getElementById('deleteModalClose') as HTMLButtonElement;
+    const cancelBtn = document.getElementById('deleteModalCancel') as HTMLButtonElement;
+    const confirmBtn = document.getElementById('deleteModalConfirm') as HTMLButtonElement;
+
+    // Cerrar modal
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        window.closeDeleteConfirmModal?.();
+      }
+    });
+
+    closeBtn?.addEventListener('click', () => {
+      window.closeDeleteConfirmModal?.();
+    });
+
+    cancelBtn?.addEventListener('click', () => {
+      window.closeDeleteConfirmModal?.();
+    });
+
+    // Confirmar eliminación
+    confirmBtn?.addEventListener('click', () => {
+      if (currentProductId && window.onDeleteConfirm) {
+        window.onDeleteConfirm(currentProductId);
+        window.closeDeleteConfirmModal?.();
+      }
+    });
+
+    // Cerrar con Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal?.style.display === 'flex') {
+        window.closeDeleteConfirmModal?.();
+      }
+    });
+  });
+</script>

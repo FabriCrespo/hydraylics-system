@@ -135,6 +135,29 @@ export const productService = {
   },
 
   /**
+   * Verificar si existe un producto con el mismo nombre
+   */
+  async existsByName(nombre: string): Promise<boolean> {
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select('id')
+        .ilike('nombre', nombre)
+        .limit(1)
+
+      if (error) {
+        console.error('Error al verificar producto:', error)
+        return false
+      }
+
+      return (data?.length || 0) > 0
+    } catch (error) {
+      console.error('Error en existsByName:', error)
+      return false
+    }
+  },
+
+  /**
    * Generar un ID único basado en el nombre del producto
    */
   generateId(nombre: string): string {
