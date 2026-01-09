@@ -1,10 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductModal from "../components/ProductModal.astro";
-import { productService } from '../utils/productService';
-
-// Cargar productos en el servidor (SSR) - solo una consulta por carga de página
-const productos = await productService.getAll();
 ---
 
 <Layout>
@@ -121,13 +117,7 @@ const productos = await productService.getAll();
     </div>
   </section>
 
-  <ProductModal products={productos} phoneNumber="59170405030" />
-  
-  <!-- Pasar productos al cliente de forma segura -->
-  <script define:vars={{ productos: JSON.stringify(productos) }}>
-    // Los productos ya están disponibles desde el servidor
-    window.__PRODUCTOS__ = JSON.parse(productos);
-  </script>
+  <ProductModal products={[]} phoneNumber="59170405030" />
 </Layout>
 
 <style>
@@ -502,13 +492,60 @@ const productos = await productService.getAll();
 
 <script>
   // @ts-nocheck
-  document.addEventListener("DOMContentLoaded", () => {
-    // Usar productos cargados desde el servidor (SSR)
-    // No necesitamos hacer fetch adicional - ya están disponibles
-    const productos = window.__PRODUCTOS__ || [];
+  document.addEventListener("DOMContentLoaded", async () => {
+    console.log('🎬 [productos.astro] DOM cargado, iniciando carga de productos...');
+    /** @type {Array<any>} */
+    let productos = [];
     
-    if (productos.length === 0) {
-      // Mostrar mensaje si no hay productos
+    // Cargar productos desde Supabase (con fallback automático a JSON)
+    try {
+      console.log('📥 [productos.astro] Importando productService...');
+      const { productService } = await import('../utils/productService');
+      console.log('✅ [productos.astro] productService importado correctamente');
+      
+      console.log('🔄 [productos.astro] Llamando a productService.getAll()...');
+      productos = await productService.getAll();
+      console.log('✅ [productos.astro] Productos obtenidos:', productos.length);
+      console.log('📋 [productos.astro] Lista de productos recibidos:');
+      productos.forEach((p, index) => {
+        console.log(`  ${index + 1}. ID: ${p.id}, Nombre: ${p.nombre?.substring(0, 50)}...`);
+      });
+      
+      // Verificar si están los nuevos productos
+      const nuevosProductos = productos.filter(p => 
+        p.id.includes('rexroth') || p.id.includes('kit-componentes')
+      );
+      console.log('🆕 [productos.astro] Productos REXROTH en la lista:', nuevosProductos.length);
+      if (nuevosProductos.length > 0) {
+        nuevosProductos.forEach(p => {
+          console.log('  ✅ Encontrado:', p.id, '-', p.nombre);
+        });
+      } else {
+        console.warn('  ⚠️ NO se encontraron los productos REXROTH en la lista');
+      }
+      
+      if (productos.length === 0) {
+        console.warn('⚠️ [productos.astro] No se encontraron productos (ni en Supabase ni en JSON)');
+        // Mostrar mensaje si no hay productos en absoluto
+        const productosGrid = document.getElementById("productosGrid");
+        if (productosGrid) {
+          productosGrid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; color: var(--color-gray-500);">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 1rem;">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              <p style="margin: 0; font-size: 1rem;">No se encontraron productos disponibles.</p>
+            </div>
+          `;
+        }
+        return;
+      }
+    } catch (error) {
+      console.error('❌ [productos.astro] Error crítico al cargar productos:', error);
+      console.error('❌ [productos.astro] Stack trace:', error.stack);
+      // Mostrar mensaje de error solo si hay un error crítico
       const productosGrid = document.getElementById("productosGrid");
       if (productosGrid) {
         productosGrid.innerHTML = `
@@ -518,7 +555,7 @@ const productos = await productService.getAll();
               <line x1="12" y1="8" x2="12" y2="12"/>
               <line x1="12" y1="16" x2="12.01" y2="16"/>
             </svg>
-            <p style="margin: 0; font-size: 1rem;">No se encontraron productos disponibles.</p>
+            <p style="margin: 0; font-size: 1rem;">Error al cargar productos. Por favor, recarga la página.</p>
           </div>
         `;
       }
@@ -650,13 +687,19 @@ const productos = await productService.getAll();
     }
     
     // Renderizar todos los productos
+    console.log('🎨 [productos.astro] Iniciando renderizado de productos...');
     if (productosGrid) {
       productosGrid.innerHTML = "";
+      console.log(`🖼️ [productos.astro] Renderizando ${productos.length} productos...`);
       
-      productos.forEach((producto) => {
+      productos.forEach((producto, index) => {
+        console.log(`  📦 [productos.astro] Renderizando producto ${index + 1}/${productos.length}: ${producto.id}`);
         const card = renderProductCard(producto);
         productosGrid.appendChild(card);
       });
+      
+      console.log('✅ [productos.astro] Renderizado completado');
+      console.log(`📊 [productos.astro] Total de cards en el DOM: ${productosGrid.children.length}`);
     } else {
       console.error('❌ [productos.astro] No se encontró el elemento productosGrid');
     }
