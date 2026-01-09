@@ -741,17 +741,12 @@ const { productId } = Astro.props;
         if (updated) {
           showMessage("Producto actualizado correctamente", "success");
           
-          // Emitir evento para actualizar la página de admin
+          // Emitir evento para actualizar la página de admin (sin recargar)
           window.dispatchEvent(new CustomEvent('product-updated'));
           
           setTimeout(() => {
             window.closeEditProductModal?.();
-            // Recargar la página para mostrar los cambios
-            if (window.location.pathname.includes('/admin')) {
-              window.location.reload();
-            } else {
-              window.location.reload();
-            }
+            // NO recargar la página - el evento product-updated actualizará la lista
           }, 1500);
         } else {
           showMessage("Error al actualizar el producto", "error");
