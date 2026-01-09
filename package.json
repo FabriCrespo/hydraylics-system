@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "migrate:products": "node scripts/migrateProductsToSupabase.js"
+    "migrate:products": "node scripts/migrateProductsToSupabase.js",
+    "migrate:firebase": "node scripts/migrateProductsToFirebase.js"
   },
   "dependencies": {
     "-": "^0.0.1",
@@ -17,6 +18,7 @@
     "animejs": "^4.2.2",
     "astro": "^5.14.5",
     "dotenv": "^17.2.3",
+    "firebase": "^10.14.1",
     "phosphor-astro": "^2.1.0",
     "tailwindcss": "^4.1.17"
   }

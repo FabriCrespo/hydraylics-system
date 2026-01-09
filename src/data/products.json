@@ -93,5 +93,632 @@
       "101S-1"
     ],
     "imagen": ["/productos/6pp (1).jpeg", "/productos/6pp (2).jpeg", "/productos/6pp (3).jpeg"]
+  },
+  {
+    "id": "kit-componentes-bombas-hidraulicas-rexroth-a10v",
+    "nombre": "Kit de Componentes para Bombas Hidráulicas REXROTH Serie A10V",
+    "descripcion": "Conjunto de piezas de repuesto esenciales para las bombas hidráulicas REXROTH de la serie A10V. Este kit incluye: 9 Zapatas de Pistón, 1 Bloque de Cilindros, 1 Placa de Válvulas I/D, 1 Placa Retenedora, 1 Guía de Bola, 1 Eje de Transmisión, 2 Rodamientos de Asiento, 1 Plato Basculante I/D, 3 Pasadores de Presión, 1 Arandela, 1 Muelle Helicoidal, 1 Anillo Elástico y 1 Controlador (DFR/DR/DRG/DFLR). Ideal para el mantenimiento y reparación de estas unidades.",
+    "modelos_compatibles": [
+      "A10V(S)016",
+      "A10V(S)018",
+      "A10V(S)028",
+      "A10V(S)045",
+      "A10V(S)071",
+      "A10V(S)100",
+      "A10V(S)140",
+      "A10V(S)O28",
+      "A10V(S)O45",
+      "A10V(S)O60",
+      "A10V(S)O63",
+      "A10V(S)O85",
+      "A10VG28",
+      "A10VG45",
+      "A10VG63"
+    ],
+    "imagen": "/productos/1rox.png"
+  },
+  {
+    "id": "kit-componentes-bombas-hidraulicas-rexroth-a11vl",
+    "nombre": "Kit de Componentes para Bombas Hidráulicas REXROTH Serie A11V(L)",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas REXROTH de la serie A11V(L). Este kit incluye: 9 Zapatas de Pistón, 1 Bloque de Cilindros, 1 Placa de Válvulas I/D, 1 Placa Retenedora, 1 Guía de Bola, 1 Eje de Transmisión, 1 Plato Basculante, 2 Retenedores y 20 Muelles de Bloqueo. Esencial para la reparación y el mantenimiento de las bombas de esta serie.",
+    "modelos_compatibles": [
+      "A11V(L)040",
+      "A11V(L)060",
+      "A11V(L)075",
+      "A11V(L)095",
+      "A11V(L)130",
+      "A11V(L)145",
+      "A11V(L)160",
+      "A11V(L)190",
+      "A11V(L)200",
+      "A11V(L)210",
+      "A11V(L)250",
+      "A11V(L)260",
+      "A11VG19",
+      "A11VG50"
+    ],
+    "imagen": "/productos/2rox.png"
+  },
+  {
+    "id": "kit-componentes-bombas-hidraulicas-rexroth-a4vg",
+    "nombre": "Kit de Componentes para Bombas Hidráulicas REXROTH Serie A4VG/A4VTG",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas REXROTH de las series A4VG y A4VTG. Este kit incluye: 1 Eje de Transmisión, 2 Asientos de Cojinete de Silla, 2 Cojinetes de Silla, 1 Plato Basculante, 9 Zapatas de Pistón, 1 Placa Retenedora, 1 Guía de Bola, 3 Resortes de Disco, 1 Arandela Retenedora, 1 Bloque de Cilindros, 1 Anillo de Seguridad, 2 Arandelas de Barril, 1 Placa de Válvulas I/D, 1 Resorte de Bobina y 1 Bomba de Carga. Esencial para la reparación y el mantenimiento de las bombas de estas series.",
+    "modelos_compatibles": [
+      "A4VG28",
+      "A4VG40",
+      "A4VG56",
+      "A4VG71",
+      "A4VG90",
+      "A4VG125",
+      "A4VG140",
+      "A4VG180",
+      "A4VG250",
+      "A4VTG71",
+      "A4VTG90"
+    ],
+    "imagen": "/productos/3rox.png"
+  },
+  {
+    "id": "kit-componentes-bombas-hidraulicas-rexroth-a4vso-a4v",
+    "nombre": "Kit de Componentes para Bombas Hidráulicas REXROTH Serie A4VSO/A4V",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas REXROTH de las series A4VSO y A4V. Este kit incluye: 1 Eje de Transmisión, 1 Placa de Empuje, 2 Espaciadores, 9 Zapatas de Pistón, 1 Placa Retenedora, 2 Retenedores, 1 Guía de Bola, 1 Arandela, 3 Resortes de Disco, 1 Bloque de Cilindros y 1 Placa de Válvulas I/D. Esencial para la reparación y el mantenimiento de las bombas de estas series.",
+    "modelos_compatibles": [
+      "A4VSO40",
+      "A4VSO45",
+      "A4VSO56",
+      "A4VSO71",
+      "A4VSO125",
+      "A4VSO180",
+      "A4VSO250",
+      "A4VSO355",
+      "A4VSO500",
+      "A4V40",
+      "A4V56",
+      "A4V71",
+      "A4V90",
+      "A4V125",
+      "A4V250"
+    ],
+    "imagen": "/productos/4rox.png"
+  },
+  {
+    "id": "kit-componentes-bombas-hidraulicas-rexroth-a8vo",
+    "nombre": "Kit de Componentes para Bombas Hidráulicas REXROTH Serie A8VO",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas REXROTH de la serie A8VO. Este kit incluye: 1 Eje Principal, 1 Eje de Transmisión, 14 Pistones, 28 Anillos, 2 Placas de Ajuste, 28 Tornillos, 2 Pasadores Centrales, 8 Resortes de Disco, 2 Bloques de Cilindros, 1 Placa de Válvulas L, 1 Placa de Válvulas R y 1 Tapa de Cabeza. Esencial para la reparación y el mantenimiento de las bombas de esta serie.",
+    "modelos_compatibles": [
+      "A8VO55",
+      "A8VO80",
+      "A8VO107",
+      "A8VO160",
+      "A8VO200"
+    ],
+    "imagen": "/productos/5rox.png"
+  },
+  {
+    "id": "kit-componentes-bombas-hidraulicas-rexroth-a6vm",
+    "nombre": "Kit de Componentes para Bombas Hidráulicas REXROTH Serie A6VM",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas REXROTH de la serie A6VM. Este kit incluye: 1 Eje de Transmisión, 1 Pasador Central, 7 Pistones, 14 Anillos, 1 Placa de Ajuste, 14 Tornillos, 4 Resortes de Disco, 1 Bloque de Cilindros y 1 Placa de Válvulas. Esencial para la reparación y el mantenimiento de las bombas de esta serie.",
+    "modelos_compatibles": [
+      "A6VM28",
+      "A6VM55",
+      "A6VM80",
+      "A6VM107",
+      "A6VM160",
+      "A6VM172",
+      "A6VM200",
+      "A6VM250",
+      "A6VM355",
+      "A6VM500"
+    ],
+    "imagen": "/productos/6rox.png"
+  },
+  {
+    "id": "kit-componentes-bomba-principal-caterpillar-312c-320c-325c",
+    "nombre": "Kit de Componentes para Bomba Principal CATERPILLAR CAT312C/320C/325C",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas principales CATERPILLAR. Este kit incluye: 1 Eje de Transmisión Delantero, 1 Eje de Transmisión Trasero, 4 Cojinetes de Silla, 2 Platos Basculantes, 2 Placas de Empuje, 18 Zapatas de Pistón, 2 Placas Retenedoras, 2 Guías de Bola, 2 Arandelas Retenedoras, 18 Resortes de Bloque, 2 Bloques de Cilindros, 1 Placa de Válvulas L y 1 Placa de Válvulas R. Esencial para la reparación y el mantenimiento de las bombas principales de estas excavadoras.",
+    "modelos_compatibles": [
+      "CATERPILLAR CAT312C/SBS80",
+      "CATERPILLAR CAT320C/SBS120",
+      "CATERPILLAR CAT325C/SBS140"
+    ],
+    "imagen": "/productos/caterp1.png"
+  },
+  {
+    "id": "kit-componentes-bomba-principal-caterpillar-320-ap12",
+    "nombre": "Kit de Componentes para Bomba Principal CATERPILLAR CAT320(AP-12)",
+    "descripcion": "Conjunto completo de piezas de recambio para bomba principal CATERPILLAR CAT320(AP-12). Este kit incluye: 1 Eje de Transmisión Delantero, 1 Eje de Transmisión Trasero, 2 Placas de Empuje, 18 Zapatas de Pistón, 2 Placas Retenedoras, 2 Guías de Bola, 2 Arandelas Retenedoras, 18 Resortes de Bloque, 2 Bloques de Cilindros, 1 Placa de Válvulas L, 1 Placa de Válvulas R, 4 Asientos de Cojinete, 4 Cojinetes de Ojo y 2 Platos Basculantes. Esencial para la reparación y el mantenimiento de la bomba principal de esta excavadora.",
+    "modelos_compatibles": [
+      "CATERPILLAR CAT320(AP-12)"
+    ],
+    "imagen": "/productos/caterp2.png"
+  },
+  {
+    "id": "kit-componentes-bomba-principal-caterpillar-e200b-ms180",
+    "nombre": "Kit de Componentes para Bomba Principal CATERPILLAR E200B/MS180",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas principales CATERPILLAR E200B(SPK10/10) y MS180(SPV10/10). Este kit incluye: 1 Eje de Transmisión Delantero, 1 Eje de Transmisión Trasero, 1 Plato Basculante, 4 Cojinetes de Ojo, 4 Asientos de Cojinete, 2 Placas de Empuje, 18 Zapatas de Pistón, 2 Placas Retenedoras, 2 Guías de Bola, 2 Placas de Ajuste, 2 Arandelas Retenedoras, 18 Resortes de Bloque, 18 Sellos de Tambor, 2 Bloques de Cilindros, 1 Placa de Válvulas L, 1 Placa de Válvulas R y 2 Placas de Cojinete. Esencial para la reparación y el mantenimiento de las bombas principales de estas excavadoras.",
+    "modelos_compatibles": [
+      "CATERPILLAR E200B(SPK10/10)",
+      "CATERPILLAR MS180(SPV10/10)"
+    ],
+    "imagen": "/productos/cater3.png"
+  },
+  {
+    "id": "kit-componentes-bomba-principal-caterpillar-new-e200b",
+    "nombre": "Kit de Componentes para Bomba Principal CATERPILLAR NEW E200B",
+    "descripcion": "Conjunto completo de piezas de recambio para bomba principal CATERPILLAR NEW E200B. Este kit incluye: 18 Zapatas de Pistón, 2 Bloques de Cilindros, 1 Placa de Válvulas L, 1 Placa de Válvulas R, 2 Placas Retenedoras, 2 Guías de Bola, 4 Cojinetes de Ojo, 4 Asientos de Cojinete, 2 Arandelas Retenedoras y 18 Resortes de Bloque. Esencial para la reparación y el mantenimiento de la bomba principal de esta excavadora.",
+    "modelos_compatibles": [
+      "CATERPILLAR NEW E200B"
+    ],
+    "imagen": "/productos/cater4.png"
+  },
+  {
+    "id": "kit-componentes-bomba-principal-caterpillar-12g-14g-16g-215-225-235-245",
+    "nombre": "Kit de Componentes para Bomba Principal CATERPILLAR CAT12G/14G/16G/215/225/235/245",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas principales CATERPILLAR. Este kit incluye: 1 Eje de Transmisión, 1 Placa de Empuje, 9 Zapatas de Pistón, 1 Placa Retenedora, 1 Bloque de Cilindros y 1 Placa de Válvulas L/R. Esencial para la reparación y el mantenimiento de las bombas principales de estas máquinas.",
+    "modelos_compatibles": [
+      "CATERPILLAR CAT12G",
+      "CATERPILLAR CAT14G",
+      "CATERPILLAR CAT16G",
+      "CATERPILLAR CAT215",
+      "CATERPILLAR CAT225",
+      "CATERPILLAR CAT235",
+      "CATERPILLAR CAT245"
+    ],
+    "imagen": "/productos/cater5.png"
+  },
+  {
+    "id": "kit-componentes-bomba-hidraulica-kawasaki-k3v-k5v",
+    "nombre": "Kit de Componentes para Bomba Hidráulica KAWASAKI K3V/K5V",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas KAWASAKI. Este kit incluye: 1 Eje de Transmisión Delantero, 1 Eje de Transmisión Trasero, 2 Soportes, 2 Platos Basculantes, 2 Placas de Empuje, 18 Zapatas de Pistón, 2 Placas Retenedoras, 2 Guías de Bola, 2 Arandelas Retenedoras, 18 Resortes de Bloque, 2 Bloques de Cilindros, 1 Placa de Válvulas L y 1 Placa de Válvulas R. Esencial para la reparación y el mantenimiento de las bombas de estas series.",
+    "modelos_compatibles": [
+      "KAWASAKI K3V63 DT",
+      "KAWASAKI K3V63 BDT",
+      "KAWASAKI K3V112 DT",
+      "KAWASAKI K3V112 BDT",
+      "KAWASAKI K3V140 DT",
+      "KAWASAKI K3V140 BDT",
+      "KAWASAKI K3V180 DT",
+      "KAWASAKI K3V180 BDT",
+      "KAWASAKI K5V140",
+      "KAWASAKI K5V200"
+    ],
+    "imagen": "/productos/kawa1.png"
+  },
+  {
+    "id": "kit-componentes-bomba-hidraulica-kawasaki-m2x",
+    "nombre": "Kit de Componentes para Bomba Hidráulica KAWASAKI M2X",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas KAWASAKI serie M2X. Este kit incluye: 1 Eje de Transmisión, 1 Placa de Empuje, 9 Zapatas de Pistón, 1 Placa Retenedora, 1 Guía de Bola, 1 Arandela Retenedora, 6 Pasadores de Presión, 1 Resorte Helicoidal, 1 Anillo de Seguridad, 3 Placas de Separación, 2 Placas de Fricción, 1 Bloque de Cilindros y 1 Placa de Válvulas. Esencial para la reparación y el mantenimiento de las bombas de esta serie.",
+    "modelos_compatibles": [
+      "KAWASAKI M2X63",
+      "KAWASAKI M2X96",
+      "KAWASAKI M2X120",
+      "KAWASAKI M2X146",
+      "KAWASAKI M2X150",
+      "KAWASAKI M2X170",
+      "KAWASAKI M2X210"
+    ],
+    "imagen": "/productos/kawa2.png"
+  },
+  {
+    "id": "kit-componentes-bomba-hidraulica-kawasaki-nv-uh-nx-nvk",
+    "nombre": "Kit de Componentes para Bomba Hidráulica KAWASAKI NV/UH/NX/NVK",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas KAWASAKI. Este kit incluye: 1 Eje de Transmisión Delantero, 1 Eje de Transmisión Trasero, 2 Soportes, 2 Platos Basculantes, 18 Zapatas de Pistón, 2 Placas Retenedoras, 2 Guías de Bola, 8 Resortes de Disco, 2 Bloques de Cilindros, 1 Placa de Válvulas L y 1 Placa de Válvulas R. Esencial para la reparación y el mantenimiento de las bombas de estas series.",
+    "modelos_compatibles": [
+      "KAWASAKI NV64",
+      "KAWASAKI NV84",
+      "KAWASAKI NV111",
+      "KAWASAKI NV137",
+      "KAWASAKI NV172",
+      "KAWASAKI NV270",
+      "KAWASAKI UH055-7",
+      "KAWASAKI NX15",
+      "KAWASAKI NVK45"
+    ],
+    "imagen": "/productos/kawa3.png"
+  },
+  {
+    "id": "kit-componentes-bomba-hidraulica-kawasaki-kvc",
+    "nombre": "Kit de Componentes para Bomba Hidráulica KAWASAKI KVC",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas KAWASAKI serie KVC. Este kit incluye: 1 Eje de Transmisión, 1 Plato Basculante, 2 Casquillos, 2 Ejes, 1 Placa de Empuje, 9 Zapatas de Pistón, 1 Placa Retenedora, 1 Bloque de Cilindros, 1 Placa de Válvulas L/R y 2 Retenedores. Esencial para la reparación y el mantenimiento de las bombas de esta serie.",
+    "modelos_compatibles": [
+      "KAWASAKI KVC925",
+      "KAWASAKI KVC930",
+      "KAWASAKI KVC932"
+    ],
+    "imagen": "/productos/kawa4.png"
+  },
+  {
+    "id": "kit-componentes-bomba-hidraulica-sauer-sundstrand-pv90r",
+    "nombre": "Kit de Componentes para Bomba Hidráulica SAUER SUNDSTRAND PV90R",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas SAUER SUNDSTRAND serie PV90R. Este kit incluye: 1 Eje de Transmisión, 1 Plato Basculante, 2 Cojinetes de Silla, 2 Asientos de Cojinete de Silla, 9 Zapatas de Pistón, 1 Placa Retenedora, 2 Retenedores, 1 Resorte Helicoidal, 1 Arandela, 1 Bloque de Cilindros y 1 Placa de Válvulas L/R/M. Esencial para la reparación y el mantenimiento de las bombas de esta serie.",
+    "modelos_compatibles": [
+      "SAUER SUNDSTRAND PV90R42",
+      "SAUER SUNDSTRAND PV90R55",
+      "SAUER SUNDSTRAND PV90R75",
+      "SAUER SUNDSTRAND PV90R100",
+      "SAUER SUNDSTRAND PV90R130",
+      "SAUER SUNDSTRAND PV90R180",
+      "SAUER SUNDSTRAND PV90R250"
+    ],
+    "imagen": "/productos/sauer1.png"
+  },
+  {
+    "id": "kit-componentes-bomba-hidraulica-sauer-sundstrand-pv90m",
+    "nombre": "Kit de Componentes para Bomba Hidráulica SAUER SUNDSTRAND PV90M",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas SAUER SUNDSTRAND serie PV90M. Este kit incluye: 9 Zapatas de Pistón, 1 Bloque de Cilindros, 1 Placa de Válvulas M, 1 Placa Retenedora, 1 Resorte Helicoidal, 1 Anillo de Seguridad, 1 Anillo de Respaldo Grueso, 1 Anillo de Respaldo Delgado y 1 Placa de Zapata. Esencial para la reparación y el mantenimiento de las bombas de esta serie.",
+    "modelos_compatibles": [
+      "SAUER SUNDSTRAND PV90M55",
+      "SAUER SUNDSTRAND PV90M75",
+      "SAUER SUNDSTRAND PV90M100",
+      "SAUER SUNDSTRAND PV90M130"
+    ],
+    "imagen": "/productos/sauer2.png"
+  },
+  {
+    "id": "kit-componentes-bomba-hidraulica-linde-hpr",
+    "nombre": "Kit de Componentes para Bomba Hidráulica LINDE HPR",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas LINDE serie HPR. Este kit incluye: 1 Eje de Transmisión, 1 Resorte Helicoidal, 1 Bloque de Cilindros, 1 Placa de Válvulas L/R, 1 Guía de Bola, 1 Placa Retenedora, 9 Zapatas de Pistón, 3 Pistones Servo, 1 Plato Basculante y 2 Piezas Metálicas. Esencial para la reparación y el mantenimiento de las bombas de esta serie.",
+    "modelos_compatibles": [
+      "LINDE HPR130",
+      "LINDE HPR160"
+    ],
+    "imagen": "/productos/linde1.png"
+  },
+  {
+    "id": "kit-componentes-bomba-hidraulica-linde-b2pv-bpv-bpr",
+    "nombre": "Kit de Componentes para Bomba Hidráulica LINDE B2PV/BPV/BPR",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas LINDE series B2PV, BPV y BPR. Este kit incluye: 1 Placa de Válvulas L/R, 1 Bloque de Cilindros, 1 Pasador Central, 1 Placa Retenedora y Pistones (7 para B2PV/BPR, 9 para BPV). Esencial para la reparación y el mantenimiento de las bombas de estas series.",
+    "modelos_compatibles": [
+      "LINDE B2PV50",
+      "LINDE B2PV75",
+      "LINDE B2PV105",
+      "LINDE B2PV140",
+      "LINDE BPV35",
+      "LINDE BPV50",
+      "LINDE BPV70",
+      "LINDE BPR140",
+      "LINDE BPR186",
+      "LINDE BPR260"
+    ],
+    "imagen": "/productos/linde2.png"
+  },
+  {
+    "id": "kit-componentes-bomba-principal-komatsu-hpv95-hpv132",
+    "nombre": "Kit de Componentes para Bomba Principal KOMATSU HPV95/HPV132",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas principales KOMATSU serie HPV95/HPV132. Compatible con excavadoras PC200/220-6/7, PC300-6/7, PC360-7, PC400-6/7. Este kit incluye: 1 Eje de Transmisión Delantero, 1 Eje de Transmisión Trasero, 2 Soportes, 2 Platos Basculantes, 6 Pasadores de Presión, 2 Resortes Helicoidales, 18 Zapatas de Pistón, 2 Placas Retenedoras, 2 Guías de Bola, 2 Bloques de Cilindros, 1 Placa de Válvulas L y 1 Placa de Válvulas R. Esencial para la reparación y el mantenimiento de las bombas principales de estas excavadoras.",
+    "modelos_compatibles": [
+      "KOMATSU HPV95",
+      "KOMATSU HPV132",
+      "KOMATSU PC200-6",
+      "KOMATSU PC200-7",
+      "KOMATSU PC220-6",
+      "KOMATSU PC220-7",
+      "KOMATSU PC300-6",
+      "KOMATSU PC300-7",
+      "KOMATSU PC360-7",
+      "KOMATSU PC400-6",
+      "KOMATSU PC400-7"
+    ],
+    "imagen": "/productos/komatsu1.png"
+  },
+  {
+    "id": "kit-componentes-bomba-principal-komatsu-pc210lc",
+    "nombre": "Kit de Componentes para Bomba Principal KOMATSU PC210LC-7/8",
+    "descripcion": "Conjunto completo de piezas de recambio para bomba principal KOMATSU PC210LC-7/8. Este kit incluye: 1 Eje de Transmisión Delantero, 1 Eje de Transmisión Trasero, 2 Soportes, 2 Platos Basculantes, 6 Pasadores de Presión, 2 Resortes Helicoidales, 18 Zapatas de Pistón, 2 Placas Retenedoras, 2 Guías de Bola, 2 Bloques de Cilindros, 1 Placa de Válvulas L y 1 Placa de Válvulas R. Esencial para la reparación y el mantenimiento de la bomba principal de esta excavadora.",
+    "modelos_compatibles": [
+      "KOMATSU PC210LC-7",
+      "KOMATSU PC210LC-8"
+    ],
+    "imagen": "/productos/komatsu2.png"
+  },
+  {
+    "id": "kit-componentes-bomba-hidraulica-vickers-pve",
+    "nombre": "Kit de Componentes para Bomba Hidráulica VICKERS PVE",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas VICKERS serie PVE. Este kit incluye: 1 Eje de Transmisión, 1 Plato Basculante, 3 Pasadores de Presión, 1 Resorte Helicoidal, 1 Anillo de Seguridad, 1 Anillo de Respaldo, 9 Zapatas de Pistón, 1 Placa Retenedora, 1 Guía de Bola, 1 Bloque de Cilindros y 1 Placa de Válvulas L/R. Esencial para la reparación y el mantenimiento de las bombas de esta serie.",
+    "modelos_compatibles": [
+      "VICKERS PVE19",
+      "VICKERS PVE21"
+    ],
+    "imagen": "/productos/vickers1.png"
+  },
+  {
+    "id": "kit-componentes-bomba-hidraulica-vickers-pvb",
+    "nombre": "Kit de Componentes para Bomba Hidráulica VICKERS PVB",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas VICKERS serie PVB. Este kit incluye: 1 Eje de Transmisión, 1 Placa de Empuje, 3 Pasadores de Presión, 1 Resorte Helicoidal, 1 Anillo de Seguridad, 9 Zapatas de Pistón, 1 Placa Retenedora, 1 Guía de Bola, 1 Bloque de Cilindros y 1 Placa de Válvulas L/R. Esencial para la reparación y el mantenimiento de las bombas de esta serie.",
+    "modelos_compatibles": [
+      "VICKERS PVB5",
+      "VICKERS PVB6",
+      "VICKERS PVB10",
+      "VICKERS PVB15",
+      "VICKERS PVB20",
+      "VICKERS PVB29"
+    ],
+    "imagen": "/productos/vickers2.png"
+  },
+  {
+    "id": "kit-componentes-bomba-hidraulica-eaton-33xx-46xx-54xx-pvxs",
+    "nombre": "Kit de Componentes para Bomba Hidráulica EATON Series 33XX/46XX/54XX/3932/6423/76XX/78462, PVXS",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas EATON. Este kit incluye: 1 Eje de Transmisión, 1 Placa de Empuje, 2 Retenedores, 9 Zapatas de Pistón, 1 Placa Retenedora, 1 Bloque de Cilindros, 1 Placa de Cojinete y 1 Placa de Válvulas L/R/M. Esencial para la reparación y el mantenimiento de las bombas de estas series.",
+    "modelos_compatibles": [
+      "EATON 3321",
+      "EATON 3331",
+      "EATON 3322",
+      "EATON 4621",
+      "EATON 4631",
+      "EATON 5421",
+      "EATON 5431",
+      "EATON 3932",
+      "EATON 6423",
+      "EATON 7620",
+      "EATON 7621",
+      "EATON 78462",
+      "EATON PVXS130",
+      "EATON PVXS180"
+    ],
+    "imagen": "/productos/eaton1.png"
+  },
+  {
+    "id": "kit-componentes-bomba-hidraulica-parker-f12",
+    "nombre": "Kit de Componentes para Bomba Hidráulica PARKER F12",
+    "descripcion": "Conjunto completo de piezas de recambio para bombas hidráulicas PARKER serie F12. Este kit incluye: 1 Eje de Transmisión, 1 Engranaje de Transmisión, 1 Placa de Válvulas, 1 Bloque de Cilindros, 1 Pasador Central y 7 Zapatas de Pistón. Esencial para la reparación y el mantenimiento de las bombas de esta serie.",
+    "modelos_compatibles": [
+      "PARKER F12-030",
+      "PARKER F12-040",
+      "PARKER F12-060",
+      "PARKER F12-080",
+      "PARKER F12-110"
+    ],
+    "imagen": "/productos/parker1.png"
+  },
+  {
+    "id": "regulador-hidraulico-kawasaki-k3v",
+    "nombre": "Regulador Hidráulico para Bombas KAWASAKI K3V",
+    "descripcion": "Regulador hidráulico completo para bombas KAWASAKI serie K3V. Disponible en varios tipos: KOBELCO TYPE (9TFL, 9TDL), 9N-TYPE, 9C-TYPE, 2N-TYPE, HL-TYPE, HN-TYPE y 9NOY. Cada tipo tiene diferentes características de control de presión y flujo según la aplicación. Esencial para el control y regulación de las bombas hidráulicas de estas series.",
+    "modelos_compatibles": [
+      "KAWASAKI K3V63",
+      "KAWASAKI K3V112",
+      "KAWASAKI K3V140",
+      "KAWASAKI K3V180",
+      "KAWASAKI K3V280"
+    ],
+    "imagen": "/productos/reg1.png"
+  },
+  {
+    "id": "sello-de-eje-hidraulico-universal",
+    "nombre": "Sello de Eje Hidráulico Universal",
+    "descripcion": "Sello de eje hidráulico de alta calidad compatible con múltiples series de bombas y motores hidráulicos de las principales marcas: REXROTH, SAUER SUNDSTRAND, LINDE, VICKERS, EATON, KAWASAKI, HITACHI y KOMATSU. Esencial para prevenir fugas de aceite en los ejes de transmisión. Compatible con más de 100 modelos diferentes de bombas y motores hidráulicos.",
+    "modelos_compatibles": [
+      "REXROTH A10VSO18",
+      "REXROTH A10VSO28",
+      "REXROTH A10VSO45",
+      "REXROTH A10VSO71",
+      "REXROTH A10VSO100",
+      "REXROTH A10VSO140",
+      "REXROTH A11VO60",
+      "REXROTH A11VO75",
+      "REXROTH A11VO95",
+      "REXROTH A11VO130",
+      "REXROTH A11VO160",
+      "REXROTH A11VO190",
+      "REXROTH A11VO260",
+      "REXROTH A6VM55",
+      "REXROTH A6VM80",
+      "REXROTH A6VM107",
+      "REXROTH A6VM160",
+      "REXROTH A6VM200",
+      "REXROTH A2F55",
+      "REXROTH A2F107",
+      "REXROTH A2F160",
+      "REXROTH A2F250",
+      "REXROTH A10VG28",
+      "REXROTH A10VG45",
+      "REXROTH A4VSO71",
+      "REXROTH A4VSO125",
+      "REXROTH A4VSO180",
+      "REXROTH A4VSO250",
+      "REXROTH A4VSO355",
+      "REXROTH A2FO10",
+      "REXROTH A2FM10",
+      "REXROTH A2FE10",
+      "REXROTH A2FO12",
+      "REXROTH A2FM12",
+      "REXROTH A2FE12",
+      "REXROTH A2FO16",
+      "REXROTH A2FM16",
+      "REXROTH A2FE16",
+      "REXROTH A2FO23",
+      "REXROTH A2FM23",
+      "REXROTH A2FE23",
+      "REXROTH A2FO28",
+      "REXROTH A2FM28",
+      "REXROTH A2FE28",
+      "REXROTH A2FO32",
+      "REXROTH A2FM32",
+      "REXROTH A2FE32",
+      "REXROTH A2FO45",
+      "REXROTH A2FM45",
+      "REXROTH A2FE45",
+      "REXROTH A2FO56",
+      "REXROTH A2FM56",
+      "REXROTH A2FE56",
+      "REXROTH A2FO63",
+      "REXROTH A2FM63",
+      "REXROTH A2FE63",
+      "REXROTH A2FO80",
+      "REXROTH A2FM80",
+      "REXROTH A2FE80",
+      "REXROTH A2FO90",
+      "REXROTH A2FM90",
+      "REXROTH A2FE90",
+      "REXROTH A2FO107",
+      "REXROTH A2FM107",
+      "REXROTH A2FE107",
+      "REXROTH A2FO125",
+      "REXROTH A2FM125",
+      "REXROTH A2FE125",
+      "REXROTH A2FO160",
+      "REXROTH A2FM160",
+      "REXROTH A2FE160",
+      "REXROTH A2FO180",
+      "REXROTH A2FM180",
+      "REXROTH A2FE180",
+      "REXROTH A2FO200",
+      "REXROTH A2FM200",
+      "REXROTH A2FE200",
+      "REXROTH A6V55",
+      "REXROTH A6V80",
+      "REXROTH A6V107",
+      "REXROTH A7V55",
+      "REXROTH A7V80",
+      "REXROTH A7V107",
+      "REXROTH A8V55",
+      "REXROTH A8V80",
+      "REXROTH A8V107",
+      "REXROTH A8V172",
+      "REXROTH A8V200",
+      "REXROTH A4VG28",
+      "REXROTH A4VG40",
+      "REXROTH A4VG45",
+      "REXROTH A4VG56",
+      "REXROTH A4VG71",
+      "REXROTH A4VG90",
+      "REXROTH A4VG125",
+      "REXROTH A4VG180",
+      "REXROTH A4VG250",
+      "REXROTH A8VO55",
+      "REXROTH A8VO80",
+      "REXROTH A8VO107",
+      "REXROTH A8VO160",
+      "REXROTH A8VO200",
+      "REXROTH A7VO55",
+      "REXROTH A7VO80",
+      "REXROTH A7VO107",
+      "REXROTH A7VO160",
+      "SAUER SUNDSTRAND PV20",
+      "SAUER SUNDSTRAND PV21",
+      "SAUER SUNDSTRAND PV22",
+      "SAUER SUNDSTRAND PV23",
+      "SAUER SUNDSTRAND PV24",
+      "SAUER SUNDSTRAND PV90R42",
+      "SAUER SUNDSTRAND PV90R55",
+      "SAUER SUNDSTRAND PV90R75",
+      "SAUER SUNDSTRAND PV90R100",
+      "SAUER SUNDSTRAND PV90R130",
+      "SAUER SUNDSTRAND PV90R180",
+      "SAUER SUNDSTRAND PV90R250",
+      "LINDE BPV50",
+      "LINDE BPV70",
+      "LINDE BPV100",
+      "LINDE HMF50",
+      "LINDE HPV55",
+      "LINDE HPR160",
+      "LINDE MPV046",
+      "VICKERS PVH57",
+      "VICKERS PVH74",
+      "VICKERS PVH98",
+      "VICKERS PVH131",
+      "EATON 3321",
+      "EATON 3331",
+      "EATON 4621",
+      "EATON 4631",
+      "EATON 5421",
+      "EATON 5431",
+      "EATON 6423",
+      "EATON 7620",
+      "EATON 7621",
+      "KAWASAKI K3V112",
+      "KAWASAKI K3V140",
+      "KAWASAKI K3V180",
+      "KAWASAKI NV80",
+      "KAWASAKI NV111",
+      "HITACHI HPV091",
+      "HITACHI HPV102",
+      "HITACHI HPV116",
+      "KOMATSU PC200-5",
+      "KOMATSU PC200-6",
+      "KOMATSU PC200-7"
+    ],
+    "imagen": "/productos/shaf1.png"
+  },
+  {
+    "id": "kit-componentes-bomba-hidraulica-sauer-sundstrand-pv90r42",
+    "nombre": "Kit de Componentes para Bomba Hidráulica SAUER SUNDSTRAND PV90R42",
+    "descripcion": "Conjunto completo de piezas de recambio para bomba hidráulica SAUER SUNDSTRAND PV90R42. Este kit incluye: 1 Bloque de Cilindros con Eje de Transmisión, 9 Zapatas de Pistón, 1 Guía de Bola, 1 Placa Retenedora, 1 Placa de Válvulas y 1 Placa de Empuje. Esencial para la reparación y el mantenimiento de esta bomba.",
+    "modelos_compatibles": [
+      "SAUER SUNDSTRAND PV90R42"
+    ],
+    "imagen": "/productos/sauer3.png"
+  },
+  {
+    "id": "kit-componentes-bomba-hidraulica-sauer-sundstrand-pv90r55",
+    "nombre": "Kit de Componentes para Bomba Hidráulica SAUER SUNDSTRAND PV90R55",
+    "descripcion": "Conjunto completo de piezas de recambio para bomba hidráulica SAUER SUNDSTRAND PV90R55. Este kit incluye: 1 Bloque de Cilindros con Eje de Transmisión, 9 Zapatas de Pistón, 1 Guía de Bola, 1 Placa Retenedora, 1 Placa de Válvulas y 1 Placa de Empuje. Esencial para la reparación y el mantenimiento de esta bomba.",
+    "modelos_compatibles": [
+      "SAUER SUNDSTRAND PV90R55"
+    ],
+    "imagen": "/productos/sauer4.png"
+  },
+
+  {
+    "id": "VALVE-a10vso-drg",
+    "nombre": "VALVULA HIDRAULICA A10VSO-DRG",
+    "imagen": "/productos/rex2.png"
+  },
+
+  {
+    "id": "VALVE-a11vlo190-ep2",
+    "nombre": "VALVULA HIDRAULICA A11VLO190 EP2",
+    "imagen": "/productos/rex5.png"
+  },
+  {
+    "id": "VALVE-a11vlo190-lrdu2",
+    "nombre": "VALVULA HIDRAULICA A11VLO190 LRDU2",
+    "imagen": "/productos/rex6.png"
+  },
+  {
+    "id": "VALVE-a11vlo145-ldrs",
+    "nombre": "VALVULA HIDRAULICA A11VLO145 LDRS",
+    "imagen": "/productos/rex7.png"
+  },
+  {
+    "id": "VALVE-a11vlo190-lrds",
+    "nombre": "VALVULA HIDRAULICA A11VLO190 LRDS",
+    "imagen": "/productos/rex8.png"
+  },
+  {
+    "id": "VALVE-eaton-33-46-54-64-control-valve",
+    "nombre": "EATON 33/46/54/64 CONTROL VALVE",
+    "imagen": "/productos/rex9.png"
+  },
+  {
+    "id": "VALVE-eaton-33-46-54-64-valve-assy",
+    "nombre": "EATON 33/46/54/64 VALVE ASSY",
+    "imagen": "/productos/rex10.png"
+  },
+  {
+    "id": "VALVE-pv22-control-valve",
+    "nombre": "PV22 CONTROL VALVE",
+    "imagen": "/productos/rex11.png"
+  },
+  {
+    "id": "VALVE-mf23-valve-assy",
+    "nombre": "MF23 VALVE ASSY",
+    "imagen": "/productos/rex12.png"
+  },
+  {
+    "id": "VALVE-pv90r75-100-control-valve",
+    "nombre": "PV90R75/100 CONTROL VALVE",
+    "imagen": "/productos/rex13.png"
+  },
+  {
+    "id": "VALVE-pvb",
+    "nombre": "VALVULA HIDRAULICA PVB",
+    "imagen": "/productos/rex14.png"
+  },
+  {
+    "id": "VALVE-pve",
+    "nombre": "VALVULA HIDRAULICA PVE",
+    "imagen": "/productos/rex15.png"
   }
+
 ]

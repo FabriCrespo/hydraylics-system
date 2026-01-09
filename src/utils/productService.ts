@@ -8,26 +8,98 @@ export interface Product {
   imagen: string | string[]
 }
 
+// Importar directamente el JSON como datos mock
+import productsJsonData from '../data/products.json'
+
+/**
+ * Cargar productos desde el archivo JSON directamente (sin endpoint)
+ */
+function loadProductsFromJson(): Product[] {
+  console.log('🔄 [loadProductsFromJson] Cargando productos desde JSON directo...')
+  try {
+    console.log('📦 [loadProductsFromJson] JSON importado, cantidad de productos:', productsJsonData?.length || 0)
+    console.log('📋 [loadProductsFromJson] Primeros productos:', productsJsonData?.slice(0, 3)?.map((p: any) => ({ id: p.id, nombre: p.nombre })))
+    
+    // Normalizar los datos del JSON para asegurar el formato correcto
+    const normalizedProducts = productsJsonData.map((product: any) => ({
+      id: product.id,
+      nombre: product.nombre,
+      descripcion: product.descripcion || '',
+      modelos_compatibles: Array.isArray(product.modelos_compatibles) 
+        ? product.modelos_compatibles 
+        : [],
+      imagen: product.imagen || '',
+    }))
+    
+    console.log('✅ [loadProductsFromJson] Productos normalizados:', normalizedProducts.length)
+    console.log('🔍 [loadProductsFromJson] IDs de productos:', normalizedProducts.map((p: Product) => p.id))
+    
+    // Verificar si están los nuevos productos
+    const nuevosProductos = normalizedProducts.filter((p: Product) => 
+      p.id.includes('rexroth') || p.id.includes('kit-componentes')
+    )
+    console.log('🆕 [loadProductsFromJson] Productos REXROTH encontrados:', nuevosProductos.length)
+    nuevosProductos.forEach((p: Product) => {
+      console.log('  -', p.id, ':', p.nombre)
+    })
+    
+    return normalizedProducts
+  } catch (error) {
+    console.error('❌ [loadProductsFromJson] Error al cargar productos desde JSON:', error)
+    return []
+  }
+}
+
 export const productService = {
   /**
    * Obtener todos los productos
+   * Intenta cargar desde Supabase primero, si falla usa el JSON como fallback
    */
   async getAll(): Promise<Product[]> {
+    console.log('🚀 [productService.getAll] Iniciando obtención de productos...')
+    console.log('🔧 [productService.getAll] Supabase configurado:', !!supabase)
+    
+    // Si no hay cliente de Supabase configurado, usar JSON directamente
+    if (!supabase) {
+      console.warn('⚠️ [productService.getAll] Supabase no configurado. Cargando productos desde JSON...')
+      const productos = loadProductsFromJson()
+      console.log('✅ [productService.getAll] Productos obtenidos desde JSON:', productos.length)
+      return productos
+    }
+
     try {
+      console.log('🔍 [productService.getAll] Consultando Supabase...')
       const { data, error } = await supabase
         .from('products')
         .select('*')
         .order('nombre', { ascending: true })
 
       if (error) {
-        console.error('Error al obtener productos:', error)
-        throw error
+        console.warn('⚠️ [productService.getAll] Error al obtener productos desde Supabase:', error.message)
+        console.info('📦 [productService.getAll] Cargando productos desde JSON como fallback...')
+        const productos = loadProductsFromJson()
+        console.log('✅ [productService.getAll] Productos obtenidos desde JSON (fallback):', productos.length)
+        return productos
       }
 
-      return data || []
+      // Si no hay productos en Supabase, usar JSON como fallback
+      if (!data || data.length === 0) {
+        console.warn('⚠️ [productService.getAll] No se encontraron productos en Supabase')
+        console.info('📦 [productService.getAll] Cargando productos desde JSON como fallback...')
+        const productos = loadProductsFromJson()
+        console.log('✅ [productService.getAll] Productos obtenidos desde JSON (fallback):', productos.length)
+        return productos
+      }
+
+      console.log(`✅ [productService.getAll] ${data.length} productos cargados desde Supabase`)
+      console.log('🔍 [productService.getAll] IDs de productos desde Supabase:', data.map((p: Product) => p.id))
+      return data
     } catch (error) {
-      console.error('Error en getAll:', error)
-      return []
+      console.error('❌ [productService.getAll] Error al conectar con Supabase:', error)
+      console.info('📦 [productService.getAll] Cargando productos desde JSON como fallback...')
+      const productos = loadProductsFromJson()
+      console.log('✅ [productService.getAll] Productos obtenidos desde JSON (fallback):', productos.length)
+      return productos
     }
   },
 
@@ -35,6 +107,12 @@ export const productService = {
    * Obtener un producto por ID
    */
   async getById(id: string): Promise<Product | null> {
+    if (!supabase) {
+      console.warn('⚠️ Supabase no configurado. Buscando producto en JSON...')
+      const products = loadProductsFromJson()
+      return products.find(p => p.id === id) || null
+    }
+
     try {
       const { data, error } = await supabase
         .from('products')
@@ -44,13 +122,17 @@ export const productService = {
 
       if (error) {
         console.error('Error al obtener producto:', error)
-        return null
+        // Intentar buscar en JSON como fallback
+        const products = loadProductsFromJson()
+        return products.find(p => p.id === id) || null
       }
 
       return data
     } catch (error) {
       console.error('Error en getById:', error)
-      return null
+      // Intentar buscar en JSON como fallback
+      const products = loadProductsFromJson()
+      return products.find(p => p.id === id) || null
     }
   },
 
@@ -58,6 +140,10 @@ export const productService = {
    * Crear un nuevo producto
    */
   async create(product: Omit<Product, 'id'> & { id?: string }): Promise<Product | null> {
+    if (!supabase) {
+      throw new Error('No se puede crear producto: Supabase no está configurado. Configura las variables de entorno PUBLIC_SUPABASE_URL y PUBLIC_SUPABASE_ANON_KEY')
+    }
+
     try {
       // Generar ID si no se proporciona
       const productId = product.id || this.generateId(product.nombre)
@@ -92,6 +178,10 @@ export const productService = {
    * Actualizar un producto existente
    */
   async update(id: string, product: Partial<Omit<Product, 'id'>>): Promise<Product | null> {
+    if (!supabase) {
+      throw new Error('No se puede actualizar producto: Supabase no está configurado. Configura las variables de entorno PUBLIC_SUPABASE_URL y PUBLIC_SUPABASE_ANON_KEY')
+    }
+
     try {
       const { data, error } = await supabase
         .from('products')
@@ -116,6 +206,10 @@ export const productService = {
    * Eliminar un producto
    */
   async delete(id: string): Promise<boolean> {
+    if (!supabase) {
+      throw new Error('No se puede eliminar producto: Supabase no está configurado. Configura las variables de entorno PUBLIC_SUPABASE_URL y PUBLIC_SUPABASE_ANON_KEY')
+    }
+
     try {
       const { error } = await supabase
         .from('products')
@@ -138,6 +232,12 @@ export const productService = {
    * Verificar si existe un producto con el mismo nombre
    */
   async existsByName(nombre: string): Promise<boolean> {
+    if (!supabase) {
+      // Buscar en JSON como fallback
+      const products = loadProductsFromJson()
+      return products.some(p => p.nombre.toLowerCase() === nombre.toLowerCase())
+    }
+
     try {
       const { data, error } = await supabase
         .from('products')
@@ -147,13 +247,17 @@ export const productService = {
 
       if (error) {
         console.error('Error al verificar producto:', error)
-        return false
+        // Buscar en JSON como fallback
+        const products = loadProductsFromJson()
+        return products.some(p => p.nombre.toLowerCase() === nombre.toLowerCase())
       }
 
       return (data?.length || 0) > 0
     } catch (error) {
       console.error('Error en existsByName:', error)
-      return false
+      // Buscar en JSON como fallback
+      const products = loadProductsFromJson()
+      return products.some(p => p.nombre.toLowerCase() === nombre.toLowerCase())
     }
   },
 
