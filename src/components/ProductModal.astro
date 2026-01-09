@@ -569,7 +569,7 @@ const { products, phoneNumber = "59170405030" } = Astro.props;
     modalCotizar?.addEventListener("click", () => {
       if (!productoActual) return;
 
-      const mensaje = `Hola, quisiera hacer una cotización del siguiente producto:\n\nProducto: ${productoActual.nombre}\nID: ${productoActual.id}\n\nGracias.`;
+      const mensaje = `¡Hola! 👋\n\nQuisiera solicitar una cotización del siguiente producto:\n\n📦 Producto: ${productoActual.nombre}\n🆔 ID: ${productoActual.id}\n\n¿Podrían enviarme más información y precio? Gracias 🙏`;
       const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
     });

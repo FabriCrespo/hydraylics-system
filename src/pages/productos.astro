@@ -42,11 +42,9 @@ import ProductModal from "../components/ProductModal.astro";
         </div>
 
         <div class="filtro-group">
-          <label for="imagen">Imagen disponible</label>
-          <select id="imagen">
-            <option value="">Todos</option>
-            <option value="true">Solo con imagen</option>
-            <option value="false">Solo sin imagen</option>
+          <label for="marca">Marca</label>
+          <select id="marca">
+            <option value="">Todas las marcas</option>
           </select>
         </div>
       </div>
@@ -570,6 +568,7 @@ import ProductModal from "../components/ProductModal.astro";
     const productosCount = document.getElementById("productosCount");
     const loadingState = document.getElementById("loadingState");
     const modeloSelect = document.getElementById("modelo");
+    const marcaSelect = document.getElementById("marca");
     
     // Ocultar estado de carga
     if (loadingState) {
@@ -579,6 +578,49 @@ import ProductModal from "../components/ProductModal.astro";
     // Actualizar contador
     if (productosCount) {
       productosCount.textContent = `${productos.length} productos`;
+    }
+    
+    // Función para extraer marcas de un producto
+    function extraerMarcas(producto) {
+      const marcas = new Set();
+      const marcasConocidas = [
+        'KAWASAKI', 'REXROTH', 'CATERPILLAR', 'SAUER', 'SUNDSTRAND',
+        'LINDE', 'KOMATSU', 'VICKERS', 'EATON', 'PARKER', 'HITACHI',
+        'MEDAL', 'MOTOCANA'
+      ];
+      
+      // Buscar marcas en modelos_compatibles
+      if (producto.modelos_compatibles) {
+        producto.modelos_compatibles.forEach((modelo) => {
+          marcasConocidas.forEach((marca) => {
+            if (modelo.toUpperCase().includes(marca)) {
+              marcas.add(marca);
+            }
+          });
+        });
+      }
+      
+      // Buscar marcas en el nombre
+      const nombreUpper = producto.nombre?.toUpperCase() || '';
+      marcasConocidas.forEach((marca) => {
+        if (nombreUpper.includes(marca)) {
+          marcas.add(marca);
+        }
+      });
+      
+      // Buscar "PARKER HANNIFIN" como "PARKER"
+      if (nombreUpper.includes('PARKER HANNIFIN') || nombreUpper.includes('PARKER')) {
+        marcas.add('PARKER');
+      }
+      
+      // Buscar "SAUER SUNDSTRAND" como "SAUER SUNDSTRAND"
+      if (nombreUpper.includes('SAUER SUNDSTRAND')) {
+        marcas.add('SAUER SUNDSTRAND');
+      } else if (nombreUpper.includes('SAUER')) {
+        marcas.add('SAUER');
+      }
+      
+      return Array.from(marcas);
     }
     
     // Generar opciones de modelos
@@ -595,9 +637,28 @@ import ProductModal from "../components/ProductModal.astro";
       });
     }
     
+    // Generar opciones de marcas
+    const todasLasMarcas = new Set();
+    productos.forEach((producto) => {
+      const marcas = extraerMarcas(producto);
+      marcas.forEach((marca) => todasLasMarcas.add(marca));
+    });
+    
+    const marcasOrdenadas = Array.from(todasLasMarcas).sort((a, b) => a.localeCompare(b));
+    
+    if (marcaSelect) {
+      marcasOrdenadas.forEach((marca) => {
+        const option = document.createElement("option");
+        option.value = marca;
+        option.textContent = marca;
+        marcaSelect.appendChild(option);
+      });
+    }
+    
     // Función para renderizar una tarjeta de producto
     function renderProductCard(producto) {
       const modelos = producto.modelos_compatibles ?? [];
+      const marcas = extraerMarcas(producto);
       const imagenes = producto.imagen
         ? Array.isArray(producto.imagen)
           ? producto.imagen
@@ -609,7 +670,7 @@ import ProductModal from "../components/ProductModal.astro";
       const card = document.createElement("div");
       card.className = "producto-card";
       card.setAttribute("data-modelos", modelos.join(","));
-      card.setAttribute("data-imagen", tieneImagen ? "true" : "false");
+      card.setAttribute("data-marcas", marcas.join(","));
       
       card.innerHTML = `
         <div class="producto-imagen">
@@ -655,7 +716,6 @@ import ProductModal from "../components/ProductModal.astro";
           ` : ""}
         </div>
         <div class="producto-info">
-          <div class="producto-codigo">ID: ${producto.id}</div>
           <h4 class="producto-nombre">${producto.nombre}</h4>
           <p class="producto-descripcion">${producto.descripcion || ""}</p>
           ${modelos.length > 0 ? `
@@ -704,11 +764,11 @@ import ProductModal from "../components/ProductModal.astro";
       console.error('❌ [productos.astro] No se encontró el elemento productosGrid');
     }
 
-    /** @type {{ busqueda: HTMLInputElement | null; modelo: HTMLSelectElement | null; imagen: HTMLSelectElement | null; }} */
+    /** @type {{ busqueda: HTMLInputElement | null; modelo: HTMLSelectElement | null; marca: HTMLSelectElement | null; }} */
     const filtros = {
       busqueda: document.getElementById("busqueda"),
       modelo: document.getElementById("modelo"),
-      imagen: document.getElementById("imagen"),
+      marca: document.getElementById("marca"),
     };
 
     const btnFiltrar = document.getElementById("btnFiltrar");
@@ -863,7 +923,7 @@ import ProductModal from "../components/ProductModal.astro";
 
       const termino = (filtros.busqueda?.value || "").trim().toLowerCase();
       const modelo = (filtros.modelo?.value || "").trim().toLowerCase();
-      const imagenFiltro = filtros.imagen?.value || "";
+      const marca = (filtros.marca?.value || "").trim().toUpperCase();
 
       const cards = /** @type {HTMLElement[]} */ (
         Array.from(productosGrid.children)
@@ -874,9 +934,6 @@ import ProductModal from "../components/ProductModal.astro";
         const nombre =
           card.querySelector(".producto-nombre")?.textContent?.toLowerCase() ||
           "";
-        const codigo =
-          card.querySelector(".producto-codigo")?.textContent?.toLowerCase() ||
-          "";
         const descripcion =
           card
             .querySelector(".producto-descripcion")
@@ -885,23 +942,22 @@ import ProductModal from "../components/ProductModal.astro";
           .split(",")
           .map((m) => m.trim().toLowerCase())
           .filter(Boolean);
-        const tieneImagen = card.dataset.imagen === "true";
+        const marcas = (card.dataset.marcas || "")
+          .split(",")
+          .map((m) => m.trim().toUpperCase())
+          .filter(Boolean);
 
         const coincideBusqueda =
           !termino ||
           nombre.includes(termino) ||
-          codigo.includes(termino) ||
           descripcion.includes(termino);
         const coincideModelo = !modelo || modelos.includes(modelo);
-        const coincideImagen =
-          !imagenFiltro ||
-          (imagenFiltro === "true" && tieneImagen) ||
-          (imagenFiltro === "false" && !tieneImagen);
+        const coincideMarca = !marca || marcas.includes(marca);
 
         if (
           coincideBusqueda &&
           coincideModelo &&
-          coincideImagen
+          coincideMarca
         ) {
           card.style.display = "block";
           visibles += 1;
@@ -926,7 +982,7 @@ import ProductModal from "../components/ProductModal.astro";
     btnLimpiar?.addEventListener("click", limpiar);
     filtros.busqueda?.addEventListener("input", filtrar);
     filtros.modelo?.addEventListener("change", filtrar);
-    filtros.imagen?.addEventListener("change", filtrar);
+    filtros.marca?.addEventListener("change", filtrar);
 
     filtrar();
   });

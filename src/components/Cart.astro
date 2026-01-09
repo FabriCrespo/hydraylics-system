@@ -647,7 +647,7 @@ const { phoneNumber = "59170405030" } = Astro.props;
         .map((item, index) => `${index + 1}. ${item.nombre ?? 'Producto'} (ID: ${item.id}) - Cantidad: ${item.cantidad}`)
         .join('\n');
 
-      const mensaje = `Hola, quisiera hacer una cotización de los siguientes productos:\n\n${resumen}\n\nGracias.`;
+      const mensaje = `¡Hola! 👋\n\nQuisiera solicitar una cotización de los siguientes productos:\n\n${resumen}\n\n¿Podrían enviarme más información y precios? Gracias 🙏`;
       const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(mensaje)}`;
       window.open(url, '_blank');
     });
