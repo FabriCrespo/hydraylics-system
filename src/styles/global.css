@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
-/* Variables de colores de la empresa */
-:root {
-  --color-primary: #f1ece8;      /* Beige/Crema claro */
-  --color-secondary: #e1332c;    /* Rojo corporativo */
-  --color-tertiary: #3d3532;     /* Gris oscuro/Marrón */
-  
-  /* Variaciones para diferentes usos */
+/* Clases de tarjeta de producto definidas en TS (grid dinámico) */
+@source "../data/productCardTailwind.ts";
+
+@theme {
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --color-primary: #f1ece8;
   --color-primary-dark: #e0d5cf;
+  --color-secondary: #e1332c;
   --color-secondary-dark: #c12e27;
   --color-secondary-light: #f04840;
+  --color-tertiary: #3d3532;
   --color-tertiary-light: #5a4f4b;
-  
-  /* Colores adicionales para funcionalidad */
   --color-white: #ffffff;
   --color-black: #000000;
   --color-gray-50: #f9fafb;
@@ -25,28 +25,89 @@
   --color-gray-700: #374151;
   --color-gray-800: #1f2937;
   --color-gray-900: #111827;
-  
-  /* Colores de estado */
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-error: #ef4444;
   --color-info: #3b82f6;
-  
-  /* Colores de transparencia */
-  --color-overlay: rgba(0, 0, 0, 0.5);
-  --color-overlay-light: rgba(0, 0, 0, 0.1);
-  --color-overlay-dark: rgba(0, 0, 0, 0.8);
+  --color-overlay: rgb(0 0 0 / 0.5);
+  --color-overlay-light: rgb(0 0 0 / 0.1);
+  --color-overlay-dark: rgb(0 0 0 / 0.8);
 }
 
-/* Estilos base */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  body {
+    background-color: var(--color-primary);
+    color: var(--color-tertiary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background-color: var(--color-primary);
-  color: var(--color-tertiary);
+/* Lucide (@lucide/astro): tamaño heredado del contenedor cuando aplica */
+svg.lucide {
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+/* Animaciones usadas en la home (indicador scroll, scan, badges, fondos) */
+@keyframes home-scroll {
+  0% {
+    opacity: 1;
+    top: 10px;
+  }
+  100% {
+    opacity: 0;
+    top: 30px;
+  }
+}
+
+@keyframes home-services-scan {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes home-float-glow {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+    opacity: 0.6;
+  }
+}
+
+@keyframes home-badge-pulse {
+  0%,
+  100% {
+    box-shadow: 0 10px 30px rgba(225, 51, 44, 0.3);
+  }
+  50% {
+    box-shadow: 0 10px 50px rgba(225, 51, 44, 0.5);
+  }
+}
+
+@keyframes home-pulse-bg {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes home-cta-grid {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
 }

@@ -1,416 +1,196 @@
 ---
-// Header component
+import { CircleUser, ShoppingCart } from "@lucide/astro/icons";
+
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+function navActive(href: string) {
+  const h = href.replace(/\/$/, "") || "/";
+  if (h === "/") return pathname === "/";
+  return pathname === h || pathname.startsWith(`${h}/`);
+}
+
+const contactActive = pathname === "/contacto" || pathname.startsWith("/contacto/");
 ---
 
-<header class="header">
-  <div class="container">
-    <div class="logo">
-      <a href="/" class="logo-link">
-        <span class="logo-text">Hydraulic</span>
-        <span class="logo-accent">Sistem</span>
+<header
+  class="sticky top-0 z-1000 overflow-visible border-b border-[#E8E8E8] bg-white/90 shadow-[0_1px_2px_rgba(0,0,0,0.05)] backdrop-blur-[6px] supports-backdrop-filter:bg-white/85"
+>
+  <div
+    class="relative mx-auto flex max-w-[1280px] min-h-20 items-center justify-between gap-4 overflow-visible px-6 py-3 font-[Inter,ui-sans-serif,system-ui,sans-serif] max-md:min-h-0 max-md:gap-3 max-md:px-3 max-md:py-2.5"
+  >
+    <div class="relative z-2 flex shrink-0 items-center overflow-visible">
+      <a
+        href="/"
+        class="flex items-center leading-none no-underline focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C60D00]"
+        aria-label="Hydraulic Sistem — Inicio"
+      >
+        <!-- Caja de layout baja + scale: logo más grande sin subir min-h del header -->
+        <img
+          src="/HeroLogo.png"
+          alt=""
+          class="block h-8 w-auto max-w-[100px] origin-left scale-[2.15] object-contain object-left transition-[transform,opacity] duration-200 ease-out hover:scale-[2.24] hover:opacity-90 min-[900px]:h-[2.125rem] min-[900px]:max-w-[110px] min-[900px]:scale-[2.35] min-[900px]:hover:scale-[2.42] xl:h-9 xl:max-w-[118px] xl:scale-[2.45] xl:hover:scale-[2.52] max-md:h-7 max-md:max-w-[78px] max-md:scale-[2.05] max-md:hover:scale-[2.12]"
+          width="400"
+          height="90"
+          loading="eager"
+          decoding="async"
+        />
       </a>
     </div>
-    
-    <nav class="nav">
-      <ul>
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/servicios">Servicios</a></li>
-        <li><a href="/productos">Productos</a></li>
-        <li><a href="/nosotros">Nosotros</a></li>
-        <li><a href="/contacto" class="btn-contacto">Contacto</a></li>
+
+    <nav
+      id="site-nav"
+      class="isolate z-50 min-w-0 max-md:pointer-events-none max-md:absolute max-md:left-0 max-md:right-0 max-md:top-full max-md:border-t max-md:border-[#E8E8E8] max-md:bg-white/95 max-md:shadow-md max-md:backdrop-blur-md max-md:transition-all max-md:duration-200 max-md:data-[state=closed]:max-h-0 max-md:data-[state=closed]:-translate-y-px max-md:data-[state=closed]:overflow-hidden max-md:data-[state=closed]:opacity-0 max-md:data-[state=closed]:py-0 max-md:data-[state=open]:pointer-events-auto max-md:data-[state=open]:max-h-[min(520px,85vh)] max-md:data-[state=open]:translate-y-0 max-md:data-[state=open]:opacity-100 max-md:data-[state=open]:overflow-y-auto max-md:data-[state=open]:py-3 md:relative md:top-auto md:flex md:flex-1 md:justify-center md:overflow-visible md:opacity-100 md:transition-none"
+      data-state="closed"
+      aria-label="Principal"
+    >
+      <ul
+        class="m-0 flex list-none flex-col gap-0 p-0 md:flex-row md:items-center md:gap-8"
+      >
+        <li>
+          <a
+            href="/"
+            class:list={[
+              "relative isolate flex flex-col items-start py-1 text-[14px] font-normal uppercase leading-5 tracking-[-0.35px] no-underline transition-colors after:pointer-events-none max-md:block max-md:border-b max-md:border-[#E8E8E8] max-md:px-5 max-md:py-3 max-md:text-[0.9rem] max-md:hover:bg-[#f9f9f9]",
+              navActive("/")
+                ? "text-[#1A1C1C] after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:bg-[#C60D00] max-md:after:hidden"
+                : "text-[#5F5E5E] after:hidden hover:text-[#1A1C1C]",
+            ]}
+            aria-current={navActive("/") ? "page" : undefined}>Inicio</a>
+        </li>
+        <li>
+          <a
+            href="/servicios"
+            class:list={[
+              "relative isolate flex flex-col items-start py-1 text-[14px] font-normal uppercase leading-5 tracking-[-0.35px] no-underline transition-colors after:pointer-events-none max-md:block max-md:border-b max-md:border-[#E8E8E8] max-md:px-5 max-md:py-3 max-md:text-[0.9rem] max-md:hover:bg-[#f9f9f9]",
+              navActive("/servicios")
+                ? "text-[#1A1C1C] after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:bg-[#C60D00] max-md:after:hidden"
+                : "text-[#5F5E5E] after:hidden hover:text-[#1A1C1C]",
+            ]}
+            aria-current={navActive("/servicios") ? "page" : undefined}
+            >Servicios</a>
+        </li>
+        <li>
+          <a
+            href="/productos"
+            class:list={[
+              "relative isolate flex flex-col items-start py-1 text-[14px] font-normal uppercase leading-5 tracking-[-0.35px] no-underline transition-colors after:pointer-events-none max-md:block max-md:border-b max-md:border-[#E8E8E8] max-md:px-5 max-md:py-3 max-md:text-[0.9rem] max-md:hover:bg-[#f9f9f9]",
+              navActive("/productos")
+                ? "text-[#1A1C1C] after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:bg-[#C60D00] max-md:after:hidden"
+                : "text-[#5F5E5E] after:hidden hover:text-[#1A1C1C]",
+            ]}
+            aria-current={navActive("/productos") ? "page" : undefined}
+            >Productos</a>
+        </li>
+        <li>
+          <a
+            href="/nosotros"
+            class:list={[
+              "relative isolate flex flex-col items-start py-1 text-[14px] font-normal uppercase leading-5 tracking-[-0.35px] no-underline transition-colors after:pointer-events-none max-md:block max-md:border-b max-md:border-[#E8E8E8] max-md:px-5 max-md:py-3 max-md:text-[0.9rem] max-md:hover:bg-[#f9f9f9]",
+              navActive("/nosotros")
+                ? "text-[#1A1C1C] after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:bg-[#C60D00] max-md:after:hidden"
+                : "text-[#5F5E5E] after:hidden hover:text-[#1A1C1C]",
+            ]}
+            aria-current={navActive("/nosotros") ? "page" : undefined}
+            >Nosotros</a>
+        </li>
+        <li class="md:hidden">
+          <a
+            href="/contacto"
+            class="mx-5 my-3 block rounded-[2px] bg-[#C60D00] px-8 py-2.5 text-center text-sm font-normal uppercase tracking-[1.4px] text-white no-underline shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.1),0px_2px_4px_-2px_rgba(0,0,0,0.1)] transition-opacity hover:opacity-90"
+            aria-current={contactActive ? "page" : undefined}>Contacto</a>
+        </li>
       </ul>
     </nav>
 
-    <div class="header-actions">
-      <a href="/admin" class="header-admin" aria-label="Panel de Administración" title="Administración">
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-        </svg>
+    <div
+      class="hidden h-8 w-px shrink-0 bg-[#E7BDB6] md:block"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div
+      class="flex shrink-0 items-center gap-4 max-md:order-3 max-md:ml-auto max-md:gap-2 md:ml-0 md:gap-4"
+    >
+      <a
+        href="/admin"
+        class="inline-flex size-9 items-center justify-center rounded-xl bg-transparent p-2 text-[#5F5E5E] no-underline transition-colors hover:bg-black/4 hover:text-[#1A1C1C] [&_svg]:size-5"
+        aria-label="Panel de Administración"
+        title="Administración"
+      >
+        <CircleUser aria-hidden="true" />
       </a>
-      <button class="header-cart" type="button" aria-label="Ver carrito">
-        <svg
-          width="26"
-          height="26"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <circle cx="9" cy="21" r="1" />
-          <circle cx="20" cy="21" r="1" />
-          <path d="M1 1h4l2.68 13.39a2 2 0 001.95 1.61h9.72a2 2 0 001.95-1.61l1.75-9.78H6.5" />
-        </svg>
-        <span class="header-cart-count" id="cartCount" aria-live="polite">0</span>
+      <button
+        class="relative inline-flex size-9 items-center justify-center rounded-xl border-none bg-transparent p-2 text-[#5F5E5E] transition-colors hover:bg-black/4 hover:text-[#1A1C1C] [&_svg]:size-5"
+        type="button"
+        aria-label="Ver carrito"
+      >
+        <ShoppingCart aria-hidden="true" />
+        <span
+          class="absolute -right-0.5 top-0 hidden min-h-[23px] min-w-[22px] items-center justify-center rounded-xl border-2 border-white bg-[#C60D00] px-1.5 py-0.5 text-center text-[10px] font-bold leading-[15px] text-white empty:hidden"
+          id="cartCount"
+          aria-live="polite"
+        ></span>
       </button>
     </div>
 
-    <button class="menu-toggle" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
+    <a
+      href="/contacto"
+      class:list={[
+        "hidden shrink-0 items-center justify-center rounded-[2px] bg-[#C60D00] px-8 py-2.5 text-sm font-normal uppercase tracking-[1.4px] text-white no-underline shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.1),0px_2px_4px_-2px_rgba(0,0,0,0.1)] transition-opacity hover:opacity-90 md:inline-flex",
+        contactActive &&
+          "ring-2 ring-[#1A1C1C]/15 ring-offset-2 ring-offset-white/80",
+      ]}
+      aria-current={contactActive ? "page" : undefined}>Contacto</a>
+
+    <button
+      id="site-menu-toggle"
+      type="button"
+      class="group/menu relative z-1001 hidden cursor-pointer flex-col border-none bg-transparent p-1.5 text-[#5F5E5E] max-md:flex"
+      aria-label="Abrir o cerrar menú"
+      aria-controls="site-nav"
+      aria-expanded="false"
+      data-menu="closed"
+    >
+      <span
+        class="my-0.5 block h-0.5 w-[22px] rounded-sm bg-current transition-all duration-300 group-data-[menu=open]/menu:translate-y-2 group-data-[menu=open]/menu:rotate-45"
+      ></span>
+      <span
+        class="my-0.5 block h-0.5 w-[22px] rounded-sm bg-current transition-all duration-300 group-data-[menu=open]/menu:-translate-x-2.5 group-data-[menu=open]/menu:opacity-0"
+      ></span>
+      <span
+        class="my-0.5 block h-0.5 w-[22px] rounded-sm bg-current transition-all duration-300 group-data-[menu=open]/menu:-translate-y-2 group-data-[menu=open]/menu:-rotate-45"
+      ></span>
     </button>
   </div>
 </header>
 
-<style>
-  .header {
-    background-color: var(--color-tertiary);
-    padding: 0.9rem 0;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .logo a {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 1.35rem;
-    font-weight: bold;
-    color: var(--color-primary);
-    transition: color 0.2s ease;
-  }
-
-  .logo a:hover {
-    color: var(--color-secondary);
-  }
-
-  .logo-text {
-    color: var(--color-primary);
-    letter-spacing: 0.5px;
-  }
-
-  .logo-accent {
-    color: var(--color-secondary);
-  }
-
-  .nav ul {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-    align-items: center;
-  }
-
-  .header-actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-
-  .header-admin {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 8px;
-    background: transparent;
-    color: var(--color-primary);
-    text-decoration: none;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .header-admin:hover {
-    background: rgba(225, 51, 44, 0.1);
-    color: var(--color-secondary);
-    transform: translateY(-1px);
-  }
-
-  .header-admin svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .header-cart {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 8px;
-    background: transparent;
-    color: var(--color-primary);
-    border: none;
-    position: relative;
-    transition: all 0.2s ease;
-    cursor: pointer;
-  }
-
-  .header-cart:hover {
-    background: var(--color-gray-100);
-    color: var(--color-secondary);
-  }
-
-  .header-cart svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .header-cart-count {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    background: var(--color-secondary);
-    color: var(--color-white);
-    border-radius: 999px;
-    min-width: 18px;
-    height: 18px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.65rem;
-    font-weight: 700;
-    padding: 0 0.3rem;
-    display: none;
-  }
-
-  .header-cart-count:not(:empty) {
-    display: inline-flex;
-  }
-
-  .nav a {
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: color 0.2s ease;
-    padding: 0.4rem 0.8rem;
-  }
-
-  .nav a:hover {
-    color: var(--color-secondary);
-  }
-
-  .btn-contacto {
-    background-color: var(--color-secondary);
-    color: white !important;
-    padding: 0.5rem 1.25rem !important;
-    border-radius: 6px;
-    transition: background-color 0.2s ease;
-    font-size: 0.9rem;
-  }
-
-  .btn-contacto:hover {
-    background-color: var(--color-secondary-dark);
-    color: white !important;
-  }
-
-  .menu-toggle {
-    display: none;
-    flex-direction: column;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    z-index: 1001;
-  }
-
-  .menu-toggle span {
-    width: 22px;
-    height: 2.5px;
-    background-color: var(--color-primary);
-    margin: 3px 0;
-    transition: all 0.3s ease;
-    border-radius: 2px;
-  }
-
-  /* Animación del icono hamburguesa a X */
-  .menu-toggle.active span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-  }
-
-  .menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-    transform: translateX(-10px);
-  }
-
-  .menu-toggle.active span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .header {
-      padding: 0.7rem 0;
-    }
-
-    .container {
-      padding: 0 1rem;
-      gap: 0.75rem;
-    }
-
-    .logo a {
-      font-size: 1.2rem;
-    }
-
-    .nav {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background-color: var(--color-white);
-      padding: 0;
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(-5px);
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      border-top: 1px solid var(--color-gray-200);
-    }
-
-    .nav.active {
-      max-height: 500px;
-      opacity: 1;
-      transform: translateY(0);
-      padding: 0.5rem 0;
-    }
-
-    .nav ul {
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .nav li {
-      opacity: 0;
-      transform: translateX(-10px);
-      transition: all 0.2s ease;
-    }
-
-    .nav.active li {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    /* Animación escalonada de los items */
-    .nav.active li:nth-child(1) { transition-delay: 0.05s; }
-    .nav.active li:nth-child(2) { transition-delay: 0.1s; }
-    .nav.active li:nth-child(3) { transition-delay: 0.15s; }
-    .nav.active li:nth-child(4) { transition-delay: 0.2s; }
-    .nav.active li:nth-child(5) { transition-delay: 0.25s; }
-
-    .nav a {
-      display: block;
-      padding: 0.75rem 1.25rem;
-      border-bottom: 1px solid var(--color-gray-100);
-      color: var(--color-tertiary);
-      font-size: 0.9rem;
-    }
-
-    .nav a:hover {
-      background-color: var(--color-gray-50);
-      color: var(--color-secondary);
-    }
-
-    .nav a::before {
-      display: none;
-    }
-
-    .btn-contacto {
-      background-color: var(--color-secondary);
-      color: white !important;
-      padding: 0.75rem 1.25rem !important;
-      margin: 0.5rem 1.25rem;
-      border-radius: 6px;
-      display: block;
-      text-align: center;
-    }
-
-    .btn-contacto:hover {
-      background-color: var(--color-secondary-dark);
-      color: white !important;
-    }
-
-    .menu-toggle {
-      display: flex;
-      padding: 0.4rem;
-    }
-
-    .menu-toggle span {
-      width: 22px;
-      height: 2.5px;
-      margin: 2.5px 0;
-    }
-
-    .header-actions {
-      order: 3;
-      gap: 0.4rem;
-    }
-
-    .header-admin {
-      width: 36px;
-      height: 36px;
-    }
-
-    .header-admin svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    .header-cart {
-      width: 36px;
-      height: 36px;
-    }
-
-    .header-cart svg {
-      width: 18px;
-      height: 18px;
-    }
-  }
-</style>
-
 <script>
-  // Toggle menu en móviles con animaciones suaves
-  const menuToggle = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('.nav');
+  const menuToggle = document.querySelector("#site-menu-toggle");
+  const nav = document.querySelector("#site-nav");
+
+  function setMenuOpen(open: boolean) {
+    if (!menuToggle || !nav) return;
+    nav.setAttribute("data-state", open ? "open" : "closed");
+    menuToggle.setAttribute("data-menu", open ? "open" : "closed");
+    menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+  }
 
   if (menuToggle && nav) {
-    menuToggle.addEventListener('click', () => {
-      menuToggle.classList.toggle('active');
-      nav.classList.toggle('active');
+    menuToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = nav.getAttribute("data-state") !== "open";
+      setMenuOpen(open);
     });
 
-    // Cerrar menú al hacer click en un link
-    const navLinks = nav.querySelectorAll('a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        menuToggle.classList.remove('active');
-        nav.classList.remove('active');
-      });
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setMenuOpen(false));
     });
 
-    // Cerrar menú al hacer click fuera
-    document.addEventListener('click', (e) => {
+    document.addEventListener("click", (e) => {
       const target = e.target as Node;
       if (!menuToggle.contains(target) && !nav.contains(target)) {
-        menuToggle.classList.remove('active');
-        nav.classList.remove('active');
+        setMenuOpen(false);
       }
     });
   }
 </script>
-

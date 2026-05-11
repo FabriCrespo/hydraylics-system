@@ -15,18 +15,6 @@
   max-width: 450px;
   width: 100%;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: loginSlideIn 0.4s ease-out;
-}
-
-@keyframes loginSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
 
 .login-header {
@@ -491,19 +479,7 @@
   min-width: 320px;
   max-width: 400px;
   pointer-events: auto;
-  animation: notificationSlideIn 0.3s ease-out;
   border-left: 4px solid var(--color-secondary, #e1332c);
-}
-
-@keyframes notificationSlideIn {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 @keyframes notificationSlideOut {
@@ -595,7 +571,7 @@
   z-index: 3000;
   backdrop-filter: blur(4px);
   opacity: 0;
-  transition: opacity 0.3s ease-out;
+  transition: none;
 }
 
 .loader-content {
@@ -607,37 +583,15 @@
   align-items: center;
   gap: 1.5rem;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: loaderFadeIn 0.3s ease-out;
-}
-
-.loader-overlay[style*="display: none"] .loader-content {
-  animation: loaderFadeOut 0.3s ease-out;
-}
-
-@keyframes loaderFadeOut {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-}
-
-@keyframes loaderFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 .loader-spinner {
   color: var(--color-secondary, #e1332c);
+  animation: spin 1s linear infinite;
+}
+
+.loader-spinner-inline {
+  color: var(--color-gray-500, #888);
   animation: spin 1s linear infinite;
 }
 

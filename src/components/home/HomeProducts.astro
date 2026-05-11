@@ -1,0 +1,262 @@
+---
+import { ChevronLeft, ChevronRight } from "@lucide/astro/icons";
+import ProductCard from "../ProductCard.astro";
+import ProductModal from "../ProductModal.astro";
+import productsData from "../../data/products.json";
+
+type Producto = {
+  id: string;
+  nombre: string;
+  descripcion?: string;
+  imagen?: string | string[];
+  modelos_compatibles?: string[];
+};
+
+const productos = (productsData as Producto[]).slice(0, 6);
+---
+
+<section
+  id="productos-destacados"
+  class="bg-gray-50 py-20 md:py-24"
+  aria-labelledby="home-products-heading"
+>
+  <div class="mx-auto max-w-[1200px] px-6 sm:px-8">
+    <header class="mb-10 text-center md:mb-14">
+      <p
+        class="text-xs font-bold uppercase tracking-[0.2em] text-secondary sm:text-sm"
+      >
+        Catálogo
+      </p>
+      <h2
+        id="home-products-heading"
+        class="mt-3 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl"
+      >
+        Productos destacados
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-gray-600">
+        Repuestos y piezas hidráulicas seleccionadas. Desliza en móvil o usa las
+        flechas en pantallas grandes.
+      </p>
+    </header>
+
+    <div class="relative md:px-11">
+      <button
+        id="home-products-prev"
+        type="button"
+        class="pointer-events-auto absolute left-0 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-800 shadow-md transition hover:border-secondary hover:bg-secondary hover:text-white md:flex motion-reduce:transition-none"
+        aria-controls="home-products-viewport"
+        aria-label="Ver productos anteriores"
+      >
+        <ChevronLeft class="size-6" aria-hidden="true" stroke-width={2} />
+      </button>
+      <button
+        id="home-products-next"
+        type="button"
+        class="pointer-events-auto absolute right-0 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-800 shadow-md transition hover:border-secondary hover:bg-secondary hover:text-white md:flex motion-reduce:transition-none"
+        aria-controls="home-products-viewport"
+        aria-label="Ver productos siguientes"
+      >
+        <ChevronRight class="size-6" aria-hidden="true" stroke-width={2} />
+      </button>
+
+      <div
+        id="home-products-viewport"
+        class="-mx-4 snap-x snap-mandatory overflow-x-auto overflow-y-visible scroll-smooth px-4 pb-1 motion-reduce:scroll-auto md:mx-0 md:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        tabindex="0"
+        role="region"
+        aria-roledescription="carrusel"
+        aria-label="Productos destacados"
+      >
+        <div
+          id="home-products-track"
+          class="flex w-max min-w-full gap-4 md:min-w-0 md:gap-6 lg:gap-8"
+        >
+          {
+            productos.map((producto) => (
+              <div
+                class="w-[min(calc(100vw-2.5rem),22rem)] shrink-0 snap-start sm:w-[min(calc(50vw-2rem),20rem)] md:w-[min(calc(33.333vw-2.5rem),21rem)] lg:w-[min(calc(33.333%-1.35rem),22rem)]"
+              >
+                <ProductCard producto={producto} />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-6 text-center text-xs text-gray-500 md:hidden">
+      Desliza horizontalmente para ver más productos
+    </p>
+
+    <div class="mt-10 flex justify-center md:mt-12 md:justify-end">
+      <a
+        href="/productos"
+        class="inline-flex items-center gap-1 text-sm font-bold uppercase tracking-wide text-secondary transition-[gap] duration-200 hover:gap-2"
+      >
+        Ver catálogo completo <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<ProductModal products={productos} phoneNumber="59170405030" />
+
+<script define:vars={{ productosHome: productos }}>
+  // @ts-nocheck
+  function scrollProductsViewport(dir) {
+    const el = document.getElementById("home-products-viewport");
+    if (!el) return;
+    const step = Math.max(280, Math.floor(el.clientWidth * 0.75));
+    el.scrollBy({
+      left: dir * step,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    });
+  }
+
+  function initImagenCarousels(root) {
+    root.querySelectorAll(".producto-imagen").forEach((container) => {
+      const images = container.querySelectorAll(".producto-imagen-img");
+      const prevBtn = container.querySelector(".producto-imagen-prev");
+      const nextBtn = container.querySelector(".producto-imagen-next");
+      const indicators = container.querySelectorAll(".producto-imagen-indicator");
+      if (images.length <= 1) return;
+
+      let currentIndex = 0;
+      const showImage = (index) => {
+        images.forEach((img, i) => {
+          img.classList.toggle("active", i === index);
+        });
+        indicators.forEach((indicator, i) => {
+          indicator.classList.toggle("active", i === index);
+        });
+        currentIndex = index;
+      };
+
+      prevBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        showImage(currentIndex === 0 ? images.length - 1 : currentIndex - 1);
+      });
+      nextBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        showImage(
+          currentIndex === images.length - 1 ? 0 : currentIndex + 1,
+        );
+      });
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener("click", (e) => {
+          e.stopPropagation();
+          showImage(index);
+        });
+      });
+    });
+  }
+
+  function initCantidad(root) {
+    root.querySelectorAll(".cantidad-control").forEach((control) => {
+      const input = control.querySelector(".cantidad-input");
+      const decrementar = control.querySelector('[data-action="decremento"]');
+      const incrementar = control.querySelector('[data-action="incremento"]');
+      const actualizarCantidad = (delta) => {
+        if (!input) return;
+        const actual = Number(input.value) || 1;
+        const nuevo = Math.max(1, actual + delta);
+        input.value = String(nuevo);
+      };
+      decrementar?.addEventListener("click", () => actualizarCantidad(-1));
+      incrementar?.addEventListener("click", () => actualizarCantidad(1));
+      input?.addEventListener("input", () => {
+        const valor = Number(input.value) || 1;
+        input.value = String(Math.max(1, Math.floor(valor)));
+      });
+    });
+  }
+
+  function openProductModal(producto) {
+    const tryOpen = () => {
+      if (typeof window.abrirModalProducto === "function") {
+        window.abrirModalProducto(producto);
+        return true;
+      }
+      return false;
+    };
+    if (!tryOpen()) {
+      setTimeout(() => {
+        if (!tryOpen()) setTimeout(() => tryOpen(), 200);
+      }, 50);
+    }
+  }
+
+  function initInfoButtons(root) {
+    root.querySelectorAll(".producto-info-button").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const id = btn.getAttribute("data-producto-id");
+        if (!id) return;
+        const producto = productosHome.find((item) => item.id === id);
+        if (!producto) return;
+        openProductModal(producto);
+      });
+    });
+  }
+
+  function initCartButtons(root) {
+    root.querySelectorAll(".btn-agregar-carrito").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-producto-id");
+        const producto = productosHome.find((item) => item.id === id);
+        if (!producto) return;
+        const card = btn.closest(".producto-card");
+        const cantidadInput = card?.querySelector(".cantidad-input");
+        const cantidad = Math.max(
+          1,
+          Math.floor(Number(cantidadInput?.value) || 1),
+        );
+        const imagen =
+          typeof producto.imagen === "string"
+            ? producto.imagen
+            : producto.imagen?.[0] ?? null;
+        const payload = {
+          id: producto.id,
+          nombre: producto.nombre ?? "Producto sin nombre",
+          imagen,
+        };
+        const ejecutar = (manager) => {
+          manager?.addItem(payload, cantidad);
+        };
+        const cm = window.cartManager;
+        if (cm) ejecutar(cm);
+        else {
+          document.addEventListener(
+            "cart-ready",
+            () => ejecutar(window.cartManager ?? null),
+            { once: true },
+          );
+        }
+      });
+    });
+  }
+
+  function initHomeProductsCarousel() {
+    const prev = document.getElementById("home-products-prev");
+    const next = document.getElementById("home-products-next");
+    prev?.addEventListener("click", () => scrollProductsViewport(-1));
+    next?.addEventListener("click", () => scrollProductsViewport(1));
+  }
+
+  function initAll() {
+    const track = document.getElementById("home-products-track");
+    if (!track) return;
+    initImagenCarousels(track);
+    initCantidad(track);
+    initInfoButtons(track);
+    initCartButtons(track);
+    initHomeProductsCarousel();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    queueMicrotask(() => initAll());
+  });
+</script>

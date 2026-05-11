@@ -1,0 +1,93 @@
+---
+import { Mail, MessageCircle, Phone } from "@lucide/astro/icons";
+---
+
+<section
+  id="contacto"
+  class="relative isolate min-h-[min(52vh,26rem)] overflow-hidden bg-[#14100f] py-12 sm:min-h-[min(48vh,30rem)] sm:py-16 md:py-20 lg:py-[clamp(4.5rem,9vw,6rem)] lg:pb-[clamp(3.25rem,6vw,4.5rem)]"
+>
+  <div
+    class="pointer-events-none absolute inset-0 bg-[url('/home/cta-bg.png')] bg-cover bg-center bg-no-repeat sm:bg-[position:center_40%]"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(10,9,8,0.82)_0%,rgba(12,10,9,0.72)_45%,#14100f_100%)]"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_0%,rgba(0,0,0,0.35)_0%,transparent_55%)]"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div
+    class="relative z-[1] mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8"
+  >
+    <div class="mx-auto max-w-[40rem] text-center lg:max-w-[44rem]">
+      <h2
+        class="mb-4 text-balance text-[clamp(1.35rem,4.2vw,2.75rem)] font-extrabold leading-[1.15] tracking-tight text-white sm:mb-5"
+      >
+        ¿Tu maquinaria necesita reparación hidráulica?
+      </h2>
+      <p
+        class="mx-auto mb-8 max-w-[36rem] text-pretty text-[clamp(0.9375rem,2.1vw,1.125rem)] leading-relaxed text-white/88 sm:mb-10"
+      >
+        Contáctanos hoy mismo. Reparamos cosechadoras, tractores y todo tipo
+        de equipo pesado. También contamos con repuestos hidráulicos
+        importados en stock.
+      </p>
+      <div
+        class="mb-8 flex flex-col items-stretch justify-center gap-3 sm:mb-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4"
+      >
+        <a
+          href="https://api.whatsapp.com/send?phone=59170405030&text=¡Hola!%20👋%0A%0AMe%20interesa%20conocer%20más%20sobre%20sus%20servicios%20y%20soluciones%20hidráulicas.%0A%0A¿Podrían%20brindarme%20más%20información?%20Gracias%20🙏"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-lg bg-secondary px-6 py-3 text-[0.9375rem] font-semibold text-white shadow-[0_4px_20px_rgba(225,51,44,0.35)] transition duration-300 hover:bg-secondary-dark hover:shadow-[0_6px_24px_rgba(225,51,44,0.45)] sm:min-h-0 sm:px-8 sm:py-3.5 sm:text-base [&_svg]:size-[1.125rem] sm:[&_svg]:size-6 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] motion-reduce:transition-none"
+        >
+          <MessageCircle aria-hidden="true" />
+          Contactar por WhatsApp
+        </a>
+        <a
+          href="mailto:hydraulicssistem@gmail.com"
+          class="inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-lg border-2 border-white/85 bg-white/5 px-6 py-3 text-[0.9375rem] font-semibold text-white backdrop-blur-[2px] transition duration-300 hover:border-white hover:bg-white hover:text-[#1a1513] sm:min-h-0 sm:px-8 sm:py-3.5 sm:text-base [&_svg]:size-[1.125rem] sm:[&_svg]:size-6 motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-[1.02] motion-reduce:transition-none"
+        >
+          <Mail aria-hidden="true" />
+          Enviar email
+        </a>
+      </div>
+      <div
+        class="flex flex-col items-center justify-center gap-4 text-left text-[0.8125rem] text-white/85 sm:flex-row sm:flex-wrap sm:gap-x-10 sm:gap-y-3 sm:text-center sm:text-[0.9375rem]"
+      >
+        <div
+          class="flex w-full max-w-[20rem] items-center justify-start gap-3 sm:w-auto sm:max-w-none sm:justify-center"
+        >
+          <Phone
+            aria-hidden="true"
+            class="size-[1.125rem] shrink-0 stroke-[2] text-secondary sm:size-5"
+          />
+          <a
+            href="tel:+59170405030"
+            class="font-medium text-white/95 no-underline transition hover:text-secondary"
+            >+591 70405030</a
+          >
+        </div>
+        <div
+          class="flex w-full max-w-[20rem] items-center justify-start gap-3 sm:w-auto sm:max-w-none sm:justify-center"
+        >
+          <Mail
+            aria-hidden="true"
+            class="size-[1.125rem] shrink-0 stroke-[2] text-secondary sm:size-5"
+          />
+          <a
+            href="mailto:hydraulicssistem@gmail.com"
+            class="min-w-0 break-all font-medium text-white/95 no-underline transition hover:text-secondary sm:break-normal"
+            >hydraulicssistem@gmail.com</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
