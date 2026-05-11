@@ -13,15 +13,16 @@ type Producto = {
 };
 
 const productos = (productsData as Producto[]).slice(0, 6);
+const productosMobile = productos.slice(0, 4);
 ---
 
 <section
   id="productos-destacados"
-  class="bg-gray-50 py-20 md:py-24"
+  class="bg-gray-50 py-16 max-md:py-12 md:py-24"
   aria-labelledby="home-products-heading"
 >
-  <div class="mx-auto max-w-[1200px] px-6 sm:px-8">
-    <header class="mb-10 text-center md:mb-14">
+  <div class="mx-auto max-w-[1200px] px-4 sm:px-6">
+    <header class="mb-8 text-center md:mb-14">
       <p
         class="text-xs font-bold uppercase tracking-[0.2em] text-secondary sm:text-sm"
       >
@@ -33,59 +34,81 @@ const productos = (productsData as Producto[]).slice(0, 6);
       >
         Productos destacados
       </h2>
-      <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-gray-600">
-        Repuestos y piezas hidráulicas seleccionadas. Desliza en móvil o usa las
-        flechas en pantallas grandes.
+      <p
+        class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-gray-600 max-md:text-sm"
+      >
+        Repuestos y piezas hidráulicas seleccionadas. En móvil se muestran en
+        una grilla compacta y en desktop podés usar las flechas.
       </p>
     </header>
 
     <div class="relative md:px-11">
-      <button
-        id="home-products-prev"
-        type="button"
-        class="pointer-events-auto absolute left-0 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-800 shadow-md transition hover:border-secondary hover:bg-secondary hover:text-white md:flex motion-reduce:transition-none"
-        aria-controls="home-products-viewport"
-        aria-label="Ver productos anteriores"
-      >
-        <ChevronLeft class="size-6" aria-hidden="true" stroke-width={2} />
-      </button>
-      <button
-        id="home-products-next"
-        type="button"
-        class="pointer-events-auto absolute right-0 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-800 shadow-md transition hover:border-secondary hover:bg-secondary hover:text-white md:flex motion-reduce:transition-none"
-        aria-controls="home-products-viewport"
-        aria-label="Ver productos siguientes"
-      >
-        <ChevronRight class="size-6" aria-hidden="true" stroke-width={2} />
-      </button>
-
-      <div
-        id="home-products-viewport"
-        class="-mx-4 snap-x snap-mandatory overflow-x-auto overflow-y-visible scroll-smooth px-4 pb-1 motion-reduce:scroll-auto md:mx-0 md:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        tabindex="0"
-        role="region"
-        aria-roledescription="carrusel"
-        aria-label="Productos destacados"
-      >
-        <div
-          id="home-products-track"
-          class="flex w-max min-w-full gap-4 md:min-w-0 md:gap-6 lg:gap-8"
-        >
+      {/* Mobile: grilla 2x2 para compactar */}
+      <div id="home-products-mobile-grid" class="md:hidden">
+        <div class="grid grid-cols-2 gap-3">
           {
-            productos.map((producto) => (
-              <div
-                class="w-[min(calc(100vw-2.5rem),22rem)] shrink-0 snap-start sm:w-[min(calc(50vw-2rem),20rem)] md:w-[min(calc(33.333vw-2.5rem),21rem)] lg:w-[min(calc(33.333%-1.35rem),22rem)]"
-              >
+            productosMobile.map((producto) => (
+              <div class="w-full">
                 <ProductCard producto={producto} />
               </div>
             ))
           }
         </div>
       </div>
+
+      {/* Desktop: carrusel horizontal */}
+      <div class="hidden md:block">
+        <button
+          id="home-products-prev"
+          type="button"
+          class="pointer-events-auto absolute left-0 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-800 shadow-md transition hover:border-secondary hover:bg-secondary hover:text-white md:flex motion-reduce:transition-none"
+          aria-controls="home-products-viewport"
+          aria-label="Ver productos anteriores"
+        >
+          <ChevronLeft class="size-6" aria-hidden="true" stroke-width={2} />
+        </button>
+        <button
+          id="home-products-next"
+          type="button"
+          class="pointer-events-auto absolute right-0 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-800 shadow-md transition hover:border-secondary hover:bg-secondary hover:text-white md:flex motion-reduce:transition-none"
+          aria-controls="home-products-viewport"
+          aria-label="Ver productos siguientes"
+        >
+          <ChevronRight
+            class="size-6"
+            aria-hidden="true"
+            stroke-width={2}
+          />
+        </button>
+
+        <div
+          id="home-products-viewport"
+          class="-mx-4 snap-x snap-mandatory overflow-x-auto overflow-y-visible scroll-smooth px-4 pb-1 motion-reduce:scroll-auto md:mx-0 md:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          tabindex="0"
+          role="region"
+          aria-roledescription="carrusel"
+          aria-label="Productos destacados"
+        >
+          <div
+            id="home-products-track"
+            class="flex w-max min-w-full gap-4 md:min-w-0 md:gap-6 lg:gap-8"
+          >
+            {
+              productos.map((producto) => (
+                <div
+                  class="w-[min(calc(100vw-2.5rem),22rem)] shrink-0 snap-start sm:w-[min(calc(50vw-2rem),20rem)] md:w-[min(calc(33.333vw-2.5rem),21rem)] lg:w-[min(calc(33.333%-1.35rem),22rem)]"
+                >
+                  <ProductCard producto={producto} />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
     </div>
 
     <p class="mt-6 text-center text-xs text-gray-500 md:hidden">
-      Desliza horizontalmente para ver más productos
+      Productos destacados (4) en grilla
     </p>
 
     <div class="mt-10 flex justify-center md:mt-12 md:justify-end">
@@ -248,11 +271,15 @@ const productos = (productsData as Producto[]).slice(0, 6);
 
   function initAll() {
     const track = document.getElementById("home-products-track");
-    if (!track) return;
-    initImagenCarousels(track);
-    initCantidad(track);
-    initInfoButtons(track);
-    initCartButtons(track);
+    const mobileGrid = document.getElementById("home-products-mobile-grid");
+    const roots = [track, mobileGrid].filter(Boolean);
+    if (roots.length === 0) return;
+    roots.forEach((r) => {
+      initImagenCarousels(r);
+      initCantidad(r);
+      initInfoButtons(r);
+      initCartButtons(r);
+    });
     initHomeProductsCarousel();
   }
 

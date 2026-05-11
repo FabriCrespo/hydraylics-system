@@ -2,9 +2,9 @@
 import { Cpu, GitBranch, Headphones, Layers } from "@lucide/astro/icons";
 ---
 
-<section id="servicios" class="bg-gray-50 py-20 md:py-24">
-  <div class="mx-auto max-w-[1200px] px-6 sm:px-8">
-    <header class="mb-12 text-center md:mb-16">
+<section id="servicios" class="bg-gray-50 py-16 max-md:py-12 md:py-24">
+  <div class="mx-auto max-w-[1200px] px-4 sm:px-6">
+    <header class="mb-10 max-md:mb-8 text-center md:mb-16">
       <p
         class="text-xs font-bold uppercase tracking-[0.2em] text-secondary sm:text-sm"
       >
@@ -18,91 +18,123 @@ import { Cpu, GitBranch, Headphones, Layers } from "@lucide/astro/icons";
     </header>
 
     <div
-      class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8"
+      class="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4 lg:gap-8 max-[320px]:grid-cols-1"
     >
       <article
-        class="group flex h-full flex-col border border-gray-100 bg-white p-8 text-left shadow-sm transition-shadow duration-300 hover:shadow-md"
+        class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 sm:p-8 max-md:p-5 text-left shadow-sm transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-secondary/30 hover:shadow-md"
       >
         <div
-          class="mb-6 flex h-12 w-12 shrink-0 items-center justify-center bg-gray-100 text-gray-900"
+          class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
           aria-hidden="true"
         >
-          <Layers class="size-6 stroke-[2] stroke-current" />
+          <div
+            class="absolute inset-0 bg-[radial-gradient(600px_120px_at_30%_0%,rgba(198,13,0,0.10)_0%,transparent_60%)]"
+          />
         </div>
-        <h3 class="mb-4 text-xl font-bold text-gray-900">Cilindros Hidráulicos</h3>
-        <p class="mb-8 flex-1 text-base leading-relaxed text-gray-600">
+        <div
+          class="mb-5 max-md:mb-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-900 transition-colors duration-300 ease-out group-hover:bg-secondary/10 group-hover:text-secondary max-md:h-10 max-md:w-10"
+          aria-hidden="true"
+        >
+          <Layers class="size-6 max-md:size-5 stroke-[2] stroke-current" />
+        </div>
+        <h3 class="mb-3 max-md:mb-2 text-xl max-md:text-lg font-bold text-gray-900">Cilindros Hidráulicos</h3>
+        <p class="mb-6 max-md:mb-4 flex-1 text-base max-md:text-sm leading-relaxed text-gray-600">
           Reparación, fabricación y sellado de cilindros de alta presión para
           minería y construcción.
         </p>
         <a
           href="/servicios"
-          class="mt-auto inline-flex items-center gap-1 text-sm font-bold uppercase tracking-wide text-secondary transition-[gap] duration-200 hover:gap-2"
+          class="mt-auto inline-flex items-center gap-1 text-sm max-md:text-xs font-bold uppercase tracking-wide text-secondary transition-[gap,transform] duration-200 hover:gap-2 hover:translate-x-0.5"
         >
           Detalles <span aria-hidden="true">→</span>
         </a>
       </article>
 
       <article
-        class="group flex h-full flex-col border border-gray-100 bg-white p-8 text-left shadow-sm transition-shadow duration-300 hover:shadow-md"
+        class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 sm:p-8 max-md:p-5 text-left shadow-sm transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-secondary/30 hover:shadow-md"
       >
         <div
-          class="mb-6 flex h-12 w-12 shrink-0 items-center justify-center bg-gray-100 text-gray-900"
+          class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
           aria-hidden="true"
         >
-          <Cpu class="size-6 stroke-[2] stroke-current" />
+          <div
+            class="absolute inset-0 bg-[radial-gradient(600px_120px_at_30%_0%,rgba(198,13,0,0.10)_0%,transparent_60%)]"
+          />
         </div>
-        <h3 class="mb-4 text-xl font-bold text-gray-900">Bombas y Motores</h3>
-        <p class="mb-8 flex-1 text-base leading-relaxed text-gray-600">
+        <div
+          class="mb-5 max-md:mb-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-900 transition-colors duration-300 ease-out group-hover:bg-secondary/10 group-hover:text-secondary max-md:h-10 max-md:w-10"
+          aria-hidden="true"
+        >
+          <Cpu class="size-6 max-md:size-5 stroke-[2] stroke-current" />
+        </div>
+        <h3 class="mb-3 max-md:mb-2 text-xl max-md:text-lg font-bold text-gray-900">Bombas y Motores</h3>
+        <p class="mb-6 max-md:mb-4 flex-1 text-base max-md:text-sm leading-relaxed text-gray-600">
           Diagnóstico computarizado y reconstrucción de bombas de pistones y
           motores hidráulicos.
         </p>
         <a
           href="/servicios"
-          class="mt-auto inline-flex items-center gap-1 text-sm font-bold uppercase tracking-wide text-secondary transition-[gap] duration-200 hover:gap-2"
+          class="mt-auto inline-flex items-center gap-1 text-sm max-md:text-xs font-bold uppercase tracking-wide text-secondary transition-[gap,transform] duration-200 hover:gap-2 hover:translate-x-0.5"
         >
           Detalles <span aria-hidden="true">→</span>
         </a>
       </article>
 
       <article
-        class="group flex h-full flex-col border border-gray-100 bg-white p-8 text-left shadow-sm transition-shadow duration-300 hover:shadow-md"
+        class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 sm:p-8 max-md:p-5 text-left shadow-sm transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-secondary/30 hover:shadow-md"
       >
         <div
-          class="mb-6 flex h-12 w-12 shrink-0 items-center justify-center bg-gray-100 text-gray-900"
+          class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
           aria-hidden="true"
         >
-          <GitBranch class="size-6 stroke-[2] stroke-current" />
+          <div
+            class="absolute inset-0 bg-[radial-gradient(600px_120px_at_30%_0%,rgba(198,13,0,0.10)_0%,transparent_60%)]"
+          />
         </div>
-        <h3 class="mb-4 text-xl font-bold text-gray-900">Válvulas y Mandos</h3>
-        <p class="mb-8 flex-1 text-base leading-relaxed text-gray-600">
+        <div
+          class="mb-5 max-md:mb-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-900 transition-colors duration-300 ease-out group-hover:bg-secondary/10 group-hover:text-secondary max-md:h-10 max-md:w-10"
+          aria-hidden="true"
+        >
+          <GitBranch class="size-6 max-md:size-5 stroke-[2] stroke-current" />
+        </div>
+        <h3 class="mb-3 max-md:mb-2 text-xl max-md:text-lg font-bold text-gray-900">Válvulas y Mandos</h3>
+        <p class="mb-6 max-md:mb-4 flex-1 text-base max-md:text-sm leading-relaxed text-gray-600">
           Calibración de bancos de válvulas y sistemas de control proporcional
           para precisión extrema.
         </p>
         <a
           href="/servicios"
-          class="mt-auto inline-flex items-center gap-1 text-sm font-bold uppercase tracking-wide text-secondary transition-[gap] duration-200 hover:gap-2"
+          class="mt-auto inline-flex items-center gap-1 text-sm max-md:text-xs font-bold uppercase tracking-wide text-secondary transition-[gap,transform] duration-200 hover:gap-2 hover:translate-x-0.5"
         >
           Detalles <span aria-hidden="true">→</span>
         </a>
       </article>
 
       <article
-        class="group flex h-full flex-col border border-gray-100 bg-white p-8 text-left shadow-sm transition-shadow duration-300 hover:shadow-md"
+        class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 sm:p-8 max-md:p-5 text-left shadow-sm transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-secondary/30 hover:shadow-md"
       >
         <div
-          class="mb-6 flex h-12 w-12 shrink-0 items-center justify-center bg-gray-100 text-gray-900"
+          class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
           aria-hidden="true"
         >
-          <Headphones class="size-6 stroke-[2] stroke-current" />
+          <div
+            class="absolute inset-0 bg-[radial-gradient(600px_120px_at_30%_0%,rgba(198,13,0,0.10)_0%,transparent_60%)]"
+          />
         </div>
-        <h3 class="mb-4 text-xl font-bold text-gray-900">Servicio 24/7</h3>
-        <p class="mb-8 flex-1 text-base leading-relaxed text-gray-600">
+        <div
+          class="mb-5 max-md:mb-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-900 transition-colors duration-300 ease-out group-hover:bg-secondary/10 group-hover:text-secondary max-md:h-10 max-md:w-10"
+          aria-hidden="true"
+        >
+          <Headphones class="size-6 max-md:size-5 stroke-[2] stroke-current" />
+        </div>
+        <h3 class="mb-3 max-md:mb-2 text-xl max-md:text-lg font-bold text-gray-900">Servicio 24/7</h3>
+        <p class="mb-6 max-md:mb-4 flex-1 text-base max-md:text-sm leading-relaxed text-gray-600">
           Asistencia técnica en sitio y atención de emergencias para evitar
           paradas críticas.
         </p>
         <a
           href="/servicios"
-          class="mt-auto inline-flex items-center gap-1 text-sm font-bold uppercase tracking-wide text-secondary transition-[gap] duration-200 hover:gap-2"
+          class="mt-auto inline-flex items-center gap-1 text-sm max-md:text-xs font-bold uppercase tracking-wide text-secondary transition-[gap,transform] duration-200 hover:gap-2 hover:translate-x-0.5"
         >
           Detalles <span aria-hidden="true">→</span>
         </a>
