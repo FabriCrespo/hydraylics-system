@@ -901,9 +901,10 @@ import {
       }
       paginacionCatalogo.classList.remove("hidden");
       const btnBase =
-        "inline-flex min-h-8 min-w-8 touch-manipulation items-center justify-center rounded-md border border-gray-200 bg-white px-1.5 text-xs font-normal text-gray-700 transition hover:border-secondary hover:text-secondary disabled:cursor-not-allowed disabled:opacity-40 sm:min-h-9 sm:min-w-9 sm:px-2 sm:text-sm";
+        "inline-flex min-h-8 min-w-8 touch-manipulation items-center justify-center rounded-md border border-gray-200 bg-white px-1.5 text-xs font-semibold text-gray-800 transition hover:border-secondary hover:text-secondary disabled:cursor-not-allowed disabled:opacity-40 sm:min-h-9 sm:min-w-9 sm:px-2 sm:text-sm";
+      /* !important: btnBase trae color de texto; sin forzar, el activo a veces queda gris sobre rojo. */
       const btnAct =
-        "border-secondary bg-secondary text-white hover:bg-secondary-dark hover:text-white";
+        "!border-secondary !bg-secondary !text-white shadow-sm hover:!bg-secondary-dark hover:!text-white";
       const prevDis = paginaActual <= 0;
       const nextDis = paginaActual >= totalPaginas - 1;
       let html = "";
