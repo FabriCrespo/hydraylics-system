@@ -1,0 +1,327 @@
+---
+import {
+  Construction,
+  Droplet,
+  Factory,
+  MessageCircle,
+  Sprout,
+  Timer,
+  Trees,
+  Truck,
+} from "@lucide/astro/icons";
+
+const waPhone = "59170405030";
+---
+
+<section
+  class="servicios-cta-section relative isolate overflow-hidden bg-black py-12 sm:py-16 md:py-20 lg:py-[clamp(4rem,8vw,5.5rem)]"
+  aria-labelledby="servicios-cta-heading"
+>
+  <div class="servicios-cta-section-grid-bg" aria-hidden="true"></div>
+  <div
+    class="pointer-events-none absolute inset-0 z-[0] bg-[radial-gradient(ellipse_90%_55%_at_50%_0%,rgba(225,51,44,0.14),transparent_58%)]"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="relative z-[1] mx-auto grid max-w-[1200px] items-start gap-10 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-12 lg:px-8 xl:grid-cols-[1.05fr_minmax(0,28rem)]"
+  >
+    <div class="min-w-0">
+      <span
+        class="mb-2 inline-block rounded-none border border-secondary/25 bg-secondary/12 px-4 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-secondary sm:px-6 sm:py-2 sm:text-[0.85rem] sm:tracking-[0.18em]"
+      >
+        Cobertura nacional
+      </span>
+      <h2
+        id="servicios-cta-heading"
+        class="mt-3 text-balance text-[clamp(1.45rem,3.8vw,2.75rem)] font-extrabold leading-tight text-white sm:mt-4"
+      >
+        Somos el socio hidráulico de industrias clave
+      </h2>
+      <p
+        class="mt-4 max-w-xl text-pretty text-[clamp(0.9375rem,1.6vw,1.05rem)] leading-relaxed text-zinc-300"
+      >
+        Agricultura, construcción pesada, logística, manufactura y energía
+        confían en Hydraulic Sistem para mantener su productividad sin
+        interrupciones.
+      </p>
+
+      <ul
+        class="mt-8 grid list-none gap-2.5 p-0 sm:mt-10 sm:grid-cols-2 sm:gap-3 lg:gap-3"
+      >
+        <li
+          class="flex min-h-12 items-center gap-3 rounded-none border border-white/10 bg-white/5 px-3 py-3 text-sm text-zinc-200 sm:px-4 sm:text-[0.9375rem]"
+        >
+          <Sprout class="size-5 shrink-0 text-secondary" aria-hidden="true" />
+          Agricultura & Agroindustria
+        </li>
+        <li
+          class="flex min-h-12 items-center gap-3 rounded-none border border-white/10 bg-white/5 px-3 py-3 text-sm text-zinc-200 sm:px-4 sm:text-[0.9375rem]"
+        >
+          <Construction
+            class="size-5 shrink-0 text-secondary"
+            aria-hidden="true"
+          />
+          Construcción y minería
+        </li>
+        <li
+          class="flex min-h-12 items-center gap-3 rounded-none border border-white/10 bg-white/5 px-3 py-3 text-sm text-zinc-200 sm:px-4 sm:text-[0.9375rem]"
+        >
+          <Factory class="size-5 shrink-0 text-secondary" aria-hidden="true" />
+          Manufactura y metalmecánica
+        </li>
+        <li
+          class="flex min-h-12 items-center gap-3 rounded-none border border-white/10 bg-white/5 px-3 py-3 text-sm text-zinc-200 sm:px-4 sm:text-[0.9375rem]"
+        >
+          <Truck class="size-5 shrink-0 text-secondary" aria-hidden="true" />
+          Transporte y logística
+        </li>
+        <li
+          class="flex min-h-12 items-center gap-3 rounded-none border border-white/10 bg-white/5 px-3 py-3 text-sm text-zinc-200 sm:px-4 sm:text-[0.9375rem]"
+        >
+          <Trees class="size-5 shrink-0 text-secondary" aria-hidden="true" />
+          Industria maderera
+        </li>
+        <li
+          class="flex min-h-12 items-center gap-3 rounded-none border border-white/10 bg-white/5 px-3 py-3 text-sm text-zinc-200 sm:px-4 sm:text-[0.9375rem]"
+        >
+          <Droplet class="size-5 shrink-0 text-secondary" aria-hidden="true" />
+          Petróleo, gas y energía
+        </li>
+      </ul>
+
+      <div
+        class="mt-8 flex items-start gap-3 rounded-none border border-white/12 bg-white/5 p-4 sm:mt-10 sm:items-center sm:gap-4 sm:p-5"
+      >
+        <Timer
+          class="mt-0.5 size-5 shrink-0 text-secondary sm:mt-0 sm:size-[22px]"
+          aria-hidden="true"
+        />
+        <div>
+          <strong class="block text-sm text-white sm:text-base"
+            >Respuesta en menos de 2 horas hábiles</strong
+          >
+          <span class="text-xs text-zinc-400 sm:text-sm"
+            >Coordinamos diagnóstico y plan inmediato</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="relative w-full min-w-0 border border-secondary/45 bg-black/55 shadow-[0_24px_60px_rgba(0,0,0,0.5)] backdrop-blur-sm lg:sticky lg:top-6"
+    >
+      <div
+        class="border-l-4 border-secondary p-5 sm:p-7"
+      >
+      <p
+        class="mb-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-secondary"
+      >
+        WhatsApp directo
+      </p>
+      <h3 class="text-lg font-bold text-white sm:text-xl">
+        Solicitar servicio o cotización
+      </h3>
+      <p class="mt-2 text-sm leading-relaxed text-zinc-400">
+        Completa el formulario y te llevamos a WhatsApp con el mensaje listo
+        para enviar.
+      </p>
+
+      <form
+        id="servicios-wa-form"
+        class="mt-6 grid gap-4"
+        data-wa-phone={waPhone}
+      >
+        <div>
+          <label
+            for="wa-motivo"
+            class="mb-1.5 block text-xs font-semibold text-zinc-200 sm:text-sm"
+            >¿Qué necesitas?</label
+          >
+          <select
+            id="wa-motivo"
+            name="motivo"
+            required
+            class="w-full rounded-none border border-zinc-600 bg-zinc-950 px-3 py-2.5 text-sm text-white outline-none ring-0 transition focus:border-secondary focus:ring-1 focus:ring-secondary sm:py-3"
+          >
+            <option value="" disabled selected>Selecciona una opción</option>
+            <option value="Solicitar un servicio">Solicitar un servicio</option>
+            <option value="Cotizar un servicio">Cotizar un servicio</option>
+          </select>
+        </div>
+
+        <div>
+          <label
+            for="wa-nombre"
+            class="mb-1.5 block text-xs font-semibold text-zinc-200 sm:text-sm"
+            >Nombre o contacto</label
+          >
+          <input
+            id="wa-nombre"
+            name="nombre"
+            type="text"
+            required
+            autocomplete="name"
+            placeholder="Ej. Juan Pérez"
+            class="w-full rounded-none border border-zinc-600 bg-zinc-950 px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 outline-none transition focus:border-secondary focus:ring-1 focus:ring-secondary sm:py-3"
+          />
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="min-w-0">
+            <label
+              for="wa-telefono"
+              class="mb-1.5 block text-xs font-semibold text-zinc-200 sm:text-sm"
+              >Teléfono</label
+            >
+            <input
+              id="wa-telefono"
+              name="telefono"
+              type="tel"
+              required
+              autocomplete="tel"
+              inputmode="tel"
+              placeholder="Ej. 70405030"
+              class="w-full rounded-none border border-zinc-600 bg-zinc-950 px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 outline-none transition focus:border-secondary focus:ring-1 focus:ring-secondary sm:py-3"
+            />
+          </div>
+          <div class="min-w-0">
+            <label
+              for="wa-empresa"
+              class="mb-1.5 block text-xs font-semibold text-zinc-200 sm:text-sm"
+              >Empresa <span class="font-normal text-zinc-500">(opcional)</span></label
+            >
+            <input
+              id="wa-empresa"
+              name="empresa"
+              type="text"
+              autocomplete="organization"
+              placeholder="Ej. Mi empresa S.A."
+              class="w-full rounded-none border border-zinc-600 bg-zinc-950 px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 outline-none transition focus:border-secondary focus:ring-1 focus:ring-secondary sm:py-3"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label
+            for="wa-detalle"
+            class="mb-1.5 block text-xs font-semibold text-zinc-200 sm:text-sm"
+            >Equipo o detalle del servicio</label
+          >
+          <textarea
+            id="wa-detalle"
+            name="detalle"
+            required
+            rows="4"
+            placeholder="Tipo de equipo, síntoma, ciudad, urgencia…"
+            class="w-full resize-y rounded-none border border-zinc-600 bg-zinc-950 px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 outline-none transition focus:border-secondary focus:ring-1 focus:ring-secondary sm:py-3"
+          ></textarea>
+        </div>
+
+        <p
+          id="servicios-wa-form-hint"
+          class="hidden text-sm font-medium text-secondary"
+          role="status"
+          aria-live="polite"
+        >
+        </p>
+
+        <button
+          type="submit"
+          class="inline-flex hover:cursor-pointer min-h-12 w-full items-center justify-center gap-2 rounded-none border border-secondary bg-secondary px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_12px_32px_rgba(225,51,44,0.28)] transition duration-300 hover:bg-secondary-dark hover:shadow-[0_16px_40px_rgba(225,51,44,0.35)] sm:text-base"
+        >
+          <MessageCircle class="size-5 shrink-0" aria-hidden="true" />
+          Abrir WhatsApp con mi solicitud
+        </button>
+      </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .servicios-cta-section-grid-bg {
+    position: absolute;
+    inset: -72px;
+    z-index: 0;
+    background-image:
+      linear-gradient(
+        to right,
+        rgb(225 51 44 / 0.2) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        rgb(225 51 44 / 0.2) 1px,
+        transparent 1px
+      );
+    background-size: 40px 40px;
+    animation: servicios-cta-grid-drift 24s linear infinite;
+    will-change: transform;
+    pointer-events: none;
+  }
+
+  @keyframes servicios-cta-grid-drift {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(40px, 40px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .servicios-cta-section-grid-bg {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const form = document.getElementById("servicios-wa-form");
+    if (!form || !(form instanceof HTMLFormElement)) return;
+
+    const phone = form.getAttribute("data-wa-phone") || "59170405030";
+    const hint = document.getElementById("servicios-wa-form-hint");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const fd = new FormData(form);
+      const motivo = String(fd.get("motivo") || "").trim();
+      const nombre = String(fd.get("nombre") || "").trim();
+      const telefono = String(fd.get("telefono") || "").trim();
+      const empresa = String(fd.get("empresa") || "").trim();
+      const detalle = String(fd.get("detalle") || "").trim();
+
+      if (!motivo || !nombre || !telefono || !detalle) {
+        if (hint) {
+          hint.textContent = "Completa los campos obligatorios.";
+          hint.classList.remove("hidden");
+        }
+        return;
+      }
+      if (hint) hint.classList.add("hidden");
+
+      const lineas = [
+        "¡Hola! Solicitud desde la web (Servicios).",
+        "",
+        "*Motivo:* " + motivo,
+        "*Nombre:* " + nombre,
+        "*Teléfono:* " + telefono,
+      ];
+      if (empresa) lineas.push("*Empresa:* " + empresa);
+      lineas.push("", "*Detalle:*", detalle);
+
+      const text = lineas.join("\n");
+      const url =
+        "https://api.whatsapp.com/send?phone=" +
+        encodeURIComponent(phone.replace(/\D/g, "")) +
+        "&text=" +
+        encodeURIComponent(text);
+
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+  })();
+</script>

@@ -13,19 +13,11 @@ import {
 
 <Layout footerFlushTop>
   <section class="relative min-h-[50vh] bg-gray-50 py-6 pb-24 sm:min-h-[60vh] sm:py-9 sm:pb-9 lg:py-12">
-    <!-- Móvil: fondo al abrir filtros -->
-    <div
-      id="filtrosMobileBackdrop"
-      class="pointer-events-none fixed inset-0 z-[68] bg-black/45 opacity-0 transition-opacity duration-300 lg:hidden"
-      aria-hidden="true"
-    >
-    </div>
-
     <div
       class="mx-auto grid max-w-[1400px] gap-5 px-3 sm:gap-7 sm:px-5 lg:grid-cols-[minmax(260px,300px)_1fr] lg:items-start lg:gap-10 lg:px-8"
     >
-      <!-- Productos (primero en DOM: arriba en móvil) -->
-      <div class="order-1 min-w-0 lg:order-2">
+      <!-- Header + buscador (en móvil va arriba; en desktop a la derecha) -->
+      <div class="min-w-0 lg:col-start-2 lg:row-start-1">
         <header class="mb-5 sm:mb-7 lg:mb-8">
           <h2
             class="text-[clamp(1.25rem,4.5vw,1.875rem)] font-medium leading-tight tracking-tight text-gray-900 sm:text-3xl"
@@ -92,51 +84,21 @@ import {
           </div>
         </div>
 
-        <div
-          id="productosGrid"
-          class="grid grid-cols-2 gap-2 sm:gap-4 sm:grid-cols-2 xl:grid-cols-3"
-        >
-          <div
-            id="loadingState"
-            class="col-span-full flex flex-col items-center justify-center gap-4 py-20 text-gray-500"
-          >
-            <LoaderCircle
-              class="size-12 shrink-0 animate-spin text-secondary"
-              aria-hidden="true"
-            />
-            <p class="m-0 text-sm font-normal">Cargando productos…</p>
-          </div>
-        </div>
-
-        <nav
-          id="paginacionCatalogo"
-          class="mt-6 hidden max-w-full flex-wrap items-center justify-center gap-1.5 px-1 sm:mt-8 sm:gap-2"
-          aria-label="Paginación del catálogo"
-        >
-        </nav>
       </div>
 
-      <!-- Filtros: barra lateral en lg; bottom sheet en móvil + FAB -->
+      <!-- Filtros (en móvil debajo del buscador; en desktop barra lateral) -->
       <aside
         id="filtrosCatalogoAside"
-        data-open="false"
-        class="order-2 w-full overflow-hidden border-gray-200 bg-white max-lg:fixed max-lg:inset-x-0 max-lg:bottom-0 max-lg:z-[70] max-lg:flex max-lg:max-h-[min(88dvh,36rem)] max-lg:flex-col max-lg:rounded-t-2xl max-lg:border-x max-lg:border-t max-lg:shadow-[0_-12px_40px_rgba(0,0,0,0.18)] max-lg:translate-y-full max-lg:transition-transform max-lg:duration-300 max-lg:ease-out lg:order-1 lg:relative lg:max-h-[calc(100dvh-6rem)] lg:translate-y-0 lg:rounded-xl lg:border lg:shadow-sm lg:transition-none lg:sticky lg:top-24 lg:self-start lg:overflow-y-auto"
+        class="w-full overflow-visible border-gray-200 bg-white lg:col-start-1 lg:row-start-1 lg:rounded-xl lg:border lg:shadow-sm lg:transition-none lg:sticky lg:top-24 lg:self-start lg:max-h-[calc(100dvh-6rem)] lg:overflow-y-auto"
         aria-label="Filtros del catálogo"
       >
         <div
-          class="flex shrink-0 items-center justify-between border-b border-gray-100 px-4 py-3 lg:hidden"
+          class="flex shrink-0 items-center justify-start border-b border-gray-100 px-4 py-3 lg:hidden gap-2"
         >
           <div class="flex items-center gap-2">
             <Filter class="size-4 text-secondary" aria-hidden="true" stroke-width={2} />
             <span class="text-sm font-medium text-gray-900">Filtros</span>
           </div>
-          <button
-            type="button"
-            id="btnCerrarFiltrosMobile"
-            class="touch-manipulation rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-medium uppercase tracking-wide text-gray-700 transition hover:bg-gray-50"
-          >
-            Cerrar
-          </button>
         </div>
 
         <div class="min-h-0 flex-1 overflow-y-auto overscroll-contain lg:overflow-visible">
@@ -242,37 +204,35 @@ import {
         </div>
       </aside>
 
-      <button
-        type="button"
-        id="btnFiltrosMobileFab"
-        class="fixed bottom-[max(1rem,env(safe-area-inset-bottom,0px))] right-4 z-[80] flex touch-manipulation items-center gap-2 rounded-full bg-secondary px-4 py-3.5 text-sm font-medium text-white shadow-[0_8px_24px_rgba(225,51,44,0.45)] transition-[transform,box-shadow] active:scale-[0.98] hover:bg-secondary-dark hover:shadow-lg lg:hidden"
-        aria-expanded="false"
-        aria-controls="filtrosCatalogoAside"
-      >
-        <Filter class="size-5 shrink-0" aria-hidden="true" stroke-width={2} />
-        Filtros
-      </button>
+      <div class="min-w-0 lg:col-start-2 lg:row-start-2">
+        <div
+          id="productosGrid"
+          class="grid grid-cols-2 gap-2 sm:gap-4 sm:grid-cols-2 xl:grid-cols-3"
+        >
+          <div
+            id="loadingState"
+            class="col-span-full flex flex-col items-center justify-center gap-4 py-20 text-gray-500"
+          >
+            <LoaderCircle
+              class="size-12 shrink-0 animate-spin text-secondary"
+              aria-hidden="true"
+            />
+            <p class="m-0 text-sm font-normal">Cargando productos…</p>
+          </div>
+        </div>
+
+        <nav
+          id="paginacionCatalogo"
+          class="mt-6 hidden max-w-full flex-wrap items-center justify-center gap-1.5 px-1 sm:mt-8 sm:gap-2"
+          aria-label="Paginación del catálogo"
+        >
+        </nav>
+      </div>
     </div>
   </section>
 
   <ProductModal products={[]} phoneNumber="59170405030" />
 </Layout>
-
-<style is:global>
-  @media (max-width: 1023px) {
-    /* Filtros mobile controlados por `data-open` (más robusto que variants). */
-    #filtrosCatalogoAside {
-      transform: translateY(100%);
-    }
-
-    #filtrosCatalogoAside[data-open="true"] {
-      transform: translateY(0);
-      box-shadow:
-        0 -12px 40px rgba(0, 0, 0, 0.22),
-        0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    }
-  }
-</style>
 
 <script>
   // @ts-nocheck
@@ -353,8 +313,14 @@ import {
     filtrosMobileBackdrop?.addEventListener("click", () => {
       setFiltrosMobileOpen(false);
     });
+    // Importante: el viewport móvil puede "cambiar" cuando aparece/desaparece la barra del navegador.
+    // Solo cerramos si realmente salimos del breakpoint mobile (para que no se abra y se vuelva a cerrar).
+    const mqMobile = window.matchMedia("(max-width: 1023px)");
     window.addEventListener("resize", () => {
-      if (window.innerWidth >= 1024) setFiltrosMobileOpen(false);
+      const openNow = filtrosAside?.getAttribute("data-open") === "true";
+      if (!openNow) return;
+      if (mqMobile.matches) return; // seguimos en mobile => no cerrar
+      setFiltrosMobileOpen(false); // salimos a desktop/tablet
     });
     document.addEventListener("keydown", (e) => {
       if (e.key !== "Escape") return;
@@ -365,7 +331,6 @@ import {
   }
 
   document.addEventListener("DOMContentLoaded", async () => {
-    initFiltrosMobileSheet();
     console.log('🎬 [productos.astro] DOM cargado, iniciando carga de productos...');
     /** @type {Array<any>} */
     let productos = [];

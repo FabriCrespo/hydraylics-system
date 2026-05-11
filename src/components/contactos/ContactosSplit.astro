@@ -1,0 +1,333 @@
+---
+import { Mail, Phone, Send } from "@lucide/astro/icons";
+import SocialBrandIconButtons from "../social/SocialBrandIconButtons.astro";
+import { SOCIAL_WHATSAPP_PREFILL } from "../../data/socialLinks";
+
+const waPrefill = SOCIAL_WHATSAPP_PREFILL;
+
+const iconBtn =
+  "group/icon relative inline-flex size-12 items-center justify-center border-2 border-tertiary bg-white text-tertiary outline-none transition-all duration-300 ease-out hover:-translate-y-1 hover:border-secondary hover:text-secondary hover:shadow-[5px_5px_0_0_rgb(61,53,50)] focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-white active:translate-y-0 active:shadow-none motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:hover:shadow-none";
+
+const iconBtnLg =
+  "group/icon relative inline-flex size-[3.25rem] items-center justify-center border-2 border-tertiary bg-white text-[#25D366] outline-none transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#25D366] hover:shadow-[6px_6px_0_0_rgb(37,211,102)] hover:text-[#128C7E] focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 focus-visible:ring-offset-white active:translate-y-0 active:shadow-none motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:hover:shadow-none";
+---
+
+<section
+  class="min-h-[calc(100vh-4rem)] bg-white px-4 py-12 text-tertiary sm:px-6 sm:py-14 md:py-16 lg:flex lg:min-h-[calc(100vh-5rem)] lg:items-center lg:py-20"
+  aria-labelledby="contacto-heading"
+>
+  <div
+    class="mx-auto grid w-full max-w-[1100px] overflow-hidden border-2 border-tertiary shadow-[8px_8px_0_0_rgba(225,51,44,0.15)] lg:grid-cols-[minmax(0,6.25rem)_minmax(0,1fr)_minmax(0,1fr)] xl:max-w-[1200px]"
+  >
+    <!-- Carril social (izquierda): WhatsApp primero, invitación a seguir -->
+    <aside
+      class="flex flex-col items-center justify-center gap-4 border-b-2 border-tertiary bg-zinc-50 px-3 py-6 sm:gap-5 sm:py-8 lg:border-b-0 lg:border-r-2 lg:px-2 lg:py-10"
+      aria-label="Síguenos en redes"
+    >
+      <p
+        class="max-w-[12rem] text-center text-[10px] font-bold uppercase leading-tight tracking-[0.28em] text-zinc-500 lg:max-w-none lg:px-1 lg:text-[9px] lg:leading-snug lg:[writing-mode:vertical-rl] lg:[text-orientation:mixed] lg:rotate-180"
+      >
+        Síguenos
+      </p>
+      <SocialBrandIconButtons variant="rail" />
+      <p
+        class="hidden text-center text-[9px] font-medium leading-snug text-zinc-500 lg:block lg:max-w-[5rem] lg:[writing-mode:vertical-rl] lg:rotate-180"
+      >
+        WhatsApp · Instagram · Facebook · TikTok
+      </p>
+    </aside>
+
+    <!-- Datos -->
+    <div
+      class="flex flex-col justify-between border-b-2 border-tertiary bg-primary p-8 sm:p-10 lg:border-b-0 lg:border-r-2 lg:p-12"
+    >
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-tertiary/70">
+          Hydraulic Sistem
+        </p>
+        <h1
+          id="contacto-heading"
+          class="mt-3 text-3xl font-bold leading-tight text-tertiary sm:text-4xl"
+        >
+          Contáctanos
+        </h1>
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-tertiary/85 sm:text-base">
+          Estamos en Santa Cruz. Escríbenos o llámanos y te respondemos con criterio técnico.
+        </p>
+
+        <div class="mt-10 flex flex-col gap-10">
+          <div>
+            <h2 class="text-lg font-semibold text-tertiary">Visítanos</h2>
+            <p class="mt-1 text-sm text-tertiary/70">Pasa por nuestro taller</p>
+            <p class="mt-3 text-base font-medium leading-snug text-tertiary">
+              Santa Cruz, Bolivia
+            </p>
+          </div>
+          <div>
+            <h2 class="text-lg font-semibold text-tertiary">Escríbenos</h2>
+            <p class="mt-1 text-sm text-tertiary/70">Correo directo</p>
+            <a
+              class="mt-3 inline-block break-all border-b-2 border-transparent text-base font-semibold text-tertiary underline decoration-secondary/50 underline-offset-[5px] transition hover:border-secondary hover:text-secondary hover:decoration-secondary"
+              href="mailto:hydraulicssistem@gmail.com">hydraulicssistem@gmail.com</a>
+          </div>
+          <div>
+            <h2 class="text-lg font-semibold text-tertiary">Llámanos</h2>
+            <p class="mt-1 text-sm text-tertiary/70">
+              Lun–Vie 8:00–18:00 · Sáb 8:00–13:00
+            </p>
+            <a
+              class="mt-3 inline-block border-b-2 border-transparent text-base font-semibold text-tertiary underline decoration-secondary/50 underline-offset-[5px] transition hover:border-secondary hover:text-secondary hover:decoration-secondary"
+              href="tel:+59170405030">+591 70405030</a>
+            <p class="mt-2 text-sm text-tertiary/80">Emergencias: disponibles 24/7</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 border-t-2 border-tertiary/15 pt-8">
+        <p class="text-sm font-semibold uppercase tracking-wider text-tertiary/65">
+          Contacto rápido
+        </p>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a
+            href={waPrefill}
+            target="_blank"
+            rel="noopener noreferrer"
+            class:list={[iconBtnLg, "border-tertiary bg-primary hover:bg-white"]}
+            aria-label="WhatsApp"
+          >
+            <svg
+              class="size-6 transition-transform duration-300 group-hover/icon:scale-110 group-hover/icon:-rotate-3"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+              ><path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+              ></path></svg
+            >
+          </a>
+          <a
+            href="tel:+59170405030"
+            class:list={[iconBtn, "hover:shadow-[5px_5px_0_0_rgb(225,51,44)]"]}
+            aria-label="Teléfono"
+          >
+            <Phone
+              class="size-6 transition-transform duration-300 group-hover/icon:scale-110 group-hover/icon:rotate-6"
+              aria-hidden="true"
+            />
+          </a>
+          <a
+            href="mailto:hydraulicssistem@gmail.com"
+            class:list={[iconBtn, "hover:shadow-[5px_5px_0_0_rgb(61,53,50)]"]}
+            aria-label="Email"
+          >
+            <Mail
+              class="size-6 transition-transform duration-300 group-hover/icon:scale-110 group-hover/icon:-translate-y-0.5"
+              aria-hidden="true"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="flex flex-col bg-white p-8 sm:p-10 lg:p-12">
+      <p class="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">
+        Envíanos un mensaje
+      </p>
+      <h2 class="mt-2 text-2xl font-bold text-tertiary sm:text-3xl">
+        ¿En qué podemos ayudarte?
+      </h2>
+      <p class="mt-3 text-sm leading-relaxed text-zinc-600 sm:text-base">
+        Completa el formulario y abriremos WhatsApp con tu mensaje listo para enviar.
+      </p>
+
+      <form id="contactForm" class="mt-8 flex flex-1 flex-col gap-5">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div class="flex flex-col gap-2">
+            <label for="nombre" class="text-sm font-medium text-tertiary">Nombre *</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              required
+              autocomplete="given-name"
+              placeholder="Nombre"
+              class="rounded-none border-2 border-tertiary bg-white px-4 py-3 text-tertiary placeholder:text-zinc-400 outline-none transition duration-300 hover:border-secondary hover:shadow-[4px_4px_0_0_rgba(225,51,44,0.25)] focus:border-secondary focus:ring-0 focus:shadow-[4px_4px_0_0_rgb(225,51,44)]"
+            />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="apellidos" class="text-sm font-medium text-tertiary"
+              >Apellidos *</label
+            >
+            <input
+              type="text"
+              id="apellidos"
+              name="apellidos"
+              required
+              autocomplete="family-name"
+              placeholder="Apellidos"
+              class="rounded-none border-2 border-tertiary bg-white px-4 py-3 text-tertiary placeholder:text-zinc-400 outline-none transition duration-300 hover:border-secondary hover:shadow-[4px_4px_0_0_rgba(225,51,44,0.25)] focus:border-secondary focus:ring-0 focus:shadow-[4px_4px_0_0_rgb(225,51,44)]"
+            />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="empresa" class="text-sm font-medium text-tertiary">Empresa</label>
+          <input
+            type="text"
+            id="empresa"
+            name="empresa"
+            autocomplete="organization"
+            placeholder="Nombre de la empresa (opcional)"
+            class="rounded-none border-2 border-tertiary bg-white px-4 py-3 text-tertiary placeholder:text-zinc-400 outline-none transition duration-300 hover:border-secondary hover:shadow-[4px_4px_0_0_rgba(225,51,44,0.25)] focus:border-secondary focus:ring-0 focus:shadow-[4px_4px_0_0_rgb(225,51,44)]"
+          />
+        </div>
+
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div class="flex flex-col gap-2">
+            <label for="email" class="text-sm font-medium text-tertiary">Email *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="tu@email.com"
+              class="rounded-none border-2 border-tertiary bg-white px-4 py-3 text-tertiary placeholder:text-zinc-400 outline-none transition duration-300 hover:border-secondary hover:shadow-[4px_4px_0_0_rgba(225,51,44,0.25)] focus:border-secondary focus:ring-0 focus:shadow-[4px_4px_0_0_rgb(225,51,44)]"
+            />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="telefono" class="text-sm font-medium text-tertiary"
+              >Teléfono *</label
+            >
+            <input
+              type="tel"
+              id="telefono"
+              name="telefono"
+              required
+              autocomplete="tel"
+              placeholder="+591 00000000"
+              class="rounded-none border-2 border-tertiary bg-white px-4 py-3 text-tertiary placeholder:text-zinc-400 outline-none transition duration-300 hover:border-secondary hover:shadow-[4px_4px_0_0_rgba(225,51,44,0.25)] focus:border-secondary focus:ring-0 focus:shadow-[4px_4px_0_0_rgb(225,51,44)]"
+            />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="asunto" class="text-sm font-medium text-tertiary">Asunto *</label>
+          <select
+            id="asunto"
+            name="asunto"
+            required
+            class="rounded-none border-2 border-tertiary bg-white px-4 py-3 text-tertiary outline-none transition duration-300 hover:border-secondary hover:shadow-[4px_4px_0_0_rgba(225,51,44,0.25)] focus:border-secondary focus:ring-0 focus:shadow-[4px_4px_0_0_rgb(225,51,44)]"
+          >
+            <option value="" disabled selected>Selecciona un asunto</option>
+            <option value="reparacion">Reparación de equipo</option>
+            <option value="repuestos">Consulta de repuestos</option>
+            <option value="emergencia">Servicio de emergencia</option>
+            <option value="cotizacion">Solicitar cotización</option>
+            <option value="mantenimiento">Mantenimiento preventivo</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="mensaje" class="text-sm font-medium text-tertiary">Mensaje *</label>
+          <textarea
+            id="mensaje"
+            name="mensaje"
+            rows="5"
+            required
+            placeholder="Cuéntanos qué necesitas…"
+            class="min-h-[8rem] resize-y rounded-none border-2 border-tertiary bg-white px-4 py-3 text-tertiary placeholder:text-zinc-400 outline-none transition duration-300 hover:border-secondary hover:shadow-[4px_4px_0_0_rgba(225,51,44,0.25)] focus:border-secondary focus:ring-0 focus:shadow-[4px_4px_0_0_rgb(225,51,44)]"
+          ></textarea>
+        </div>
+
+        <label class="flex cursor-pointer items-start gap-3 text-sm leading-snug text-zinc-600">
+          <input
+            type="checkbox"
+            id="acepto"
+            name="acepto"
+            required
+            class="mt-1 size-4 shrink-0 rounded-none border-2 border-tertiary text-secondary accent-secondary transition hover:border-secondary focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+          />
+          <span>
+            Acepto la
+            <a
+              href="#"
+              class="font-semibold text-secondary underline decoration-secondary/50 underline-offset-2 transition hover:text-secondary-dark hover:decoration-secondary"
+              >Política de privacidad</a>
+            y autorizo el uso de mis datos para responder esta consulta.
+          </span>
+        </label>
+
+        <button
+          type="submit"
+          class="group/submit mt-2 inline-flex w-full items-center justify-center gap-2 border-2 border-tertiary bg-secondary py-3.5 text-base font-semibold text-white shadow-[6px_6px_0_0_rgb(61,53,50)] transition duration-300 ease-out hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-secondary-dark hover:shadow-[8px_8px_0_0_rgb(61,53,50)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary active:translate-x-0 active:translate-y-0 active:shadow-[4px_4px_0_0_rgb(61,53,50)] motion-reduce:hover:translate-x-0 motion-reduce:hover:translate-y-0"
+        >
+          <Send
+            class="size-5 shrink-0 transition-transform duration-300 group-hover/submit:translate-x-0.5 group-hover/submit:-translate-y-0.5 group-hover/submit:rotate-12"
+            aria-hidden="true"
+          />
+          Enviar mensaje
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    const form = document.getElementById("contactForm");
+    if (!form || !(form instanceof HTMLFormElement)) return;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const nombre = String(fd.get("nombre") || "").trim();
+      const apellidos = String(fd.get("apellidos") || "").trim();
+      const empresa = String(fd.get("empresa") || "").trim();
+      const email = String(fd.get("email") || "").trim();
+      const telefono = String(fd.get("telefono") || "").trim();
+      const asunto = String(fd.get("asunto") || "").trim();
+      const mensaje = String(fd.get("mensaje") || "").trim();
+      const acepto = fd.get("acepto");
+
+      if (!acepto) {
+        window.alert("Debes aceptar la política de privacidad para continuar.");
+        return;
+      }
+
+      const nombreCompleto = [nombre, apellidos].filter(Boolean).join(" ");
+      const text =
+        "Nuevo contacto desde la web — Hydraulic Sistem\n\n" +
+        "Nombre: " +
+        nombreCompleto +
+        "\n" +
+        "Empresa: " +
+        (empresa || "No especificada") +
+        "\n" +
+        "Email: " +
+        email +
+        "\n" +
+        "Teléfono: " +
+        telefono +
+        "\n" +
+        "Asunto: " +
+        asunto +
+        "\n\n" +
+        "Mensaje:\n" +
+        mensaje +
+        "\n\n" +
+        "Política de privacidad: aceptada.";
+
+      const url =
+        "https://api.whatsapp.com/send?phone=59170405030&text=" +
+        encodeURIComponent(text);
+      window.open(url, "_blank", "noopener,noreferrer");
+      form.reset();
+      window.alert(
+        "Se abrió WhatsApp con tu mensaje. Si no ves la ventana, revisa el bloqueador de ventanas emergentes.",
+      );
+    });
+  })();
+</script>

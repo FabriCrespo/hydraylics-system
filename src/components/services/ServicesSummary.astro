@@ -1,0 +1,142 @@
+---
+import { LifeBuoy, SlidersHorizontal, Wrench } from "@lucide/astro/icons";
+---
+
+<section
+  class="bg-gray-50 py-12 sm:py-16 md:py-20 lg:py-24"
+  aria-labelledby="servicios-resumen-heading"
+>
+  <div class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
+    <header class="mx-auto mb-10 max-w-2xl text-center sm:mb-12 md:mb-14">
+      <p
+        class="mb-4 inline-block rounded-none border border-secondary/25 bg-secondary/15 px-5 py-2 text-xs font-bold uppercase tracking-[0.2em] text-secondary sm:text-sm"
+      >
+        Soluciones clave
+      </p>
+      <h2
+        id="servicios-resumen-heading"
+        class="text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl"
+      >
+        Todo lo esencial en un solo equipo
+      </h2>
+      <p
+        class="mt-4 text-base leading-relaxed text-gray-600 sm:text-[1.05rem]"
+      >
+        Intervenimos cada componente hidráulico con rapidez, trazabilidad y
+        garantía real para mantener tu operación siempre en marcha.
+      </p>
+    </header>
+
+    <div
+      class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-7 lg:gap-8"
+    >
+      <!-- Card 1: acento secondary -->
+      <article
+        class="flex h-full flex-col rounded-none border border-gray-200/90 bg-white p-8 shadow-[0_18px_45px_rgba(0,0,0,0.06)] max-md:p-6"
+      >
+        <div
+          class="mb-5 flex size-14 shrink-0 items-center justify-center rounded-none border border-secondary/20 bg-secondary/15 text-secondary max-md:mb-4 max-md:size-12"
+        >
+          <Wrench class="size-7 stroke-2 max-md:size-6" aria-hidden="true" />
+        </div>
+        <h3 class="mb-3 text-xl font-bold text-gray-900 sm:text-2xl">
+          Cilindros & Potencia
+        </h3>
+        <p class="mb-6 flex-1 text-[0.95rem] leading-relaxed text-gray-600">
+          Reconstrucción integral de cilindros, bombas y motores con pruebas
+          hidrostáticas certificadas.
+        </p>
+        <ul class="grid list-none gap-2.5 p-0 text-[0.95rem] leading-snug text-gray-600">
+          <li
+            class="relative pl-5 before:absolute before:left-0 before:top-2 before:size-2 before:rounded-none before:bg-secondary"
+          >
+            Rectificado CNC, cromado espejo y balanceo dinámico
+          </li>
+          <li
+            class="relative pl-5 before:absolute before:left-0 before:top-2 before:size-2 before:rounded-none before:bg-secondary"
+          >
+            Suministro inmediato de vástagos y sellos premium
+          </li>
+          <li
+            class="relative pl-5 before:absolute before:left-0 before:top-2 before:size-2 before:rounded-none before:bg-secondary"
+          >
+            Entrega con informe técnico y garantía escrita
+          </li>
+        </ul>
+      </article>
+
+      <!-- Card 2: acento tertiary (marca corporativa oscura) -->
+      <article
+        class="flex h-full flex-col rounded-none border border-gray-200/90 bg-white p-8 shadow-[0_18px_45px_rgba(0,0,0,0.06)] max-md:p-6"
+      >
+        <div
+          class="mb-5 flex size-14 shrink-0 items-center justify-center rounded-none border border-tertiary/20 bg-tertiary/10 text-tertiary max-md:mb-4 max-md:size-12"
+        >
+          <SlidersHorizontal
+            class="size-7 stroke-2 max-md:size-6"
+            aria-hidden="true"
+          />
+        </div>
+        <h3 class="mb-3 text-xl font-bold text-gray-900 sm:text-2xl">
+          Control & Precisión
+        </h3>
+        <p class="mb-6 flex-1 text-[0.95rem] leading-relaxed text-gray-600">
+          Diagnóstico digital, limpieza ultrasónica y calibración de válvulas,
+          comandos y sistemas proporcionales.
+        </p>
+        <ul class="grid list-none gap-2.5 p-0 text-[0.95rem] leading-snug text-gray-600">
+          <li
+            class="relative pl-5 before:absolute before:left-0 before:top-2 before:size-2 before:rounded-none before:bg-tertiary"
+          >
+            Calibración en banco electrónico multicanal
+          </li>
+          <li
+            class="relative pl-5 before:absolute before:left-0 before:top-2 before:size-2 before:rounded-none before:bg-tertiary"
+          >
+            Reemplazo de spool, casquillos y electrónica
+          </li>
+          <li
+            class="relative pl-5 before:absolute before:left-0 before:top-2 before:size-2 before:rounded-none before:bg-tertiary"
+          >
+            Retrofit e integración con PLC o CANBUS
+          </li>
+        </ul>
+      </article>
+
+      <!-- Card 3: acento rojo vino (#7a1512, mismo CTA del home) -->
+      <article
+        class="flex h-full flex-col rounded-none border border-gray-200/90 bg-white p-8 shadow-[0_18px_45px_rgba(0,0,0,0.06)] max-md:p-6"
+      >
+        <div
+          class="mb-5 flex size-14 shrink-0 items-center justify-center rounded-none border border-[#7a1512]/25 bg-[#7a1512]/12 text-[#7a1512] max-md:mb-4 max-md:size-12"
+        >
+          <LifeBuoy class="size-7 stroke-2 max-md:size-6" aria-hidden="true" />
+        </div>
+        <h3 class="mb-3 text-xl font-bold text-gray-900 sm:text-2xl">
+          Soporte 24/7
+        </h3>
+        <p class="mb-6 flex-1 text-[0.95rem] leading-relaxed text-gray-600">
+          Equipos móviles, stock estratégico y mantenimiento preventivo para
+          reducir tiempos muertos.
+        </p>
+        <ul class="grid list-none gap-2.5 p-0 text-[0.95rem] leading-snug text-gray-600">
+          <li
+            class="relative pl-5 before:absolute before:left-0 before:top-2 before:size-2 before:rounded-none before:bg-[#7a1512]"
+          >
+            Diagnóstico en campo en menos de 4 horas
+          </li>
+          <li
+            class="relative pl-5 before:absolute before:left-0 before:top-2 before:size-2 before:rounded-none before:bg-[#7a1512]"
+          >
+            Plan de mantenimiento predictivo y capacitación
+          </li>
+          <li
+            class="relative pl-5 before:absolute before:left-0 before:top-2 before:size-2 before:rounded-none before:bg-[#7a1512]"
+          >
+            Logística de repuestos nacionales e importación exprés
+          </li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>

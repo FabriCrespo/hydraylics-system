@@ -32,6 +32,10 @@
   --color-overlay: rgb(0 0 0 / 0.5);
   --color-overlay-light: rgb(0 0 0 / 0.1);
   --color-overlay-dark: rgb(0 0 0 / 0.8);
+
+  --animate-nosotros-bounce: nosotros-bounce 2s ease-in-out infinite;
+  --animate-nosotros-cta-pattern: nosotros-cta-pattern 20s linear infinite;
+  --animate-nosotros-float: nosotros-float 3s ease-in-out infinite;
 }
 
 @layer base {
@@ -109,5 +113,40 @@ svg.lucide {
   }
   100% {
     background-position: 40px 40px;
+  }
+}
+
+@keyframes nosotros-bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes nosotros-cta-pattern {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+@keyframes nosotros-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
   }
 }

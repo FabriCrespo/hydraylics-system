@@ -1,0 +1,81 @@
+---
+const waDiagnostico =
+  "https://api.whatsapp.com/send?phone=59170405030&text=¡Hola!%20🔧%0A%0ANecesito%20soporte%20hidráulico%20para%20mi%20equipo.%0A%0A¿Podrían%20ayudarme%20con%20una%20cotización%20o%20asesoría?%20Gracias%20🙏";
+const waPropuesta =
+  "https://api.whatsapp.com/send?phone=59170405030&text=" +
+  encodeURIComponent(
+    "¡Hola! Me interesa recibir una propuesta por servicios hidráulicos.\n\n¿Podrían asesorarme? Gracias.",
+  );
+---
+
+<section
+  class="relative flex min-h-[min(30rem,58vh)] items-center justify-start overflow-hidden bg-[url('/servicios/services-hero.png')] bg-cover bg-center bg-no-repeat max-md:min-h-[min(26rem,52vh)]"
+  aria-labelledby="servicios-hero-heading"
+>
+  <div
+    class="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(90deg,rgba(20,16,15,0.88)_0%,rgba(20,16,15,0.55)_38%,rgba(20,16,15,0.2)_62%,transparent_85%)]"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(0,0,0,0.15)_0%,transparent_40%,rgba(0,0,0,0.28)_100%)]"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div
+    class="relative z-[2] mx-auto w-full max-w-[1200px] px-4 py-6 sm:px-6 sm:py-[clamp(1.75rem,4vw,2.75rem)] lg:px-8 lg:py-[clamp(1.75rem,4vw,2.75rem)] xl:px-[clamp(1.5rem,4vw,2.5rem)]"
+  >
+    <div class="max-w-[34rem] text-left max-[968px]:max-w-full">
+      <p
+        class="mb-3 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-white/80"
+      >
+        Servicios en taller y en campo
+      </p>
+      <h1
+        id="servicios-hero-heading"
+        class="mb-4 text-[clamp(1.55rem,3.6vw,2.65rem)] font-extrabold uppercase leading-[1.12] tracking-[0.04em] text-white max-[640px]:text-[1.65rem]"
+      >
+        Reparamos lo crítico y lo dejamos documentado
+      </h1>
+      <p
+        class="mb-6 max-w-[32rem] text-[clamp(0.9375rem,1.25vw,1.1rem)] font-normal leading-[1.65] text-white/95"
+      >
+        Cilindros, bombas, válvulas y mandos: diagnóstico claro, repuestos
+        correctos y garantía por escrito. Si su equipo para, nosotros aceleramos
+        el retorno a operación con seguimiento directo por WhatsApp.
+      </p>
+
+      <div
+        class="mb-8 flex flex-wrap gap-x-3 gap-y-2 border-t border-white/10 pt-6 text-[0.8125rem] text-white/80 max-[640px]:mb-6 max-[640px]:flex-col max-[640px]:gap-2"
+      >
+        <span class="font-semibold text-white">+15 años</span>
+        <span class="hidden text-white/40 sm:inline" aria-hidden="true">·</span>
+        <span>Urgencias 24/7</span>
+        <span class="hidden text-white/40 sm:inline" aria-hidden="true">·</span>
+        <span>98% rehabilitados</span>
+      </div>
+
+      <div
+        class="flex flex-wrap items-center gap-x-4 gap-y-[0.85rem] max-[640px]:w-full max-[640px]:flex-col"
+      >
+        <a
+          class="inline-flex min-h-11 w-full items-center justify-center rounded-none px-7 py-[0.85rem] text-[0.8rem] font-semibold uppercase tracking-[0.06em] text-white shadow-none transition duration-300 [background-color:#7a1512] hover:[background-color:#5c0f0d] hover:text-white max-[640px]:justify-center hover:-translate-y-0.5 hover:scale-[1.02] sm:w-auto"
+          href={waDiagnostico}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Agendar diagnóstico
+        </a>
+        <a
+          class="inline-flex min-h-11 w-full items-center justify-center rounded-none border-2 border-white/95 bg-transparent px-7 py-[0.85rem] text-[0.8rem] font-semibold uppercase tracking-[0.06em] text-white transition duration-300 hover:border-white hover:bg-white/12 hover:text-white max-[640px]:justify-center hover:-translate-y-0.5 hover:scale-[1.02] sm:w-auto"
+          href={waPropuesta}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Solicitar propuesta
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

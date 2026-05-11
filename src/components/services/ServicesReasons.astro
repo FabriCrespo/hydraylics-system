@@ -1,0 +1,55 @@
+---
+import { Cpu, ShieldCheck, TrendingUp, Zap } from "@lucide/astro/icons";
+---
+
+<section
+  class="bg-white py-12 sm:py-16 md:py-20"
+  aria-label="Diferenciales"
+>
+  <div class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
+    <div
+      class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-6"
+    >
+      <article
+        class="grid gap-3 rounded-none border border-secondary/12 bg-gradient-to-br from-secondary/12 to-secondary/5 p-5 text-tertiary sm:p-6 md:p-7"
+      >
+        <Cpu class="size-7 shrink-0 text-secondary" aria-hidden="true" />
+        <h4 class="text-lg font-bold">Ingeniería aplicada</h4>
+        <p class="text-sm leading-relaxed text-tertiary/72">
+          Metrología, análisis de causa raíz y actualización de materiales en
+          cada intervención.
+        </p>
+      </article>
+      <article
+        class="grid gap-3 rounded-none border border-secondary/12 bg-gradient-to-br from-secondary/12 to-secondary/5 p-5 text-tertiary sm:p-6 md:p-7"
+      >
+        <ShieldCheck class="size-7 shrink-0 text-secondary" aria-hidden="true" />
+        <h4 class="text-lg font-bold">Garantía documentada</h4>
+        <p class="text-sm leading-relaxed text-tertiary/72">
+          Protocolos de validación, ficha de servicio y respaldo escrito por
+          componente.
+        </p>
+      </article>
+      <article
+        class="grid gap-3 rounded-none border border-secondary/12 bg-gradient-to-br from-secondary/12 to-secondary/5 p-5 text-tertiary sm:p-6 md:p-7"
+      >
+        <Zap class="size-7 shrink-0 text-secondary" aria-hidden="true" />
+        <h4 class="text-lg font-bold">Respuesta inmediata</h4>
+        <p class="text-sm leading-relaxed text-tertiary/72">
+          Plan de atención crítica con disponibilidad 24/7 y coordinación
+          logística centralizada.
+        </p>
+      </article>
+      <article
+        class="grid gap-3 rounded-none border border-secondary/12 bg-gradient-to-br from-secondary/12 to-secondary/5 p-5 text-tertiary sm:p-6 md:p-7"
+      >
+        <TrendingUp class="size-7 shrink-0 text-secondary" aria-hidden="true" />
+        <h4 class="text-lg font-bold">Continuidad garantizada</h4>
+        <p class="text-sm leading-relaxed text-tertiary/72">
+          Planes preventivos y seguimiento post-servicio para asegurar
+          performance constante.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
