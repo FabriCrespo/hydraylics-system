@@ -14,8 +14,7 @@ export default defineConfig({
   site,
   integrations: [
     sitemap({
-      filter: (page) =>
-        !page.includes('/admin') && !page.includes('/checkout'),
+      filter: (page) => !page.includes('/admin'),
     }),
   ],
   vite: {

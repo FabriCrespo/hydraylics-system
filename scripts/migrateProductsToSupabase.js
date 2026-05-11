@@ -3,10 +3,7 @@
  * 
  * Uso:
  * 1. Asegúrate de tener las variables de entorno configuradas en .env
- * 2. Ejecuta: node scripts/migrateProductsToSupabase.js
- * 
- * O si tienes tsx instalado:
- * npx tsx scripts/migrateProductsToSupabase.ts
+ * 2. Ejecuta: npm run migrate:products
  */
 
 import { createClient } from '@supabase/supabase-js';

@@ -14,7 +14,7 @@ export interface Props {
 	keywords?: string;
 	/** No indexar (p. ej. panel admin). */
 	noindex?: boolean;
-	/** Imagen Open Graph bajo /public (p. ej. /Logo.png). */
+	/** Imagen Open Graph bajo /public (p. ej. /brand/logo.png). */
 	ogImagePath?: string;
 }
 
@@ -41,8 +41,9 @@ const canonicalUrl = new URL(Astro.url.pathname, canonicalBase).href;
 			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
 			rel="stylesheet"
 		/>
-		<link rel="icon" type="image/png" href="/Logo.png" />
-		<link rel="apple-touch-icon" href="/Logo.png" />
+		<link rel="icon" href="/brand/logo.ico" type="image/x-icon" sizes="any" />
+		<link rel="icon" type="image/png" href="/brand/logo.png" sizes="32x32" />
+		<link rel="apple-touch-icon" href="/brand/logo.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />

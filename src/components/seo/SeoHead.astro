@@ -12,7 +12,7 @@ export interface Props {
   keywords?: string;
   canonicalUrl: string;
   noindex?: boolean;
-  /** Ruta bajo /public, p. ej. /Logo.png */
+  /** Ruta bajo /public, p. ej. /brand/logo.png */
   ogImagePath?: string;
 }
 
@@ -22,7 +22,7 @@ const {
   keywords,
   canonicalUrl,
   noindex = false,
-  ogImagePath = "/Logo.png",
+  ogImagePath = "/brand/logo.png",
 } = Astro.props;
 
 const siteOrigin = Astro.site?.origin ?? new URL(canonicalUrl).origin;
@@ -50,8 +50,8 @@ const jsonLd = {
       name: business.name,
       alternateName: business.alternateName,
       url: `${siteOrigin}/`,
-      logo: new URL("Logo.png", siteOrigin + "/").href,
-      image: new URL("Logo.png", siteOrigin + "/").href,
+      logo: new URL("brand/logo.png", siteOrigin + "/").href,
+      image: new URL("brand/logo.png", siteOrigin + "/").href,
       email: business.email,
       telephone: business.phoneE164,
       address: {

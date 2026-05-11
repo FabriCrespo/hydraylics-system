@@ -1,4 +1,5 @@
 ---
+import { ChevronLeft, ChevronRight } from "@lucide/astro/icons";
 import { nosotrosGalleryItems } from "../../data/nosotrosGallery";
 
 const sectionId = "galeria-nosotros";
@@ -6,24 +7,24 @@ const sectionId = "galeria-nosotros";
 
 <section
   id={sectionId}
-  class="bg-white pb-0 pt-12 sm:pt-16 md:pt-20 lg:pt-24"
+  class="bg-primary pb-2 pt-10 sm:pt-14 md:pt-16 lg:pt-20"
   aria-labelledby="nosotros-galeria-heading"
 >
   <div class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
     <header class="mx-auto mb-8 max-w-2xl text-center sm:mb-10 md:mb-12">
       <p
-        class="mb-4 inline-block rounded-none border border-secondary/25 bg-secondary/15 px-5 py-2 text-xs font-bold uppercase tracking-[0.2em] text-secondary sm:text-sm"
+        class="mb-4 inline-block rounded-none bg-secondary/12 px-5 py-2 text-xs font-bold uppercase tracking-[0.2em] text-secondary ring-1 ring-secondary/20 sm:text-sm"
       >
         Nuestra gente
       </p>
       <h2
         id="nosotros-galeria-heading"
-        class="text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl"
+        class="text-3xl font-semibold tracking-tight text-tertiary sm:text-4xl"
       >
         Momentos que inspiran confianza
       </h2>
       <p
-        class="mt-4 text-base leading-relaxed text-gray-600 sm:text-[1.05rem]"
+        class="mt-4 text-base leading-relaxed text-tertiary/75 sm:text-[1.05rem]"
       >
         Un vistazo a nuestro equipo en acción y a las instalaciones donde
         transformamos cada reto en resultados.
@@ -32,55 +33,95 @@ const sectionId = "galeria-nosotros";
   </div>
 
   <p
-    class="mx-auto mb-3 max-w-[1200px] px-4 text-center text-xs font-medium uppercase tracking-wider text-gray-400 sm:px-6 lg:hidden"
+    class="mx-auto mb-4 max-w-[1200px] px-4 text-center text-[11px] font-medium uppercase tracking-[0.18em] text-tertiary/45 sm:px-6"
   >
-    Desliza para ver todas las fotos
+    Usa los botones o desliza para ver todas las fotos
   </p>
 
-  <div class="relative mx-auto max-w-[1200px]">
+  <div
+    class="nosotros-gallery-rail relative mx-auto max-w-[1200px] px-0 sm:px-2 lg:px-4"
+  >
+    <div
+      class="pointer-events-none absolute inset-y-0 left-0 z-[1] w-8 bg-gradient-to-r from-primary to-transparent sm:w-12"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute inset-y-0 right-0 z-[1] w-8 bg-gradient-to-l from-primary to-transparent sm:w-12"
+      aria-hidden="true"
+    >
+    </div>
     <ul
+      id="nosotros-gallery-strip"
       role="list"
-      aria-label="Galería de fotos. Desplázate horizontalmente para ver cada imagen completa."
-      class="nosotros-gallery-scroll m-0 flex list-none snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-5 pt-1 [-webkit-overflow-scrolling:touch] [scrollbar-color:rgba(61,53,50,0.25)_transparent] [scrollbar-width:thin] motion-reduce:scroll-auto sm:gap-5 sm:px-6 sm:scroll-px-6 lg:gap-6 lg:px-8 lg:scroll-px-8"
+      aria-label="Galería de fotos. Usa anterior y siguiente para desplazarte."
+      class="nosotros-gallery-scroll m-0 flex list-none gap-4 overflow-x-auto overflow-y-hidden scroll-smooth px-4 pb-4 pt-1 [-webkit-overflow-scrolling:touch] motion-reduce:scroll-auto sm:gap-5 sm:px-6 sm:scroll-px-6 lg:gap-6 lg:px-8 lg:scroll-px-8"
     >
       {
         nosotrosGalleryItems.map((item) => (
-          <li class="snap-center shrink-0 list-none">
+          <li class="flex shrink-0 list-none">
             <figure
-              class="group flex w-[min(82vw,17.5rem)] flex-col overflow-hidden rounded-none border border-gray-200/90 bg-white shadow-[0_12px_36px_rgba(0,0,0,0.07)] transition hover:shadow-[0_16px_44px_rgba(0,0,0,0.1)] sm:w-[min(72vw,19rem)] md:w-[min(56vw,20rem)] lg:w-[20.5rem]"
+              class="group flex h-[30rem] w-[min(88vw,18.5rem)] flex-col overflow-hidden rounded-none bg-white shadow-[0_8px_32px_rgba(61,53,50,0.08)] ring-1 ring-tertiary/[0.06] transition duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_20px_48px_rgba(61,53,50,0.12)] hover:ring-secondary/25 sm:h-[31rem] sm:w-[19.5rem] lg:h-[32rem] lg:w-[20.5rem]"
             >
               <a
                 href={`#lightbox-${item.id}`}
-                class="relative block cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+                class="relative flex h-[17.5rem] shrink-0 cursor-zoom-in flex-col focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary sm:h-[18.25rem] lg:h-[19rem]"
               >
                 <div
-                  class="flex aspect-[4/5] w-full items-center justify-center bg-gray-100 p-2 sm:p-3 md:aspect-square"
+                  class="flex min-h-0 flex-1 items-center justify-center bg-[#f3f0ed] p-2 sm:p-3"
                 >
                   <img
                     src={item.src}
                     alt={item.alt}
                     loading="lazy"
                     decoding="async"
-                    class="max-h-full max-w-full object-contain object-center transition duration-300 group-hover:opacity-95"
+                    class="h-full w-full max-h-full max-w-full object-contain object-center transition duration-500 ease-out group-hover:scale-[1.02]"
                     width={800}
                     height={600}
                   />
                 </div>
               </a>
-              <figcaption class="border-t border-gray-100 px-3 py-2.5 sm:px-3.5 sm:py-3">
-                <span class="text-[0.65rem] font-bold uppercase tracking-wide text-secondary sm:text-xs">
-                  {item.label}
-                </span>
-                <p class="mt-1 line-clamp-3 text-xs leading-snug text-gray-600 sm:text-[0.8125rem]">
-                  {item.description}
-                </p>
-                <p class="mt-2 text-[0.65rem] text-gray-400">Toca para ampliar</p>
+              <figcaption class="flex min-h-0 flex-1 flex-col justify-between bg-primary/40 px-3 py-2.5 sm:px-3.5 sm:py-3">
+                <div>
+                  <span class="text-[0.65rem] font-bold uppercase tracking-wide text-secondary sm:text-xs">
+                    {item.label}
+                  </span>
+                  <p class="mt-1 line-clamp-3 text-xs leading-snug text-tertiary/80 sm:text-[0.8125rem]">
+                    {item.description}
+                  </p>
+                </div>
+                <p class="mt-2 shrink-0 text-[0.65rem] text-tertiary/50">Toca para ampliar</p>
               </figcaption>
             </figure>
           </li>
         ))
       }
     </ul>
+
+    <div
+      class="relative z-[2] flex flex-wrap items-center justify-center gap-3 px-4 pb-8 pt-4 sm:gap-4"
+      role="group"
+      aria-label="Controles de la galería"
+    >
+      <button
+        type="button"
+        id="nosotros-gallery-prev"
+        class="inline-flex min-h-[2.75rem] items-center justify-center gap-2 border-2 border-tertiary bg-white px-4 py-2 text-sm font-semibold text-tertiary shadow-[4px_4px_0_0_rgba(61,53,50,0.1)] transition hover:-translate-y-0.5 hover:border-secondary hover:text-secondary hover:shadow-[6px_6px_0_0_rgba(225,51,44,0.22)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary disabled:pointer-events-none disabled:opacity-35"
+        aria-controls="nosotros-gallery-strip"
+      >
+        <ChevronLeft class="size-5 shrink-0" aria-hidden="true" />
+        Anterior
+      </button>
+      <button
+        type="button"
+        id="nosotros-gallery-next"
+        class="inline-flex min-h-[2.75rem] items-center justify-center gap-2 border-2 border-tertiary bg-white px-4 py-2 text-sm font-semibold text-tertiary shadow-[4px_4px_0_0_rgba(61,53,50,0.1)] transition hover:-translate-y-0.5 hover:border-secondary hover:text-secondary hover:shadow-[6px_6px_0_0_rgba(225,51,44,0.22)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary disabled:pointer-events-none disabled:opacity-35"
+        aria-controls="nosotros-gallery-strip"
+      >
+        Siguiente
+        <ChevronRight class="size-5 shrink-0" aria-hidden="true" />
+      </button>
+    </div>
   </div>
 </section>
 
@@ -118,18 +159,85 @@ const sectionId = "galeria-nosotros";
   ))
 }
 
+<script is:inline>
+  (function () {
+    function stepSize(strip) {
+      var li = strip.querySelector(":scope > li");
+      if (!li) return Math.max(240, strip.clientWidth * 0.72);
+      var st = window.getComputedStyle(strip);
+      var gap = parseFloat(st.gap || st.columnGap) || 16;
+      return li.getBoundingClientRect().width + gap;
+    }
+
+    function updateButtons(strip, prev, next) {
+      var max = Math.max(0, strip.scrollWidth - strip.clientWidth - 1);
+      var x = strip.scrollLeft;
+      prev.disabled = x <= 1;
+      next.disabled = x >= max - 1;
+    }
+
+    function init() {
+      var strip = document.getElementById("nosotros-gallery-strip");
+      var prev = document.getElementById("nosotros-gallery-prev");
+      var next = document.getElementById("nosotros-gallery-next");
+      if (!strip || !prev || !next) return;
+
+      function scrollByDir(dir) {
+        var step = stepSize(strip);
+        var max = Math.max(0, strip.scrollWidth - strip.clientWidth);
+        var target = strip.scrollLeft + dir * step;
+        target = Math.max(0, Math.min(max, target));
+        strip.scrollTo({ left: target, behavior: "smooth" });
+        window.setTimeout(function () {
+          updateButtons(strip, prev, next);
+        }, 320);
+      }
+
+      prev.addEventListener("click", function () {
+        scrollByDir(-1);
+      });
+      next.addEventListener("click", function () {
+        scrollByDir(1);
+      });
+      strip.addEventListener(
+        "scroll",
+        function () {
+          updateButtons(strip, prev, next);
+        },
+        { passive: true },
+      );
+      window.addEventListener("resize", function () {
+        updateButtons(strip, prev, next);
+      });
+      function refreshButtons() {
+        updateButtons(strip, prev, next);
+      }
+      if (document.readyState === "complete") {
+        window.requestAnimationFrame(refreshButtons);
+      } else {
+        window.addEventListener("load", refreshButtons);
+      }
+
+      updateButtons(strip, prev, next);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  })();
+</script>
+
 <style>
+  /* Scroll horizontal sin barra visible (sigue siendo desplazable y accesible). */
+  .nosotros-gallery-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
   .nosotros-gallery-scroll::-webkit-scrollbar {
-    height: 6px;
-  }
-  .nosotros-gallery-scroll::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .nosotros-gallery-scroll::-webkit-scrollbar-thumb {
-    background: rgb(61 53 50 / 0.22);
-    border-radius: 0;
-  }
-  .nosotros-gallery-scroll::-webkit-scrollbar-thumb:hover {
-    background: rgb(61 53 50 / 0.35);
+    display: none;
+    width: 0;
+    height: 0;
   }
 </style>
