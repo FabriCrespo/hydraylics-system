@@ -37,9 +37,10 @@ export const pc = {
     "producto-compat m-0 mt-0.5 line-clamp-1 text-[11px] leading-tight text-gray-400",
 
   precioRow:
-    "producto-precio-row mt-2.5 flex items-baseline justify-between gap-3 border-t border-[#f0f0f0] pt-2.5 max-sm:mt-2 max-sm:pt-2",
+    "producto-precio-row mt-2.5 flex flex-col items-stretch gap-2 border-t border-[#f0f0f0] pt-2.5 max-sm:mt-2 max-sm:pt-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3",
 
-  precioBloque: "producto-precio-bloque flex min-w-0 flex-wrap items-baseline gap-1.5",
+  precioBloque:
+    "producto-precio-bloque flex min-w-0 flex-1 flex-wrap items-baseline gap-1.5 max-sm:w-full",
 
   precio:
     "producto-precio text-xl font-extrabold tracking-tight text-[#111] max-sm:text-[1.05rem]",
@@ -48,7 +49,7 @@ export const pc = {
     "producto-precio-meta text-[11px] font-medium uppercase tracking-wide text-gray-400",
 
   infoBtn:
-    "producto-info-button shrink-0 cursor-pointer border-0 bg-transparent p-0 text-[0.65rem] font-extrabold uppercase tracking-widest text-secondary underline decoration-2 underline-offset-[3px] transition-colors hover:text-secondary-dark",
+    "producto-info-button shrink-0 cursor-pointer border-0 bg-transparent p-0 text-[0.65rem] font-extrabold uppercase tracking-widest text-secondary underline decoration-2 underline-offset-[3px] transition-colors hover:text-secondary-dark max-sm:mt-0.5 max-sm:self-end sm:shrink-0",
 
   cantidadFila:
     "producto-cantidad-fila mt-3 flex items-center justify-between gap-3 max-sm:mt-2 max-sm:flex-wrap",
