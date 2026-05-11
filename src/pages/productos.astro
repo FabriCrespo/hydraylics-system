@@ -1,445 +1,277 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductModal from "../components/ProductModal.astro";
-import { Filter, LoaderCircle, Search, Trash2 } from "@lucide/astro/icons";
+import {
+  ChevronDown,
+  Factory,
+  Filter,
+  LoaderCircle,
+  Search,
+  SlidersVertical,
+} from "@lucide/astro/icons";
 ---
 
-<Layout>
-  <!-- Filtros y Búsqueda -->
-  <section class="filtros-section">
-    <div class="container-productos">
-      <div class="filtros-header">
-        <h2>Buscar Productos</h2>
-        <p>Filtra por categoría, marca o tipo de máquina</p>
-      </div>
+<Layout footerFlushTop>
+  <section class="relative min-h-[50vh] bg-gray-50 py-6 pb-24 sm:min-h-[60vh] sm:py-9 sm:pb-9 lg:py-12">
+    <!-- Móvil: fondo al abrir filtros -->
+    <div
+      id="filtrosMobileBackdrop"
+      class="pointer-events-none fixed inset-0 z-[68] bg-black/45 opacity-0 transition-opacity duration-300 lg:hidden"
+      aria-hidden="true"
+    >
+    </div>
 
-      <div class="filtros-grid">
-        <div class="filtro-group">
-          <label for="busqueda">Buscar</label>
-          <div class="search-input">
-            <Search class="search-icon" size={20} aria-hidden="true" />
+    <div
+      class="mx-auto grid max-w-[1400px] gap-5 px-3 sm:gap-7 sm:px-5 lg:grid-cols-[minmax(260px,300px)_1fr] lg:items-start lg:gap-10 lg:px-8"
+    >
+      <!-- Productos (primero en DOM: arriba en móvil) -->
+      <div class="order-1 min-w-0 lg:order-2">
+        <header class="mb-5 sm:mb-7 lg:mb-8">
+          <h2
+            class="text-[clamp(1.25rem,4.5vw,1.875rem)] font-medium leading-tight tracking-tight text-gray-900 sm:text-3xl"
+          >
+            Catálogo de componentes
+          </h2>
+          <div
+            class="mt-2 h-1 w-[min(6.5rem,38vw)] max-w-[10rem] rounded-sm bg-secondary"
+            aria-hidden="true"
+          >
+          </div>
+          <p
+            class="mt-3 max-w-3xl text-[0.8125rem] leading-relaxed text-gray-600 sm:mt-4 sm:text-sm sm:leading-relaxed lg:text-[0.95rem]"
+          >
+            Nuestra ingeniería de precisión orienta el rendimiento en entornos
+            industriales exigentes. Explore repuestos y piezas hidráulicas de
+            alta calidad, pensados para durabilidad y una operación confiable de
+            su maquinaria.
+          </p>
+          <p
+            id="catalogoSubtituloTotal"
+            class="mt-2.5 text-[11px] font-normal text-gray-500 sm:mt-3 sm:text-xs"
+          >
+            Cargando catálogo…
+          </p>
+        </header>
+
+        <div
+          class="mb-5 flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-3 shadow-sm sm:mb-6 sm:gap-3.5 sm:rounded-lg sm:p-4 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-4"
+        >
+          <div class="relative min-w-0 flex-1 lg:max-w-md">
+            <label for="busqueda" class="sr-only">Buscar en catálogo</label>
+            <Search
+              class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-400"
+              aria-hidden="true"
+            />
             <input
-              type="text"
+              type="search"
               id="busqueda"
-              placeholder="Buscar por nombre o ID..."
+              placeholder="Buscar por número de parte o modelo…"
+              class="min-h-11 w-full rounded-lg border border-gray-200 bg-gray-50/90 py-2.5 pl-10 pr-3 text-[0.8125rem] font-normal text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-secondary focus:bg-white focus:ring-2 focus:ring-secondary/15 sm:min-h-0 sm:rounded-md sm:text-[13px]"
+              autocomplete="off"
+            />
+          </div>
+          <p
+            id="catalogoResultadosResumen"
+            class="text-pretty text-center text-[0.6rem] font-normal uppercase leading-snug tracking-[0.1em] text-gray-500 sm:text-[0.65rem] sm:tracking-[0.12em] lg:max-w-[14rem] lg:shrink-0 lg:text-left"
+          >
+            —
+          </p>
+          <div class="relative min-w-0 lg:w-auto">
+            <label for="ordenar" class="sr-only">Ordenar resultados</label>
+            <select
+              id="ordenar"
+              class="min-h-11 w-full appearance-none rounded-lg border border-gray-200 bg-white py-2.5 pl-3 pr-10 text-left text-[11px] font-medium uppercase tracking-wide text-gray-800 outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/15 sm:min-h-0 sm:rounded-md lg:min-w-[13rem]"
+            >
+              <option value="nombre-asc">Orden: nombre A–Z</option>
+              <option value="nombre-desc">Orden: nombre Z–A</option>
+            </select>
+            <ChevronDown
+              class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-gray-500 sm:right-2.5"
+              aria-hidden="true"
             />
           </div>
         </div>
 
-        <div class="filtro-group">
-          <label for="modelo">Modelo compatible</label>
-          <select id="modelo">
-            <option value="">Todos los modelos</option>
-          </select>
+        <div
+          id="productosGrid"
+          class="grid grid-cols-2 gap-2 sm:gap-4 sm:grid-cols-2 xl:grid-cols-3"
+        >
+          <div
+            id="loadingState"
+            class="col-span-full flex flex-col items-center justify-center gap-4 py-20 text-gray-500"
+          >
+            <LoaderCircle
+              class="size-12 shrink-0 animate-spin text-secondary"
+              aria-hidden="true"
+            />
+            <p class="m-0 text-sm font-normal">Cargando productos…</p>
+          </div>
         </div>
 
-        <div class="filtro-group">
-          <label for="marca">Marca</label>
-          <select id="marca">
-            <option value="">Todas las marcas</option>
-          </select>
-        </div>
+        <nav
+          id="paginacionCatalogo"
+          class="mt-6 hidden max-w-full flex-wrap items-center justify-center gap-1.5 px-1 sm:mt-8 sm:gap-2"
+          aria-label="Paginación del catálogo"
+        >
+        </nav>
       </div>
 
-      <div class="filtros-actions">
-        <button class="btn-filtrar" id="btnFiltrar">
-          <Filter size={20} aria-hidden="true" />
-          Filtrar Productos
-        </button>
-        <button class="btn-limpiar" id="btnLimpiar">
-          <Trash2 size={20} aria-hidden="true" />
-          Limpiar Filtros
-        </button>
-      </div>
-    </div>
-  </section>
+      <!-- Filtros: barra lateral en lg; bottom sheet en móvil + FAB -->
+      <aside
+        id="filtrosCatalogoAside"
+        data-open="false"
+        class="order-2 w-full overflow-hidden border-gray-200 bg-white max-lg:fixed max-lg:inset-x-0 max-lg:bottom-0 max-lg:z-[70] max-lg:flex max-lg:max-h-[min(88dvh,36rem)] max-lg:flex-col max-lg:rounded-t-2xl max-lg:border-x max-lg:border-t max-lg:shadow-[0_-12px_40px_rgba(0,0,0,0.18)] max-lg:translate-y-full max-lg:transition-transform max-lg:duration-300 max-lg:ease-out lg:order-1 lg:relative lg:max-h-[calc(100dvh-6rem)] lg:translate-y-0 lg:rounded-xl lg:border lg:shadow-sm lg:transition-none lg:sticky lg:top-24 lg:self-start lg:overflow-y-auto"
+        aria-label="Filtros del catálogo"
+      >
+        <div
+          class="flex shrink-0 items-center justify-between border-b border-gray-100 px-4 py-3 lg:hidden"
+        >
+          <div class="flex items-center gap-2">
+            <Filter class="size-4 text-secondary" aria-hidden="true" stroke-width={2} />
+            <span class="text-sm font-medium text-gray-900">Filtros</span>
+          </div>
+          <button
+            type="button"
+            id="btnCerrarFiltrosMobile"
+            class="touch-manipulation rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-medium uppercase tracking-wide text-gray-700 transition hover:bg-gray-50"
+          >
+            Cerrar
+          </button>
+        </div>
 
-  <!-- Resultados -->
-  <section class="resultados-section">
-    <div class="container-productos">
-      <div class="resultados-header">
-        <div class="resultados-info">
-          <h3>Productos Encontrados</h3>
-          <span class="productos-count" id="productosCount">Cargando...</span>
+        <div class="min-h-0 flex-1 overflow-y-auto overscroll-contain lg:overflow-visible">
+        <div class="border-b border-gray-100 px-3 py-3 sm:px-4 lg:border-t-0">
+          <h1 class="text-base font-medium tracking-tight text-gray-900 max-lg:sr-only">
+            Filtrar catálogo
+          </h1>
+          <p class="mt-0.5 text-[0.65rem] font-normal uppercase tracking-wider text-gray-500 max-lg:hidden">
+            Especificaciones técnicas
+          </p>
         </div>
-        <div class="ordenar">
-          <label for="ordenar">Ordenar por:</label>
-          <select id="ordenar">
-            <option value="nombre">Nombre</option>
-            <option value="codigo">Código</option>
-            <option value="marca">Marca</option>
-            <option value="precio">Precio</option>
-          </select>
-        </div>
-      </div>
 
-      <!-- Grid de Productos -->
-      <div class="productos-grid" id="productosGrid">
-        <div class="loading-state" id="loadingState">
-          <LoaderCircle size={48} aria-hidden="true" />
-          <p>Cargando productos...</p>
+        <div class="divide-y divide-gray-100">
+          <details class="filtros-details">
+            <summary
+              class="flex cursor-pointer list-none items-center gap-2 bg-white px-3 py-2 outline-none marker:content-none hover:bg-gray-50 [&::-webkit-details-marker]:hidden sm:px-4"
+            >
+              <Filter
+                class="size-3.5 shrink-0 text-gray-500"
+                aria-hidden="true"
+                stroke-width={2}
+              />
+              <span class="flex-1 text-left text-[11px] font-normal uppercase tracking-wide text-gray-700"
+                >Categoría</span
+              >
+            </summary>
+            <div class="space-y-0 bg-white px-3 pb-2 pt-0.5 sm:px-4">
+              {
+                [
+                  ["bombas", "Bombas"],
+                  ["cilindros", "Cilindros"],
+                  ["valvulas", "Válvulas"],
+                  ["motores", "Motores"],
+                  ["comandos", "Comandos"],
+                  ["kits", "Kits"],
+                  ["direccion", "Dirección"],
+                  ["otros", "Otros"],
+                ].map(([value, label]) => (
+                  <label class="filtro-check flex cursor-pointer items-center gap-2 py-1.5 text-[13px] font-normal text-gray-700">
+                    <input
+                      type="checkbox"
+                      name="filtro-categoria"
+                      value={value}
+                      class="filtro-checkbox size-3.5 shrink-0 rounded border-gray-300 text-secondary focus:ring-secondary"
+                    />
+                    <span>{label}</span>
+                  </label>
+                ))
+              }
+            </div>
+          </details>
+
+          <details class="filtros-details">
+            <summary
+              class="flex cursor-pointer list-none items-center gap-2 bg-white px-3 py-2 outline-none marker:content-none hover:bg-gray-50 [&::-webkit-details-marker]:hidden sm:px-4"
+            >
+              <Factory
+                class="size-3.5 shrink-0 text-gray-500"
+                aria-hidden="true"
+                stroke-width={2}
+              />
+              <span class="flex-1 text-left text-[11px] font-normal uppercase tracking-wide text-gray-700"
+                >Marca</span
+              >
+            </summary>
+            <div
+              id="filtro-marca-checkboxes"
+              class="max-h-40 space-y-0 overflow-y-auto bg-white px-3 pb-2 pt-0.5 sm:px-4"
+            >
+            </div>
+          </details>
+
+          <details class="filtros-details">
+            <summary
+              class="flex cursor-pointer list-none items-center gap-2 bg-white px-3 py-2 outline-none marker:content-none hover:bg-gray-50 [&::-webkit-details-marker]:hidden sm:px-4"
+            >
+              <SlidersVertical
+                class="size-3.5 shrink-0 text-gray-500"
+                aria-hidden="true"
+                stroke-width={2}
+              />
+              <span class="flex-1 text-left text-[11px] font-normal uppercase tracking-wide text-gray-700"
+                >Modelo compatible</span
+              >
+            </summary>
+            <div
+              id="filtro-modelo-checkboxes"
+              class="max-h-44 space-y-0 overflow-y-auto bg-white px-3 pb-2 pt-0.5 sm:px-4"
+            >
+            </div>
+          </details>
         </div>
-      </div>
+
+        <div class="px-3 py-2.5 sm:px-4">
+          <button
+            type="button"
+            id="btnLimpiar"
+            class="w-full rounded-md border border-gray-800 bg-white py-2 text-center text-[11px] font-normal uppercase tracking-wide text-gray-800 transition hover:bg-gray-900 hover:text-white"
+          >
+            Limpiar filtros
+          </button>
+        </div>
+        </div>
+      </aside>
+
+      <button
+        type="button"
+        id="btnFiltrosMobileFab"
+        class="fixed bottom-[max(1rem,env(safe-area-inset-bottom,0px))] right-4 z-[80] flex touch-manipulation items-center gap-2 rounded-full bg-secondary px-4 py-3.5 text-sm font-medium text-white shadow-[0_8px_24px_rgba(225,51,44,0.45)] transition-[transform,box-shadow] active:scale-[0.98] hover:bg-secondary-dark hover:shadow-lg lg:hidden"
+        aria-expanded="false"
+        aria-controls="filtrosCatalogoAside"
+      >
+        <Filter class="size-5 shrink-0" aria-hidden="true" stroke-width={2} />
+        Filtros
+      </button>
     </div>
   </section>
 
   <ProductModal products={[]} phoneNumber="59170405030" />
 </Layout>
 
-<style>
-  /* Hero Productos */
-  .hero-productos {
-    position: relative;
-    min-height: 60vh;
-    height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .hero-productos::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(34, 30, 28, 0.6) 0%,
-      rgba(34, 30, 28, 0.35) 100%
-    );
-    z-index: 0;
-  }
-
-  .hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-
-  .hero-background img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-  }
-
-  @media (max-width: 768px) {
-    .hero-productos {
-      min-height: 50vh;
-      height: 50vh;
+<style is:global>
+  @media (max-width: 1023px) {
+    /* Filtros mobile controlados por `data-open` (más robusto que variants). */
+    #filtrosCatalogoAside {
+      transform: translateY(100%);
     }
 
-    .hero-background img {
-      object-position: center center;
+    #filtrosCatalogoAside[data-open="true"] {
+      transform: translateY(0);
+      box-shadow:
+        0 -12px 40px rgba(0, 0, 0, 0.22),
+        0 25px 50px -12px rgba(0, 0, 0, 0.25);
     }
   }
-
-  @media (max-width: 480px) {
-    .hero-productos {
-      min-height: 45vh;
-      height: 45vh;
-    }
-  }
-
-  .hero-content-productos {
-    position: relative;
-    text-align: center;
-    z-index: 1;
-    max-width: 900px;
-    padding: 2rem;
-  }
-
-  .hero-badge-productos {
-    display: inline-block;
-    padding: 0.5rem 1.5rem;
-    background: rgba(225, 51, 44, 0.2);
-    border: 1px solid var(--color-secondary);
-    color: var(--color-secondary);
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.85rem;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-
-  .hero-title-productos {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 900;
-    color: var(--color-primary);
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-  }
-
-  .highlight-productos {
-    color: var(--color-secondary);
-    position: relative;
-  }
-
-  .hero-subtitle-productos {
-    font-size: clamp(1rem, 2vw, 1.3rem);
-    color: rgba(241, 236, 232, 0.85);
-    margin-bottom: 0;
-  }
-
-  /* Container */
-  .container-productos {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
-
-  /* Filtros */
-  .filtros-section {
-    padding: 4rem 0;
-    background: var(--color-white);
-    border-bottom: 1px solid var(--color-gray-200);
-  }
-
-  .filtros-header {
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-
-  .filtros-header h2 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--color-tertiary);
-    margin-bottom: 1rem;
-  }
-
-  .filtros-header p {
-    font-size: 1.1rem;
-    color: var(--color-gray-600);
-  }
-
-  .filtros-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  .filtro-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .filtro-group label {
-    font-weight: 600;
-    color: var(--color-tertiary);
-    font-size: 0.95rem;
-  }
-
-  .filtro-group select {
-    padding: 1rem;
-    border: 2px solid var(--color-gray-200);
-    border-radius: 10px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    font-family: inherit;
-    background: var(--color-white);
-  }
-
-  .filtro-group select:focus {
-    outline: none;
-    border-color: var(--color-secondary);
-    box-shadow: 0 0 0 4px rgba(225, 51, 44, 0.1);
-  }
-
-  .search-input {
-    position: relative;
-  }
-
-  .search-icon {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    color: var(--color-gray-400);
-  }
-
-  .search-input input {
-    width: 100%;
-    padding: 1rem 1rem 1rem 3rem;
-    border: 2px solid var(--color-gray-200);
-    border-radius: 10px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    font-family: inherit;
-  }
-
-  .search-input input:focus {
-    outline: none;
-    border-color: var(--color-secondary);
-    box-shadow: 0 0 0 4px rgba(225, 51, 44, 0.1);
-  }
-
-  .filtros-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-  }
-
-  .btn-filtrar,
-  .btn-limpiar {
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .btn-filtrar {
-    background: var(--color-secondary);
-    color: var(--color-white);
-    box-shadow: 0 2px 8px rgba(225, 51, 44, 0.2);
-  }
-
-  .btn-filtrar:hover {
-    background: var(--color-secondary-dark);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(225, 51, 44, 0.25);
-  }
-
-  .btn-limpiar {
-    background: var(--color-gray-100);
-    color: var(--color-gray-700);
-    border: 2px solid var(--color-gray-300);
-  }
-
-  .btn-limpiar:hover {
-    background: var(--color-gray-200);
-    transform: translateY(-2px);
-  }
-
-  /* Resultados */
-  .resultados-section {
-    padding: 4rem 0;
-    background: var(--color-gray-50);
-  }
-
-  .resultados-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .resultados-info h3 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--color-tertiary);
-    margin-bottom: 0.5rem;
-  }
-
-  .productos-count {
-    color: var(--color-gray-600);
-    font-size: 1rem;
-  }
-
-  .ordenar {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .ordenar label {
-    font-weight: 600;
-    color: var(--color-tertiary);
-  }
-
-  .ordenar select {
-    padding: 0.8rem 1rem;
-    border: 2px solid var(--color-gray-200);
-    border-radius: 8px;
-    font-size: 0.95rem;
-    background: var(--color-white);
-  }
-
-  /* Grid de Productos */
-  .productos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 4rem;
-  }
-
-  /* Responsive */
-  @media (max-width: 968px) {
-    .filtros-grid {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    .resultados-header {
-      flex-direction: column;
-      align-items: stretch;
-      text-align: center;
-    }
-
-    .productos-grid {
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1.25rem;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .hero-productos {
-      min-height: 50vh;
-    }
-
-    .filtros-section,
-    .resultados-section {
-      padding: 3rem 0;
-    }
-
-    .productos-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
-  }
-
-  .loading-state {
-    grid-column: 1 / -1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 4rem 2rem;
-    color: var(--color-gray-500);
-  }
-
-  .loading-state svg {
-    animation: spin 1s linear infinite;
-    margin-bottom: 1rem;
-    color: var(--color-secondary);
-  }
-
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  .loading-state p {
-    font-size: 1rem;
-    margin: 0;
-  }
-
 </style>
 
 <script>
@@ -448,7 +280,92 @@ import { Filter, LoaderCircle, Search, Trash2 } from "@lucide/astro/icons";
   import { pc } from "../data/productCardTailwind";
   import { lucideToHtml } from "../utils/lucideHtml";
 
+  let filtrosMobileSheetInitDone = false;
+
+  /** Registra FAB, backdrop y teclado del panel de filtros móvil (independiente de la carga de productos). */
+  function initFiltrosMobileSheet() {
+    if (filtrosMobileSheetInitDone) return;
+    const filtrosAside = document.getElementById("filtrosCatalogoAside");
+    const filtrosMobileBackdrop = document.getElementById(
+      "filtrosMobileBackdrop",
+    );
+    const btnFiltrosMobileFab = document.getElementById("btnFiltrosMobileFab");
+    const btnCerrarFiltrosMobile = document.getElementById(
+      "btnCerrarFiltrosMobile",
+    );
+    if (!filtrosAside) return;
+    filtrosMobileSheetInitDone = true;
+
+    function setFiltrosMobileOpen(open) {
+      const mobile =
+        typeof window !== "undefined" && window.innerWidth < 1024;
+      filtrosAside.setAttribute("data-open", open ? "true" : "false");
+      console.log(
+        `[productos.astro] filtrosMobile sheet -> ${open ? "open" : "closed"}`,
+      );
+      // No dependemos de `mobile` para aplicar la clase:
+      // el CSS (media query) decide si realmente se traduce al abrir/cerrar.
+      filtrosAside.classList.toggle("filtros-catalogo-sheet-open", open);
+
+      // Fallback: por si alguna variant no aplica como esperamos, forzamos el
+      // transform al abrir. Al cerrar, limpiamos para que el Tailwind manda.
+      if (open) {
+        filtrosAside.style.transform = "translateY(0)";
+        filtrosAside.style.opacity = "1";
+        filtrosAside.style.visibility = "visible";
+        filtrosAside.style.pointerEvents = "auto";
+        filtrosAside.style.boxShadow =
+          "0 -12px 40px rgba(0, 0, 0, 0.22), 0 25px 50px -12px rgba(0, 0, 0, 0.25)";
+      } else {
+        filtrosAside.style.transform = "translateY(100%)";
+        filtrosAside.style.opacity = "0";
+        filtrosAside.style.visibility = "hidden";
+        filtrosAside.style.pointerEvents = "none";
+        filtrosAside.style.boxShadow = "";
+      }
+      btnFiltrosMobileFab?.setAttribute(
+        "aria-expanded",
+        open ? "true" : "false",
+      );
+      if (filtrosMobileBackdrop) {
+        filtrosMobileBackdrop.classList.toggle("opacity-0", !open);
+        filtrosMobileBackdrop.classList.toggle("pointer-events-none", !open);
+        filtrosMobileBackdrop.classList.toggle("pointer-events-auto", open);
+        filtrosMobileBackdrop.setAttribute(
+          "aria-hidden",
+          open ? "false" : "true",
+        );
+      }
+      document.body.style.overflow = open && mobile ? "hidden" : "";
+    }
+
+    function toggleFiltrosMobile() {
+      const open = filtrosAside.getAttribute("data-open") === "true";
+      setFiltrosMobileOpen(!open);
+    }
+
+    btnFiltrosMobileFab?.addEventListener("click", () => {
+      toggleFiltrosMobile();
+    });
+    btnCerrarFiltrosMobile?.addEventListener("click", () => {
+      setFiltrosMobileOpen(false);
+    });
+    filtrosMobileBackdrop?.addEventListener("click", () => {
+      setFiltrosMobileOpen(false);
+    });
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 1024) setFiltrosMobileOpen(false);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      if (filtrosAside.getAttribute("data-open") === "true") {
+        setFiltrosMobileOpen(false);
+      }
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", async () => {
+    initFiltrosMobileSheet();
     console.log('🎬 [productos.astro] DOM cargado, iniciando carga de productos...');
     /** @type {Array<any>} */
     let productos = [];
@@ -486,11 +403,20 @@ import { Filter, LoaderCircle, Search, Trash2 } from "@lucide/astro/icons";
         const productosGrid = document.getElementById("productosGrid");
         if (productosGrid) {
           productosGrid.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; color: var(--color-gray-500);">
-              ${lucideToHtml(CircleAlert, { width: 48, height: 48, style: "margin-bottom: 1rem;" })}
-              <p style="margin: 0; font-size: 1rem;">No se encontraron productos disponibles.</p>
+            <div class="col-span-full flex flex-col items-center justify-center gap-4 py-16 text-center text-gray-500">
+              ${lucideToHtml(CircleAlert, { width: 48, height: 48, class: "text-secondary" })}
+              <p class="m-0 text-sm font-normal">No se encontraron productos disponibles.</p>
             </div>
           `;
+        }
+        const st0 = document.getElementById("catalogoSubtituloTotal");
+        const rs0 = document.getElementById("catalogoResultadosResumen");
+        const pg0 = document.getElementById("paginacionCatalogo");
+        if (st0) st0.textContent = "Sin piezas en catálogo";
+        if (rs0) rs0.textContent = "Sin resultados";
+        if (pg0) {
+          pg0.classList.add("hidden");
+          pg0.innerHTML = "";
         }
         return;
       }
@@ -501,11 +427,20 @@ import { Filter, LoaderCircle, Search, Trash2 } from "@lucide/astro/icons";
       const productosGrid = document.getElementById("productosGrid");
       if (productosGrid) {
         productosGrid.innerHTML = `
-          <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; color: var(--color-gray-500);">
-            ${lucideToHtml(CircleAlert, { width: 48, height: 48, style: "margin-bottom: 1rem;" })}
-            <p style="margin: 0; font-size: 1rem;">Error al cargar productos. Por favor, recarga la página.</p>
+          <div class="col-span-full flex flex-col items-center justify-center gap-4 py-16 text-center text-gray-500">
+            ${lucideToHtml(CircleAlert, { width: 48, height: 48, class: "text-secondary" })}
+            <p class="m-0 text-sm font-normal">Error al cargar productos. Por favor, recarga la página.</p>
           </div>
         `;
+      }
+      const stE = document.getElementById("catalogoSubtituloTotal");
+      const rsE = document.getElementById("catalogoResultadosResumen");
+      const pgE = document.getElementById("paginacionCatalogo");
+      if (stE) stE.textContent = "—";
+      if (rsE) rsE.textContent = "Error al cargar el catálogo";
+      if (pgE) {
+        pgE.classList.add("hidden");
+        pgE.innerHTML = "";
       }
       return;
     }
@@ -515,21 +450,44 @@ import { Filter, LoaderCircle, Search, Trash2 } from "@lucide/astro/icons";
 
     // Renderizar productos
     const productosGrid = document.getElementById("productosGrid");
-    const productosCount = document.getElementById("productosCount");
+    const catalogoSubtituloTotal = document.getElementById(
+      "catalogoSubtituloTotal",
+    );
+    const catalogoResultadosResumen = document.getElementById(
+      "catalogoResultadosResumen",
+    );
+    const paginacionCatalogo = document.getElementById("paginacionCatalogo");
     const loadingState = document.getElementById("loadingState");
-    const modeloSelect = document.getElementById("modelo");
-    const marcaSelect = document.getElementById("marca");
+    const marcaCheckboxWrap = document.getElementById("filtro-marca-checkboxes");
+    const modeloCheckboxWrap = document.getElementById("filtro-modelo-checkboxes");
     
     // Ocultar estado de carga
     if (loadingState) {
       loadingState.remove();
     }
     
-    // Actualizar contador
-    if (productosCount) {
-      productosCount.textContent = `${productos.length} productos`;
+    if (catalogoSubtituloTotal) {
+      catalogoSubtituloTotal.textContent =
+        productos.length === 1
+          ? "1 pieza en catálogo"
+          : `${productos.length} piezas en catálogo`;
     }
     
+    /** Inferencia de categorías desde nombre y descripción (filtros multi‑opción). */
+    function inferCategorias(producto) {
+      const t = `${producto.nombre || ""} ${producto.descripcion || ""}`.toLowerCase();
+      const s = new Set();
+      if (/\bbomba|bombas|engranaje\b/.test(t)) s.add("bombas");
+      if (/cilindro/.test(t)) s.add("cilindros");
+      if (/válvula|valvula/.test(t)) s.add("valvulas");
+      if (/\bmotor\b|motores hidráulicos|motor hidráulico/.test(t)) s.add("motores");
+      if (/comando/.test(t)) s.add("comandos");
+      if (/\bkit\b/.test(t)) s.add("kits");
+      if (/direcci[oó]n|orbitrol/.test(t)) s.add("direccion");
+      if (s.size === 0) s.add("otros");
+      return Array.from(s);
+    }
+
     // Función para extraer marcas de un producto
     function extraerMarcas(producto) {
       const marcas = new Set();
@@ -578,33 +536,16 @@ import { Filter, LoaderCircle, Search, Trash2 } from "@lucide/astro/icons";
       new Set(productos.flatMap((p) => p.modelos_compatibles ?? []))
     ).sort((a, b) => a.localeCompare(b));
     
-    if (modeloSelect) {
-      modelOptions.forEach((modelo) => {
-        const option = document.createElement("option");
-        option.value = modelo;
-        option.textContent = modelo;
-        modeloSelect.appendChild(option);
-      });
-    }
-    
-    // Generar opciones de marcas
     const todasLasMarcas = new Set();
     productos.forEach((producto) => {
       const marcas = extraerMarcas(producto);
       marcas.forEach((marca) => todasLasMarcas.add(marca));
     });
-    
-    const marcasOrdenadas = Array.from(todasLasMarcas).sort((a, b) => a.localeCompare(b));
-    
-    if (marcaSelect) {
-      marcasOrdenadas.forEach((marca) => {
-        const option = document.createElement("option");
-        option.value = marca;
-        option.textContent = marca;
-        marcaSelect.appendChild(option);
-      });
-    }
-    
+
+    const marcasOrdenadas = Array.from(todasLasMarcas).sort((a, b) =>
+      a.localeCompare(b),
+    );
+
     function escapeHtml(str) {
       if (str == null || str === "") return "";
       return String(str)
@@ -612,6 +553,24 @@ import { Filter, LoaderCircle, Search, Trash2 } from "@lucide/astro/icons";
         .replace(/</g, "&lt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#39;");
+    }
+
+    const filaCheckbox = (name, valor, etiqueta) => {
+      const v = escapeHtml(valor);
+      const e = escapeHtml(etiqueta);
+      return `<label class="filtro-check flex cursor-pointer items-center gap-2 py-1.5 text-[13px] font-normal text-gray-700" title="${v}"><input type="checkbox" name="${name}" value="${v}" class="filtro-checkbox size-3.5 shrink-0 rounded border-gray-300 text-secondary focus:ring-secondary" /><span class="min-w-0 truncate">${e}</span></label>`;
+    };
+
+    if (marcaCheckboxWrap) {
+      marcaCheckboxWrap.innerHTML = marcasOrdenadas
+        .map((marca) => filaCheckbox("filtro-marca", marca, marca))
+        .join("");
+    }
+
+    if (modeloCheckboxWrap) {
+      modeloCheckboxWrap.innerHTML = modelOptions
+        .map((modelo) => filaCheckbox("filtro-modelo", modelo, modelo))
+        .join("");
     }
 
     // Función para renderizar una tarjeta de producto
@@ -635,8 +594,13 @@ import { Filter, LoaderCircle, Search, Trash2 } from "@lucide/astro/icons";
 
       const card = document.createElement("div");
       card.className = pc.card;
+      card.setAttribute("data-producto-id", producto.id);
       card.setAttribute("data-modelos", modelos.join(","));
       card.setAttribute("data-marcas", marcas.join(","));
+      card.setAttribute(
+        "data-categorias",
+        inferCategorias(producto).join(","),
+      );
       card.setAttribute("data-imagen", tieneImagen ? "true" : "false");
 
       card.innerHTML = `
@@ -728,15 +692,16 @@ import { Filter, LoaderCircle, Search, Trash2 } from "@lucide/astro/icons";
       console.error('❌ [productos.astro] No se encontró el elemento productosGrid');
     }
 
-    /** @type {{ busqueda: HTMLInputElement | null; modelo: HTMLSelectElement | null; marca: HTMLSelectElement | null; }} */
-    const filtros = {
-      busqueda: document.getElementById("busqueda"),
-      modelo: document.getElementById("modelo"),
-      marca: document.getElementById("marca"),
-    };
-
-    const btnFiltrar = document.getElementById("btnFiltrar");
+    const busquedaInput = document.getElementById("busqueda");
     const btnLimpiar = document.getElementById("btnLimpiar");
+    const filtrosAside = document.getElementById("filtrosCatalogoAside");
+
+    function valoresCheckbox(name) {
+      return Array.from(
+        document.querySelectorAll(`input[name="${name}"]:checked`),
+      ).map((el) => el.value);
+    }
+
     const imagenesProductos = Array.from(
       document.querySelectorAll(".producto-imagen-img"),
     );
@@ -884,72 +849,202 @@ import { Filter, LoaderCircle, Search, Trash2 } from "@lucide/astro/icons";
       });
     });
 
-    const filtrar = () => {
-      if (!productosGrid || !productosCount) return;
+    const PAGE_SIZE = 12;
+    let paginaActual = 0;
 
-      const termino = (filtros.busqueda?.value || "").trim().toLowerCase();
-      const modelo = (filtros.modelo?.value || "").trim().toLowerCase();
-      const marca = (filtros.marca?.value || "").trim().toUpperCase();
+    function leerFiltros() {
+      return {
+        termino: (busquedaInput?.value || "").trim().toLowerCase(),
+        catsChecked: valoresCheckbox("filtro-categoria"),
+        marcasChecked: valoresCheckbox("filtro-marca").map((m) =>
+          m.trim().toUpperCase(),
+        ),
+        modelosChecked: valoresCheckbox("filtro-modelo").map((m) =>
+          m.trim().toLowerCase(),
+        ),
+      };
+    }
 
-      const cards = /** @type {HTMLElement[]} */ (
-        Array.from(productosGrid.children)
+    function cardMatchFiltros(card, f) {
+      const nombre =
+        card.querySelector(".producto-nombre")?.textContent?.toLowerCase() ||
+        "";
+      const descripcion =
+        card.querySelector(".producto-descripcion")?.textContent?.toLowerCase() ||
+        "";
+      const idCard = (card.getAttribute("data-producto-id") || "").toLowerCase();
+      const modelos = (card.dataset.modelos || "")
+        .split(",")
+        .map((m) => m.trim().toLowerCase())
+        .filter(Boolean);
+      const marcas = (card.dataset.marcas || "")
+        .split(",")
+        .map((m) => m.trim().toUpperCase())
+        .filter(Boolean);
+      const categorias = (card.dataset.categorias || "")
+        .split(",")
+        .map((c) => c.trim())
+        .filter(Boolean);
+
+      const coincideBusqueda =
+        !f.termino ||
+        nombre.includes(f.termino) ||
+        descripcion.includes(f.termino) ||
+        idCard.includes(f.termino);
+      const coincideModelo =
+        f.modelosChecked.length === 0 ||
+        f.modelosChecked.some((m) => modelos.includes(m));
+      const coincideMarca =
+        f.marcasChecked.length === 0 ||
+        f.marcasChecked.some((m) => marcas.includes(m));
+      const coincideCat =
+        f.catsChecked.length === 0 ||
+        f.catsChecked.some((c) => categorias.includes(c));
+
+      return (
+        coincideBusqueda &&
+        coincideModelo &&
+        coincideMarca &&
+        coincideCat
       );
-      let visibles = 0;
+    }
 
-      cards.forEach((card) => {
-        const nombre =
-          card.querySelector(".producto-nombre")?.textContent?.toLowerCase() ||
-          "";
-        const descripcion =
-          card
-            .querySelector(".producto-descripcion")
-            ?.textContent?.toLowerCase() || "";
-        const modelos = (card.dataset.modelos || "")
-          .split(",")
-          .map((m) => m.trim().toLowerCase())
-          .filter(Boolean);
-        const marcas = (card.dataset.marcas || "")
-          .split(",")
-          .map((m) => m.trim().toUpperCase())
-          .filter(Boolean);
+    function aplicarOrdenTarjetas() {
+      if (!productosGrid) return;
+      const ordenEl = document.getElementById("ordenar");
+      const sel = ordenEl && "value" in ordenEl ? ordenEl.value : "nombre-asc";
+      const cards = Array.from(
+        productosGrid.querySelectorAll(".producto-card"),
+      );
+      cards.sort((a, b) => {
+        const na = a.querySelector(".producto-nombre")?.textContent || "";
+        const nb = b.querySelector(".producto-nombre")?.textContent || "";
+        return sel === "nombre-desc"
+          ? nb.localeCompare(na, "es")
+          : na.localeCompare(nb, "es");
+      });
+      cards.forEach((c) => productosGrid.appendChild(c));
+    }
 
-        const coincideBusqueda =
-          !termino ||
-          nombre.includes(termino) ||
-          descripcion.includes(termino);
-        const coincideModelo = !modelo || modelos.includes(modelo);
-        const coincideMarca = !marca || marcas.includes(marca);
+    function renderPaginacion(totalPaginas, totalCoincidentes) {
+      if (!paginacionCatalogo) return;
+      if (totalCoincidentes === 0 || totalPaginas <= 1) {
+        paginacionCatalogo.classList.add("hidden");
+        paginacionCatalogo.innerHTML = "";
+        return;
+      }
+      paginacionCatalogo.classList.remove("hidden");
+      const btnBase =
+        "inline-flex min-h-8 min-w-8 touch-manipulation items-center justify-center rounded-md border border-gray-200 bg-white px-1.5 text-xs font-normal text-gray-700 transition hover:border-secondary hover:text-secondary disabled:cursor-not-allowed disabled:opacity-40 sm:min-h-9 sm:min-w-9 sm:px-2 sm:text-sm";
+      const btnAct =
+        "border-secondary bg-secondary text-white hover:bg-secondary-dark hover:text-white";
+      const prevDis = paginaActual <= 0;
+      const nextDis = paginaActual >= totalPaginas - 1;
+      let html = "";
+      html += `<button type="button" class="${btnBase}" data-page-action="prev" ${prevDis ? "disabled" : ""} aria-label="Página anterior">«</button>`;
 
-        if (
-          coincideBusqueda &&
-          coincideModelo &&
-          coincideMarca
-        ) {
-          card.style.display = "block";
-          visibles += 1;
-        } else {
+      const maxBtns = 7;
+      let start = Math.max(0, paginaActual - Math.floor(maxBtns / 2));
+      let end = Math.min(totalPaginas, start + maxBtns);
+      if (end - start < maxBtns) start = Math.max(0, end - maxBtns);
+      for (let i = start; i < end; i++) {
+        const active = i === paginaActual ? ` ${btnAct}` : "";
+        const ac = i === paginaActual ? ' aria-current="page"' : "";
+        html += `<button type="button" class="${btnBase}${active}" data-page="${i}" aria-label="Página ${i + 1}"${ac}>${i + 1}</button>`;
+      }
+      html += `<button type="button" class="${btnBase}" data-page-action="next" ${nextDis ? "disabled" : ""} aria-label="Página siguiente">»</button>`;
+      paginacionCatalogo.innerHTML = html;
+    }
+
+    function syncVistaCatalogo(opts) {
+      const resetPage = opts && opts.resetPage;
+      if (!productosGrid || !catalogoResultadosResumen) return;
+      if (resetPage) paginaActual = 0;
+
+      const f = leerFiltros();
+      const allCards = Array.from(
+        productosGrid.querySelectorAll(".producto-card"),
+      );
+      const coincidentes = allCards.filter((c) => cardMatchFiltros(c, f));
+      const total = coincidentes.length;
+      const totalPaginas = total === 0 ? 1 : Math.ceil(total / PAGE_SIZE);
+
+      if (paginaActual >= totalPaginas) {
+        paginaActual = Math.max(0, totalPaginas - 1);
+      }
+
+      const start = paginaActual * PAGE_SIZE;
+      const enPagina = new Set(coincidentes.slice(start, start + PAGE_SIZE));
+
+      allCards.forEach((card) => {
+        if (!cardMatchFiltros(card, f)) {
           card.style.display = "none";
+          return;
         }
+        card.style.display = enPagina.has(card) ? "" : "none";
       });
 
-      productosCount.textContent = `${visibles} productos`;
-    };
+      if (total === 0) {
+        catalogoResultadosResumen.textContent = "Sin resultados";
+      } else {
+        const desde = start + 1;
+        const hasta = Math.min(start + PAGE_SIZE, total);
+        catalogoResultadosResumen.textContent = `Mostrando ${desde}–${hasta} de ${total} resultados`;
+      }
+
+      renderPaginacion(totalPaginas, total);
+    }
+
+    function filtrar() {
+      syncVistaCatalogo({ resetPage: true });
+    }
+
+    function irAPagina(n) {
+      paginaActual = Math.max(0, n);
+      syncVistaCatalogo({ resetPage: false });
+    }
+
+    paginacionCatalogo?.addEventListener("click", (e) => {
+      const t = e.target;
+      if (!(t instanceof Element)) return;
+      const prev = t.closest("[data-page-action='prev']");
+      const next = t.closest("[data-page-action='next']");
+      const pageBtn = t.closest("[data-page]");
+      if (prev && !prev.hasAttribute("disabled")) {
+        irAPagina(paginaActual - 1);
+      } else if (next && !next.hasAttribute("disabled")) {
+        irAPagina(paginaActual + 1);
+      } else if (pageBtn && !pageBtn.hasAttribute("data-page-action")) {
+        const p = parseInt(pageBtn.getAttribute("data-page") || "", 10);
+        if (!Number.isNaN(p)) irAPagina(p);
+      }
+    });
+
+    document.getElementById("ordenar")?.addEventListener("change", () => {
+      aplicarOrdenTarjetas();
+      syncVistaCatalogo({ resetPage: true });
+    });
 
     const limpiar = () => {
-      Object.values(filtros).forEach((filtro) => {
-        if (!filtro) return;
-        if ("value" in filtro) filtro.value = "";
-        if ("selectedIndex" in filtro) filtro.selectedIndex = 0;
+      if (busquedaInput) busquedaInput.value = "";
+      document.querySelectorAll(".filtro-checkbox").forEach((el) => {
+        if (el instanceof HTMLInputElement) el.checked = false;
       });
       filtrar();
     };
 
-    btnFiltrar?.addEventListener("click", filtrar);
     btnLimpiar?.addEventListener("click", limpiar);
-    filtros.busqueda?.addEventListener("input", filtrar);
-    filtros.modelo?.addEventListener("change", filtrar);
-    filtros.marca?.addEventListener("change", filtrar);
+    busquedaInput?.addEventListener("input", filtrar);
+    filtrosAside?.addEventListener("change", (e) => {
+      const t = e.target;
+      if (
+        t instanceof HTMLInputElement &&
+        t.classList.contains("filtro-checkbox")
+      )
+        filtrar();
+    });
 
-    filtrar();
+    aplicarOrdenTarjetas();
+    syncVistaCatalogo({ resetPage: true });
   });
 </script>

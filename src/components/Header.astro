@@ -13,47 +13,88 @@ const contactActive = pathname === "/contacto" || pathname.startsWith("/contacto
 ---
 
 <header
-  class="sticky top-0 z-1000 overflow-visible border-b border-[#E8E8E8] bg-white/90 shadow-[0_1px_2px_rgba(0,0,0,0.05)] backdrop-blur-[6px] supports-backdrop-filter:bg-white/85"
+  class="sticky top-0 z-50 overflow-visible border-b border-[#E8E8E8] bg-white/95 shadow-sm backdrop-blur-md supports-backdrop-filter:bg-white/90"
 >
   <div
-    class="relative mx-auto flex max-w-[1280px] min-h-20 items-center justify-between gap-4 overflow-visible px-6 py-3 font-[Inter,ui-sans-serif,system-ui,sans-serif] max-md:min-h-0 max-md:gap-3 max-md:px-3 max-md:py-2.5"
+    class="relative mx-auto flex w-full max-w-[1280px] flex-wrap items-center justify-between gap-x-3 gap-y-0 px-4 py-3 font-[Inter,ui-sans-serif,system-ui,sans-serif] sm:px-5 md:min-h-[4.25rem] md:flex-nowrap md:gap-6 md:py-3.5 lg:px-6"
   >
-    <div class="relative z-2 flex shrink-0 items-center overflow-visible">
+    <a
+      href="/"
+      class="order-1 flex shrink-0 items-center overflow-visible pr-1 leading-none no-underline focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C60D00] sm:pr-2"
+      aria-label="Hydraulic Sistem — Inicio"
+    >
+      <img
+        src="/HeroLogo.png"
+        alt=""
+        class="block h-8 w-auto max-w-[100px] origin-left scale-[2.1] object-contain object-left transition-[transform,opacity] duration-200 ease-out hover:scale-[2.18] hover:opacity-90 sm:h-8 sm:max-w-[104px] sm:scale-[2.2] md:h-[2.125rem] md:max-w-[110px] md:scale-[2.32] lg:h-9 lg:max-w-[118px] lg:scale-[2.42] lg:hover:scale-[2.5]"
+        width="400"
+        height="90"
+        loading="eager"
+        decoding="async"
+      />
+    </a>
+
+    <div
+      class="order-2 flex shrink-0 items-center gap-1.5 sm:gap-2 md:order-4 md:gap-3"
+    >
       <a
-        href="/"
-        class="flex items-center leading-none no-underline focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C60D00]"
-        aria-label="Hydraulic Sistem — Inicio"
+        href="/admin"
+        class="inline-flex size-10 touch-manipulation items-center justify-center rounded-xl border border-transparent text-[#5F5E5E] no-underline transition-colors hover:bg-[#f3f3f3] hover:text-[#1A1C1C] active:bg-[#ebebeb] sm:size-11 md:size-10 [&_svg]:size-[1.15rem] md:[&_svg]:size-5"
+        aria-label="Panel de Administración"
+        title="Administración"
       >
-        <!-- Caja de layout baja + scale: logo más grande sin subir min-h del header -->
-        <img
-          src="/HeroLogo.png"
-          alt=""
-          class="block h-8 w-auto max-w-[100px] origin-left scale-[2.15] object-contain object-left transition-[transform,opacity] duration-200 ease-out hover:scale-[2.24] hover:opacity-90 min-[900px]:h-[2.125rem] min-[900px]:max-w-[110px] min-[900px]:scale-[2.35] min-[900px]:hover:scale-[2.42] xl:h-9 xl:max-w-[118px] xl:scale-[2.45] xl:hover:scale-[2.52] max-md:h-7 max-md:max-w-[78px] max-md:scale-[2.05] max-md:hover:scale-[2.12]"
-          width="400"
-          height="90"
-          loading="eager"
-          decoding="async"
-        />
+        <CircleUser aria-hidden="true" />
       </a>
+      <button
+        type="button"
+        class="header-cart relative inline-flex size-10 touch-manipulation items-center justify-center rounded-xl border border-transparent text-[#5F5E5E] transition-colors hover:bg-[#f3f3f3] hover:text-[#1A1C1C] active:bg-[#ebebeb] sm:size-11 md:size-10 [&_svg]:size-[1.15rem] md:[&_svg]:size-5"
+        aria-label="Ver carrito"
+      >
+        <ShoppingCart aria-hidden="true" />
+        <span
+          class="absolute -right-0.5 top-0 hidden min-h-[22px] min-w-[20px] items-center justify-center rounded-full border-2 border-white bg-[#C60D00] px-1 py-0.5 text-center text-[10px] font-semibold leading-none text-white empty:hidden"
+          id="cartCount"
+          aria-live="polite"
+        ></span>
+      </button>
+      <button
+        id="site-menu-toggle"
+        type="button"
+        class="group/menu relative z-[60] inline-flex size-10 touch-manipulation flex-col items-center justify-center rounded-xl border border-[#E8E8E8] bg-[#fafafa] text-[#1A1C1C] transition-colors hover:bg-white hover:shadow-sm active:scale-[0.98] sm:size-11 md:hidden"
+        aria-label="Abrir o cerrar menú"
+        aria-controls="site-nav"
+        aria-expanded="false"
+        data-menu="closed"
+      >
+        <span
+          class="my-0.5 block h-0.5 w-[20px] rounded-sm bg-current transition-all duration-300 group-data-[menu=open]/menu:translate-y-[7px] group-data-[menu=open]/menu:rotate-45"
+        ></span>
+        <span
+          class="my-0.5 block h-0.5 w-[20px] rounded-sm bg-current transition-all duration-300 group-data-[menu=open]/menu:opacity-0"
+        ></span>
+        <span
+          class="my-0.5 block h-0.5 w-[20px] rounded-sm bg-current transition-all duration-300 group-data-[menu=open]/menu:-translate-y-[7px] group-data-[menu=open]/menu:-rotate-45"
+        ></span>
+      </button>
     </div>
 
     <nav
       id="site-nav"
-      class="isolate z-50 min-w-0 max-md:pointer-events-none max-md:absolute max-md:left-0 max-md:right-0 max-md:top-full max-md:border-t max-md:border-[#E8E8E8] max-md:bg-white/95 max-md:shadow-md max-md:backdrop-blur-md max-md:transition-all max-md:duration-200 max-md:data-[state=closed]:max-h-0 max-md:data-[state=closed]:-translate-y-px max-md:data-[state=closed]:overflow-hidden max-md:data-[state=closed]:opacity-0 max-md:data-[state=closed]:py-0 max-md:data-[state=open]:pointer-events-auto max-md:data-[state=open]:max-h-[min(520px,85vh)] max-md:data-[state=open]:translate-y-0 max-md:data-[state=open]:opacity-100 max-md:data-[state=open]:overflow-y-auto max-md:data-[state=open]:py-3 md:relative md:top-auto md:flex md:flex-1 md:justify-center md:overflow-visible md:opacity-100 md:transition-none"
+      class="order-3 isolate z-40 min-w-0 basis-full max-md:pointer-events-none max-md:max-h-0 max-md:overflow-hidden max-md:border-t max-md:border-[#E8E8E8] max-md:bg-white max-md:opacity-0 max-md:transition-[max-height,opacity,padding] max-md:duration-300 max-md:ease-out max-md:data-[state=closed]:py-0 max-md:data-[state=open]:pointer-events-auto max-md:data-[state=open]:max-h-[min(70vh,32rem)] max-md:data-[state=open]:overflow-y-auto max-md:data-[state=open]:opacity-100 max-md:data-[state=open]:py-2 max-md:data-[state=open]:shadow-inner md:order-2 md:flex md:basis-auto md:max-h-none md:flex-1 md:justify-center md:overflow-visible md:border-0 md:opacity-100 md:shadow-none md:transition-none"
       data-state="closed"
       aria-label="Principal"
     >
       <ul
-        class="m-0 flex list-none flex-col gap-0 p-0 md:flex-row md:items-center md:gap-8"
+        class="m-0 flex list-none flex-col gap-0.5 p-0 md:flex-row md:items-center md:gap-1 lg:gap-8"
       >
         <li>
           <a
             href="/"
             class:list={[
-              "relative isolate flex flex-col items-start py-1 text-[14px] font-normal uppercase leading-5 tracking-[-0.35px] no-underline transition-colors after:pointer-events-none max-md:block max-md:border-b max-md:border-[#E8E8E8] max-md:px-5 max-md:py-3 max-md:text-[0.9rem] max-md:hover:bg-[#f9f9f9]",
+              "relative isolate block py-1 text-[13px] font-normal uppercase leading-snug tracking-wide no-underline transition-colors after:pointer-events-none max-md:rounded-lg max-md:px-4 max-md:py-3.5 max-md:text-[0.9375rem] max-md:active:bg-[#f0f0f0] md:inline-flex md:flex-col md:items-start md:py-1 md:text-[14px] md:tracking-[-0.35px] md:after:pointer-events-none",
               navActive("/")
-                ? "text-[#1A1C1C] after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:bg-[#C60D00] max-md:after:hidden"
-                : "text-[#5F5E5E] after:hidden hover:text-[#1A1C1C]",
+                ? "text-[#1A1C1C] max-md:border-l-[3px] max-md:border-[#C60D00] max-md:bg-[#fff8f7] md:after:absolute md:after:inset-x-0 md:after:-bottom-1 md:after:h-0.5 md:after:bg-[#C60D00]"
+                : "max-md:border-l-[3px] max-md:border-transparent text-[#5F5E5E] max-md:hover:bg-[#f9f9f9] md:after:hidden md:hover:text-[#1A1C1C]",
             ]}
             aria-current={navActive("/") ? "page" : undefined}>Inicio</a>
         </li>
@@ -61,10 +102,10 @@ const contactActive = pathname === "/contacto" || pathname.startsWith("/contacto
           <a
             href="/servicios"
             class:list={[
-              "relative isolate flex flex-col items-start py-1 text-[14px] font-normal uppercase leading-5 tracking-[-0.35px] no-underline transition-colors after:pointer-events-none max-md:block max-md:border-b max-md:border-[#E8E8E8] max-md:px-5 max-md:py-3 max-md:text-[0.9rem] max-md:hover:bg-[#f9f9f9]",
+              "relative isolate block py-1 text-[13px] font-normal uppercase leading-snug tracking-wide no-underline transition-colors after:pointer-events-none max-md:rounded-lg max-md:px-4 max-md:py-3.5 max-md:text-[0.9375rem] max-md:active:bg-[#f0f0f0] md:inline-flex md:flex-col md:items-start md:py-1 md:text-[14px] md:tracking-[-0.35px] md:after:pointer-events-none",
               navActive("/servicios")
-                ? "text-[#1A1C1C] after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:bg-[#C60D00] max-md:after:hidden"
-                : "text-[#5F5E5E] after:hidden hover:text-[#1A1C1C]",
+                ? "text-[#1A1C1C] max-md:border-l-[3px] max-md:border-[#C60D00] max-md:bg-[#fff8f7] md:after:absolute md:after:inset-x-0 md:after:-bottom-1 md:after:h-0.5 md:after:bg-[#C60D00]"
+                : "max-md:border-l-[3px] max-md:border-transparent text-[#5F5E5E] max-md:hover:bg-[#f9f9f9] md:after:hidden md:hover:text-[#1A1C1C]",
             ]}
             aria-current={navActive("/servicios") ? "page" : undefined}
             >Servicios</a>
@@ -73,10 +114,10 @@ const contactActive = pathname === "/contacto" || pathname.startsWith("/contacto
           <a
             href="/productos"
             class:list={[
-              "relative isolate flex flex-col items-start py-1 text-[14px] font-normal uppercase leading-5 tracking-[-0.35px] no-underline transition-colors after:pointer-events-none max-md:block max-md:border-b max-md:border-[#E8E8E8] max-md:px-5 max-md:py-3 max-md:text-[0.9rem] max-md:hover:bg-[#f9f9f9]",
+              "relative isolate block py-1 text-[13px] font-normal uppercase leading-snug tracking-wide no-underline transition-colors after:pointer-events-none max-md:rounded-lg max-md:px-4 max-md:py-3.5 max-md:text-[0.9375rem] max-md:active:bg-[#f0f0f0] md:inline-flex md:flex-col md:items-start md:py-1 md:text-[14px] md:tracking-[-0.35px] md:after:pointer-events-none",
               navActive("/productos")
-                ? "text-[#1A1C1C] after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:bg-[#C60D00] max-md:after:hidden"
-                : "text-[#5F5E5E] after:hidden hover:text-[#1A1C1C]",
+                ? "text-[#1A1C1C] max-md:border-l-[3px] max-md:border-[#C60D00] max-md:bg-[#fff8f7] md:after:absolute md:after:inset-x-0 md:after:-bottom-1 md:after:h-0.5 md:after:bg-[#C60D00]"
+                : "max-md:border-l-[3px] max-md:border-transparent text-[#5F5E5E] max-md:hover:bg-[#f9f9f9] md:after:hidden md:hover:text-[#1A1C1C]",
             ]}
             aria-current={navActive("/productos") ? "page" : undefined}
             >Productos</a>
@@ -85,10 +126,10 @@ const contactActive = pathname === "/contacto" || pathname.startsWith("/contacto
           <a
             href="/nosotros"
             class:list={[
-              "relative isolate flex flex-col items-start py-1 text-[14px] font-normal uppercase leading-5 tracking-[-0.35px] no-underline transition-colors after:pointer-events-none max-md:block max-md:border-b max-md:border-[#E8E8E8] max-md:px-5 max-md:py-3 max-md:text-[0.9rem] max-md:hover:bg-[#f9f9f9]",
+              "relative isolate block py-1 text-[13px] font-normal uppercase leading-snug tracking-wide no-underline transition-colors after:pointer-events-none max-md:rounded-lg max-md:px-4 max-md:py-3.5 max-md:text-[0.9375rem] max-md:active:bg-[#f0f0f0] md:inline-flex md:flex-col md:items-start md:py-1 md:text-[14px] md:tracking-[-0.35px] md:after:pointer-events-none",
               navActive("/nosotros")
-                ? "text-[#1A1C1C] after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:bg-[#C60D00] max-md:after:hidden"
-                : "text-[#5F5E5E] after:hidden hover:text-[#1A1C1C]",
+                ? "text-[#1A1C1C] max-md:border-l-[3px] max-md:border-[#C60D00] max-md:bg-[#fff8f7] md:after:absolute md:after:inset-x-0 md:after:-bottom-1 md:after:h-0.5 md:after:bg-[#C60D00]"
+                : "max-md:border-l-[3px] max-md:border-transparent text-[#5F5E5E] max-md:hover:bg-[#f9f9f9] md:after:hidden md:hover:text-[#1A1C1C]",
             ]}
             aria-current={navActive("/nosotros") ? "page" : undefined}
             >Nosotros</a>
@@ -96,71 +137,26 @@ const contactActive = pathname === "/contacto" || pathname.startsWith("/contacto
         <li class="md:hidden">
           <a
             href="/contacto"
-            class="mx-5 my-3 block rounded-[2px] bg-[#C60D00] px-8 py-2.5 text-center text-sm font-normal uppercase tracking-[1.4px] text-white no-underline shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.1),0px_2px_4px_-2px_rgba(0,0,0,0.1)] transition-opacity hover:opacity-90"
+            class="mx-2 mt-2 block rounded-lg bg-[#C60D00] px-4 py-3.5 text-center text-sm font-medium uppercase tracking-wide text-white no-underline shadow-md transition-[transform,opacity] active:scale-[0.99] hover:opacity-95"
             aria-current={contactActive ? "page" : undefined}>Contacto</a>
         </li>
       </ul>
     </nav>
 
     <div
-      class="hidden h-8 w-px shrink-0 bg-[#E7BDB6] md:block"
+      class="order-3 hidden h-9 w-px shrink-0 self-stretch bg-[#E7BDB6]/90 md:block"
       aria-hidden="true"
     >
-    </div>
-
-    <div
-      class="flex shrink-0 items-center gap-4 max-md:order-3 max-md:ml-auto max-md:gap-2 md:ml-0 md:gap-4"
-    >
-      <a
-        href="/admin"
-        class="inline-flex size-9 items-center justify-center rounded-xl bg-transparent p-2 text-[#5F5E5E] no-underline transition-colors hover:bg-black/4 hover:text-[#1A1C1C] [&_svg]:size-5"
-        aria-label="Panel de Administración"
-        title="Administración"
-      >
-        <CircleUser aria-hidden="true" />
-      </a>
-      <button
-        class="relative inline-flex size-9 items-center justify-center rounded-xl border-none bg-transparent p-2 text-[#5F5E5E] transition-colors hover:bg-black/4 hover:text-[#1A1C1C] [&_svg]:size-5"
-        type="button"
-        aria-label="Ver carrito"
-      >
-        <ShoppingCart aria-hidden="true" />
-        <span
-          class="absolute -right-0.5 top-0 hidden min-h-[23px] min-w-[22px] items-center justify-center rounded-xl border-2 border-white bg-[#C60D00] px-1.5 py-0.5 text-center text-[10px] font-bold leading-[15px] text-white empty:hidden"
-          id="cartCount"
-          aria-live="polite"
-        ></span>
-      </button>
     </div>
 
     <a
       href="/contacto"
       class:list={[
-        "hidden shrink-0 items-center justify-center rounded-[2px] bg-[#C60D00] px-8 py-2.5 text-sm font-normal uppercase tracking-[1.4px] text-white no-underline shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.1),0px_2px_4px_-2px_rgba(0,0,0,0.1)] transition-opacity hover:opacity-90 md:inline-flex",
+        "order-5 hidden shrink-0 items-center justify-center rounded-lg bg-[#C60D00] px-6 py-2.5 text-xs font-medium uppercase tracking-wide text-white no-underline shadow-md transition-opacity hover:opacity-95 md:inline-flex md:order-5 lg:px-8 lg:text-sm",
         contactActive &&
           "ring-2 ring-[#1A1C1C]/15 ring-offset-2 ring-offset-white/80",
       ]}
       aria-current={contactActive ? "page" : undefined}>Contacto</a>
-
-    <button
-      id="site-menu-toggle"
-      type="button"
-      class="group/menu relative z-1001 hidden cursor-pointer flex-col border-none bg-transparent p-1.5 text-[#5F5E5E] max-md:flex"
-      aria-label="Abrir o cerrar menú"
-      aria-controls="site-nav"
-      aria-expanded="false"
-      data-menu="closed"
-    >
-      <span
-        class="my-0.5 block h-0.5 w-[22px] rounded-sm bg-current transition-all duration-300 group-data-[menu=open]/menu:translate-y-2 group-data-[menu=open]/menu:rotate-45"
-      ></span>
-      <span
-        class="my-0.5 block h-0.5 w-[22px] rounded-sm bg-current transition-all duration-300 group-data-[menu=open]/menu:-translate-x-2.5 group-data-[menu=open]/menu:opacity-0"
-      ></span>
-      <span
-        class="my-0.5 block h-0.5 w-[22px] rounded-sm bg-current transition-all duration-300 group-data-[menu=open]/menu:-translate-y-2 group-data-[menu=open]/menu:-rotate-45"
-      ></span>
-    </button>
   </div>
 </header>
 
@@ -188,7 +184,7 @@ const contactActive = pathname === "/contacto" || pathname.startsWith("/contacto
 
     document.addEventListener("click", (e) => {
       const target = e.target as Node;
-      if (!menuToggle.contains(target) && !nav.contains(target)) {
+      if (!menuToggle?.contains(target) && !nav?.contains(target)) {
         setMenuOpen(false);
       }
     });
