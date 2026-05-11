@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductModal from "../components/ProductModal.astro";
+import { SEO_PRODUCTOS } from "../data/siteSeo";
 import {
   ChevronDown,
   Factory,
@@ -11,7 +12,7 @@ import {
 } from "@lucide/astro/icons";
 ---
 
-<Layout footerFlushTop>
+<Layout footerFlushTop {...SEO_PRODUCTOS}>
   <section class="relative min-h-[50vh] bg-gray-50 py-6 pb-24 sm:min-h-[60vh] sm:py-9 sm:pb-9 lg:py-12">
     <div
       class="mx-auto grid max-w-[1400px] gap-5 px-3 sm:gap-7 sm:px-5 lg:grid-cols-[minmax(260px,300px)_1fr] lg:items-start lg:gap-10 lg:px-8"

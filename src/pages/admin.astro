@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import EditProductModal from "../components/admin/EditProductModal.astro";
 import AddProductModal from "../components/admin/AddProductModal.astro";
 import DeleteConfirmModal from "../components/admin/DeleteConfirmModal.astro";
+import { SEO_ADMIN } from "../data/siteSeo";
 import {
   CircleAlert,
   CircleUser,
@@ -16,7 +17,7 @@ import {
 } from "@lucide/astro/icons";
 ---
 
-<Layout>
+<Layout noindex {...SEO_ADMIN}>
   <!-- Pantalla de Login -->
   <div class="admin-login" id="adminLogin">
     <div class="login-container">

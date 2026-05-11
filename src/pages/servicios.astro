@@ -4,9 +4,10 @@ import ServicesCta from "../components/services/ServicesCta.astro";
 import ServicesHero from "../components/services/ServicesHero.astro";
 import ServicesReasons from "../components/services/ServicesReasons.astro";
 import ServicesSummary from "../components/services/ServicesSummary.astro";
+import { SEO_SERVICIOS } from "../data/siteSeo";
 ---
 
-<Layout footerFlushTop>
+<Layout footerFlushTop {...SEO_SERVICIOS}>
   <ServicesHero />
   <ServicesSummary />
   <ServicesReasons />

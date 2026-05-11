@@ -2,9 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 import ContactosMapaEmbed from "../components/contactos/ContactosMapaEmbed.astro";
 import ContactosSplit from "../components/contactos/ContactosSplit.astro";
+import { SEO_CONTACTO } from "../data/siteSeo";
 ---
 
-<Layout footerFlushTop>
+<Layout footerFlushTop {...SEO_CONTACTO}>
   <ContactosSplit />
   <ContactosMapaEmbed />
 </Layout>

@@ -1,0 +1,8 @@
+# https://www.robotstxt.org/robotstxt.html
+# Si tu dominio no es www.hydraulicsistem.com, cambia la URL del Sitemap para que coincida con astro.config (site / PUBLIC_SITE_URL).
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+
+Sitemap: https://www.hydraulicsistem.com/sitemap-index.xml

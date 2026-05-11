@@ -5,9 +5,10 @@ import HomeCta from "../components/home/HomeCta.astro";
 import HomeHero from "../components/home/HomeHero.astro";
 import HomeProducts from "../components/home/HomeProducts.astro";
 import HomeServices from "../components/home/HomeServices.astro";
+import { SEO_HOME } from "../data/siteSeo";
 ---
 
-<Layout footerFlushTop>
+<Layout footerFlushTop {...SEO_HOME}>
   <HomeHero />
   <HomeServices />
   <HomeAbout />

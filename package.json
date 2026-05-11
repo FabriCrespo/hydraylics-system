@@ -23,5 +23,8 @@
     "lucide": "^1.14.0",
     "phosphor-astro": "^2.1.0",
     "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@astrojs/sitemap": "^3.7.2"
   }
 }

@@ -3,9 +3,10 @@ import Layout from "../layouts/Layout.astro";
 import NosotrosGallery from "../components/nosotros/NosotrosGallery.astro";
 import NosotrosHero from "../components/nosotros/NosotrosHero.astro";
 import NosotrosSocialFollow from "../components/nosotros/NosotrosSocialFollow.astro";
+import { SEO_NOSOTROS } from "../data/siteSeo";
 ---
 
-<Layout footerFlushTop>
+<Layout footerFlushTop {...SEO_NOSOTROS}>
   <NosotrosHero />
   <NosotrosGallery />
   <NosotrosSocialFollow />

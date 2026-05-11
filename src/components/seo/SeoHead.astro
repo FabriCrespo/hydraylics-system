@@ -1,0 +1,127 @@
+---
+import { business } from "../../data/siteSeo";
+import {
+  SOCIAL_FACEBOOK,
+  SOCIAL_INSTAGRAM,
+  SOCIAL_TIKTOK,
+} from "../../data/socialLinks";
+
+export interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  canonicalUrl: string;
+  noindex?: boolean;
+  /** Ruta bajo /public, p. ej. /Logo.png */
+  ogImagePath?: string;
+}
+
+const {
+  title,
+  description,
+  keywords,
+  canonicalUrl,
+  noindex = false,
+  ogImagePath = "/Logo.png",
+} = Astro.props;
+
+const siteOrigin = Astro.site?.origin ?? new URL(canonicalUrl).origin;
+const ogImageUrl = ogImagePath.startsWith("http")
+  ? ogImagePath
+  : new URL(ogImagePath.replace(/^\//, ""), siteOrigin + "/").href;
+
+const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("HYDRAULICS SISTEM Santa Cruz Bolivia")}`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteOrigin}/#website`,
+      url: `${siteOrigin}/`,
+      name: business.name,
+      description: business.description,
+      inLanguage: "es-BO",
+      publisher: { "@id": `${siteOrigin}/#organization` },
+    },
+    {
+      "@type": ["Organization", "Store"],
+      "@id": `${siteOrigin}/#organization`,
+      name: business.name,
+      alternateName: business.alternateName,
+      url: `${siteOrigin}/`,
+      logo: new URL("Logo.png", siteOrigin + "/").href,
+      image: new URL("Logo.png", siteOrigin + "/").href,
+      email: business.email,
+      telephone: business.phoneE164,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: business.addressLocality,
+        addressRegion: business.addressRegion,
+        addressCountry: business.addressCountry,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: business.geo.latitude,
+        longitude: business.geo.longitude,
+      },
+      hasMap: mapUrl,
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          opens: "08:00",
+          closes: "18:00",
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: "Saturday",
+          opens: "08:00",
+          closes: "13:00",
+        },
+      ],
+      areaServed: [
+        { "@type": "Country", name: "Bolivia" },
+        { "@type": "AdministrativeArea", name: "Santa Cruz" },
+      ],
+      priceRange: "$$",
+      sameAs: [SOCIAL_INSTAGRAM, SOCIAL_FACEBOOK, SOCIAL_TIKTOK],
+    },
+  ],
+};
+---
+
+<!-- SEO principal -->
+{noindex ? (
+  <meta name="robots" content="noindex, nofollow" />
+) : (
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+)}
+<link rel="canonical" href={canonicalUrl} />
+<link rel="alternate" hreflang="es-BO" href={canonicalUrl} />
+<meta name="author" content={business.name} />
+{keywords ? <meta name="keywords" content={keywords} /> : null}
+<meta name="geo.region" content="BO-S" />
+<meta name="geo.placename" content={business.addressLocality} />
+<meta name="ICBM" content={`${business.geo.latitude}, ${business.geo.longitude}`} />
+<meta name="theme-color" content="#3d3532" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={business.name} />
+<meta property="og:locale" content="es_BO" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:alt" content={`${business.name} — repuestos hidráulicos Bolivia`} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+{!noindex ? (
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+) : null}
